@@ -1,0 +1,3897 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Security Intelligence Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Fraunces:opsz,wght@9..144,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" integrity="sha384-dug+JxfBvklEQdJ4AYuBBAIScUz0bVN73xpy273gcAwHjb3qI0fXmuYNaNfdyYJG" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--fd:'Fraunces',serif;--fb:'DM Sans',sans-serif;--fm:'JetBrains Mono',monospace;--r:10px;--rl:16px;--e:cubic-bezier(.22,1,.36,1)}
+[data-theme="dark"]{--bg:#0A0D10;--c1:#10141A;--c2:#151A22;--c3:#1A202A;--c4:#1F2633;--bd:rgba(255,255,255,.05);--bd2:rgba(255,255,255,.1);--t1:#E4E7ED;--t2:#828A98;--t3:#515969;--grid:rgba(255,255,255,.03);--tt:#151A22;--ttb:rgba(255,255,255,.08);--cb:#10141A;--glow:.05;--ov:rgba(0,0,0,.75)}
+[data-theme="light"]{--bg:#F2F3F6;--c1:#FFFFFF;--c2:#FAFBFC;--c3:#F0F1F4;--c4:#E8EAF0;--bd:rgba(0,0,0,.07);--bd2:rgba(0,0,0,.12);--t1:#0F1218;--t2:#5A6275;--t3:#8B92A2;--grid:rgba(0,0,0,.04);--tt:#FFF;--ttb:rgba(0,0,0,.08);--cb:#FFF;--glow:.02;--ov:rgba(0,0,0,.45)}
+:root{--cr:#FF4D4F;--crs:rgba(255,77,79,.1);--co:#FF7A45;--cos:rgba(255,122,69,.1);--ca:#FAAD14;--cas:rgba(250,173,20,.08);--cb2:#4B8BFF;--cbs:rgba(75,139,255,.08);--cc:#13C2C2;--ccs:rgba(19,194,194,.08);--cg:#52C41A;--cgs:rgba(82,196,26,.08);--cp:#9254DE;--cps:rgba(146,84,222,.08)}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--t1);font-size:13px;line-height:1.5;overflow-x:hidden}
+a{color:var(--cb2);text-decoration:none}
+a:hover{text-decoration:underline}
+.W{display:flex;min-height:100vh}
+.S{position:sticky;top:0;width:210px;min-width:210px;height:100vh;background:var(--c1);border-right:1px solid var(--bd);overflow-y:auto;padding:16px 0;z-index:100;flex-shrink:0}
+.S .logo{padding:0 16px 16px;font-family:var(--fd);font-size:14px;font-weight:600;color:var(--t1);border-bottom:1px solid var(--bd);margin-bottom:12px}
+.S .ng{padding:4px 16px}
+.S .ng .ngl{font-family:var(--fm);font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:4px}
+.S .ng a{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;color:var(--t2);font-size:11.5px;transition:all .15s var(--e)}
+.S .ng a:hover,.S .ng a.active{background:var(--c3);color:var(--t1);text-decoration:none}
+.S .ng a .sn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:5px;background:var(--c3);font-family:var(--fm);font-size:8px;color:var(--t3);flex-shrink:0}
+.S .ng a.active .sn{background:var(--cb2);color:#fff}
+.S .st-sel{padding:12px 16px;border-top:1px solid var(--bd);margin-top:8px}
+.S .st-sel select{width:100%;background:var(--c2);border:1px solid var(--bd);color:var(--t1);border-radius:6px;padding:6px 8px;font-size:11px;font-family:var(--fb)}
+.S .st-sel label{font-family:var(--fm);font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);display:block;margin-bottom:4px}
+.M{flex:1;min-width:0;padding:0 0 40px;overflow-x:hidden}
+.TB{position:sticky;top:0;z-index:90;background:var(--c1);border-bottom:1px solid var(--bd);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:8px 24px;gap:12px}
+.TB .tb-left{display:flex;align-items:center;gap:12px}
+.TB .tb-right{display:flex;align-items:center;gap:8px}
+.TB .tb-btn{background:var(--c3);border:1px solid var(--bd);color:var(--t2);border-radius:6px;padding:5px 10px;font-size:11px;font-family:var(--fb);cursor:pointer;transition:all .15s var(--e)}
+.TB .tb-btn:hover{background:var(--c4);color:var(--t1)}
+.TB .tb-date{font-family:var(--fm);font-size:10px;color:var(--t3)}
+.TB .tb-title{font-family:var(--fd);font-size:14px;font-weight:600}
+.TK{position:fixed;bottom:0;left:210px;right:0;z-index:80;background:var(--c1);border-top:1px solid var(--bd);display:flex;align-items:center;gap:0;padding:0;height:32px;overflow:hidden;transition:transform .3s var(--e)}
+.TK.hidden{transform:translateY(100%)}
+.TK .tk-item{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-family:var(--fm);font-size:9px;color:var(--t2);border-right:1px solid var(--bd);height:100%;padding:0 8px}
+.TK .tk-item:last-child{border-right:none}
+.TK .tk-val{color:var(--t1);font-weight:500}
+.TK .tk-crit{color:var(--cr)}
+.TK .tk-warn{color:var(--ca)}
+.TK .tk-good{color:var(--cg)}
+.hdr{padding:32px 24px 16px;max-width:1200px}
+.hdr h1{font-family:var(--fd);font-size:22px;font-weight:600;margin-bottom:4px}
+.hdr .hdr-sub{font-size:12px;color:var(--t2)}
+.sec{padding:20px 24px;max-width:1200px;width:100%;opacity:0;transform:translateY(12px);transition:opacity .5s var(--e),transform .5s var(--e)}
+.sec.visible{opacity:1;transform:translateY(0)}
+.sh{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--c3);font-family:var(--fm);font-size:9px;color:var(--t3);flex-shrink:0}
+.st{font-family:var(--fd);font-size:16px;font-weight:600}
+.ss{font-size:11px;color:var(--t2);margin-left:auto}
+.KG{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--bd);border-radius:var(--rl);overflow:hidden;margin-bottom:20px}
+.KG.cols8{grid-template-columns:repeat(8,1fr)}
+.K{background:var(--c1);padding:14px 16px;position:relative}
+.K .kl{font-family:var(--fm);font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);margin-bottom:6px}
+.K .kv{font-family:var(--fd);font-size:1.5rem;font-weight:600;color:var(--t1);line-height:1.2}
+.K .ks{font-size:10px;color:var(--t2);margin-top:2px}
+.K .kd{display:inline-flex;align-items:center;gap:3px;font-family:var(--fm);font-size:9px;padding:2px 6px;border-radius:4px;margin-top:4px}
+.K .kd.up{background:var(--crs);color:var(--cr)}
+.K .kd.dn{background:var(--cgs);color:var(--cg)}
+.K .kd.neutral{background:var(--cbs);color:var(--cb2)}
+.K.crt{border-top:2px solid var(--cr)}
+.K.hig{border-top:2px solid var(--co)}
+.K.med{border-top:2px solid var(--ca)}
+.K.tot{border-top:2px solid var(--cb2)}
+.K.grn{border-top:2px solid var(--cg)}
+.CC{background:var(--c1);border:1px solid var(--bd);border-radius:var(--rl);padding:16px;margin-bottom:16px}
+.CC.full{grid-column:1/-1}
+.CR{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.ct{font-size:11px;font-weight:600;color:var(--t1);margin-bottom:2px}
+.cs{font-family:var(--fm);font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);margin-bottom:12px}
+.chart-wrap{position:relative;width:100%;height:220px}
+.chart-wrap.tall{height:300px}
+.chart-wrap.short{height:160px}
+.chart-wrap canvas{position:absolute;top:0;left:0}
+.DT{width:100%;border-collapse:collapse;font-size:11px}
+.DT thead th{font-family:var(--fm);font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);text-align:left;padding:8px 10px;border-bottom:1px solid var(--bd2);position:sticky;top:0;background:var(--c1)}
+.DT tbody td{padding:7px 10px;border-bottom:1px solid var(--bd);color:var(--t2);vertical-align:top}
+.DT tbody tr:hover td{background:var(--c2)}
+.DT .sev-badge{display:inline-flex;padding:2px 6px;border-radius:4px;font-family:var(--fm);font-size:8.5px;font-weight:500}
+.DT .sev-badge.crit{background:var(--crs);color:var(--cr)}
+.DT .sev-badge.high{background:var(--cos);color:var(--co)}
+.DT .sev-badge.med{background:var(--cas);color:var(--ca)}
+.DT .sev-badge.low{background:var(--cbs);color:var(--cb2)}
+.HM{width:100%;border-collapse:collapse;font-size:10px}
+.HM th,.HM td{padding:6px 8px;text-align:center;border:1px solid var(--bd)}
+.HM th{font-family:var(--fm);font-size:8px;text-transform:uppercase;color:var(--t3);background:var(--c2)}
+.HM .hm-cell{border-radius:4px;padding:4px 6px;font-family:var(--fm);font-size:9px;font-weight:500}
+.RH{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center;margin-bottom:24px}
+.SR{position:relative;width:200px;height:200px;margin:0 auto}
+.SR .sr-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:2}
+.SR .sr-grade{font-family:var(--fd);font-size:32px;font-weight:700;color:var(--t1)}
+.SR .sr-score{font-family:var(--fm);font-size:11px;color:var(--t2)}
+.SR .sr-delta{font-family:var(--fm);font-size:9px;color:var(--cg);margin-top:2px}
+.RB{display:flex;flex-direction:column;gap:8px}
+.RB .rb-row{display:flex;align-items:center;gap:10px}
+.RB .rb-label{font-size:10px;color:var(--t2);width:110px;flex-shrink:0}
+.RB .rb-bar{flex:1;height:6px;background:var(--c3);border-radius:3px;overflow:hidden}
+.RB .rb-fill{height:100%;border-radius:3px;transition:width .6s var(--e)}
+.RB .rb-val{font-family:var(--fm);font-size:9px;color:var(--t1);width:36px;text-align:right;flex-shrink:0}
+.pill{display:inline-flex;align-items:center;padding:2px 8px;border-radius:10px;font-family:var(--fm);font-size:8.5px;font-weight:500}
+.pill.ac{background:var(--crs);color:var(--cr)}
+.pill.mt{background:var(--cgs);color:var(--cg)}
+.pill.ra{background:var(--cbs);color:var(--cb2)}
+.pill.dr{background:var(--cas);color:var(--ca)}
+.AP{background:var(--c1);border:1px solid var(--bd);border-radius:var(--rl);padding:16px;margin-bottom:12px;position:relative;overflow:hidden}
+.AP::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px}
+.AP.crit-path::before{background:linear-gradient(180deg,var(--cr),rgba(255,77,79,.2))}
+.AP.med-path::before{background:linear-gradient(180deg,var(--co),rgba(255,122,69,.2))}
+.AP.low-path::before{background:linear-gradient(180deg,var(--ca),rgba(250,173,20,.2))}
+.AP.mit-path::before{background:linear-gradient(180deg,var(--cg),rgba(82,196,26,.2))}
+.AP .ap-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;cursor:pointer}
+.AP .ap-name{font-size:12px;font-weight:600;color:var(--t1)}
+.AP .ap-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.AP .ap-badge{font-family:var(--fm);font-size:8.5px;padding:2px 8px;border-radius:4px}
+.AP .ap-body{max-height:0;overflow:hidden;transition:max-height .4s var(--e)}
+.AP.open .ap-body{max-height:800px}
+.AP .ap-chevron{color:var(--t3);font-size:14px;transition:transform .2s var(--e);margin-left:8px}
+.AP.open .ap-chevron{transform:rotate(180deg)}
+.ap-chain{display:flex;align-items:stretch;gap:0;margin:14px 0;overflow-x:auto;padding-bottom:4px}
+.ap-step{flex:1;min-width:110px;display:flex;flex-direction:column;align-items:center;position:relative}
+.ap-step-box{background:var(--c2);border:1px solid var(--bd2);border-radius:10px;padding:10px 8px 8px;text-align:center;width:100%;position:relative;transition:border-color .15s var(--e)}
+.AP.open .ap-step-box:hover{border-color:var(--cb2)}
+.ap-step-tactic{font-family:var(--fm);font-size:7px;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:4px}
+.ap-step-label{font-size:10px;color:var(--t1);font-weight:500;line-height:1.3;margin-bottom:3px}
+.ap-step-count{font-family:var(--fm);font-size:8px;display:inline-flex;align-items:center;gap:3px;padding:1px 5px;border-radius:3px}
+.ap-step-icon{font-size:16px;margin-bottom:4px;display:block}
+.ap-connector{display:flex;align-items:center;padding:0 2px;flex-shrink:0}
+.ap-conn-line{width:24px;height:2px;position:relative;overflow:visible}
+.ap-conn-line::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bd2)}
+.ap-conn-line::after{content:'';position:absolute;top:-3px;right:-2px;border:4px solid transparent;border-left:5px solid var(--t3)}
+.AP.open .ap-conn-line::before{background:linear-gradient(90deg,var(--cb2),var(--cr));animation:flowPulse 2s ease-in-out infinite}
+@keyframes flowPulse{0%,100%{opacity:.4}50%{opacity:1}}
+.ap-footer{display:flex;align-items:center;gap:12px;font-size:10px;color:var(--t2);margin-top:10px;padding-top:8px;border-top:1px solid var(--bd)}
+.AP.open .ap-chevron{transform:rotate(180deg)}
+
+/* --- Attack Graph Stats Ribbon --- */
+.ag-stats-ribbon{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.ag-stat-card{background:var(--c1);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;position:relative;overflow:hidden}
+.ag-stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.ag-stat-card.crit::before{background:linear-gradient(90deg,var(--cr),transparent)}
+.ag-stat-card.warn::before{background:linear-gradient(90deg,var(--co),transparent)}
+.ag-stat-card.info::before{background:linear-gradient(90deg,var(--cb2),transparent)}
+.ag-stat-card.ok::before{background:linear-gradient(90deg,var(--cg),transparent)}
+.ag-stat-card.purp::before{background:linear-gradient(90deg,var(--cp),transparent)}
+.ag-stat-label{font-family:var(--fm);font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:4px}
+.ag-stat-val{font-family:var(--fd);font-size:22px;font-weight:600;line-height:1.1}
+.ag-stat-sub{font-size:9px;color:var(--t3);margin-top:2px}
+
+/* --- Attack Graph View Toggles --- */
+.ag-view-btn{background:var(--c2);border:1px solid var(--bd2);border-radius:6px;padding:5px 7px;color:var(--t3);cursor:pointer;transition:all .15s var(--e);display:flex;align-items:center}
+.ag-view-btn:hover,.ag-view-btn.active{background:var(--c3);color:var(--t1);border-color:var(--cb2)}
+.ag-toggle-label{display:flex;align-items:center;gap:4px;cursor:pointer;font-size:10px;color:var(--t3)}
+.ag-toggle-label input{accent-color:var(--cb2);width:12px;height:12px}
+.ag-toggle-text{font-family:var(--fm);font-size:8.5px;text-transform:uppercase;letter-spacing:.04em}
+
+/* --- Attack Graph Tooltip --- */
+.ag-tooltip{position:absolute;display:none;pointer-events:none;background:var(--tt);border:1px solid var(--ttb);border-radius:8px;padding:10px 12px;font-size:10px;color:var(--t1);box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:50;max-width:280px;backdrop-filter:blur(12px)}
+.ag-tooltip.show{display:block}
+.ag-tooltip .tt-title{font-weight:600;font-size:11px;margin-bottom:4px}
+.ag-tooltip .tt-row{display:flex;align-items:center;gap:6px;margin-top:3px}
+.ag-tooltip .tt-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.ag-tooltip .tt-label{color:var(--t3);font-family:var(--fm);font-size:8px;text-transform:uppercase;letter-spacing:.04em}
+.ag-tooltip .tt-val{font-family:var(--fm);font-size:9px}
+
+/* --- Attack Graph Legend --- */
+.ag-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--bd)}
+.ag-legend-item{display:flex;align-items:center;gap:5px;font-size:9px;color:var(--t3)}
+.ag-legend-swatch{width:10px;height:10px;border-radius:3px}
+
+/* --- Intel Drawer --- */
+.ag-drawer-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--ov);z-index:999;opacity:0;pointer-events:none;transition:opacity .3s var(--e)}
+.ag-drawer-overlay.open{opacity:1;pointer-events:auto}
+.ag-drawer{position:fixed;top:0;right:-480px;width:480px;max-width:90vw;height:100vh;background:var(--c1);border-left:1px solid var(--bd);z-index:1000;transition:right .35s var(--e);overflow-y:auto;display:flex;flex-direction:column}
+.ag-drawer.open{right:0}
+.ag-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:var(--c1);z-index:1}
+.ag-drawer-title{font-family:var(--fd);font-size:16px;font-weight:600}
+.ag-drawer-close{background:none;border:none;color:var(--t3);font-size:24px;cursor:pointer;padding:0 4px;transition:color .15s}
+.ag-drawer-close:hover{color:var(--t1)}
+.ag-drawer-body{padding:16px 20px;flex:1}
+.ag-drawer-section{margin-bottom:18px}
+.ag-drawer-section-title{font-family:var(--fm);font-size:8.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ag-drawer-section-title .ag-ds-count{background:var(--c3);padding:1px 6px;border-radius:4px;font-size:8px}
+.ag-intel-card{background:var(--c2);border:1px solid var(--bd2);border-radius:8px;padding:10px 12px;margin-bottom:6px;font-size:10px;line-height:1.5}
+.ag-intel-card .ag-ic-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.ag-intel-card .ag-ic-title{font-weight:600;font-size:10.5px;color:var(--t1)}
+.ag-intel-card .ag-ic-badge{font-family:var(--fm);font-size:8px;padding:1px 6px;border-radius:4px}
+.ag-intel-card .ag-ic-row{color:var(--t2);margin-top:2px}
+.ag-intel-card .ag-ic-label{font-family:var(--fm);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.04em}
+.ag-blast-bar{height:4px;border-radius:2px;background:var(--c3);margin-top:6px;overflow:hidden}
+.ag-blast-fill{height:100%;border-radius:2px;transition:width .4s var(--e)}
+.ag-path-trace{display:flex;align-items:center;gap:0;margin:6px 0;flex-wrap:wrap}
+.ag-path-trace .ag-pt-node{font-family:var(--fm);font-size:8.5px;padding:2px 6px;border-radius:4px;background:var(--c3);color:var(--t1);white-space:nowrap}
+.ag-path-trace .ag-pt-arrow{color:var(--t3);font-size:10px;margin:0 2px}
+.ag-path-trace .ag-pt-node.current{background:var(--cbs);color:var(--cb2)}
+
+/* --- MITRE Matrix View --- */
+.ag-matrix{width:100%;border-collapse:separate;border-spacing:4px}
+.ag-matrix th{font-family:var(--fm);font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);padding:6px 4px;text-align:center;vertical-align:bottom;border-bottom:2px solid var(--bd2)}
+.ag-matrix td{vertical-align:top;padding:4px}
+.ag-matrix-cell{background:var(--c2);border:1px solid var(--bd);border-radius:6px;padding:6px 8px;margin-bottom:4px;font-size:9px;cursor:pointer;transition:all .15s var(--e);position:relative}
+.ag-matrix-cell:hover{border-color:var(--cb2);transform:translateY(-1px)}
+.ag-matrix-cell .mc-icon{font-size:12px;margin-bottom:2px}
+.ag-matrix-cell .mc-label{font-weight:500;color:var(--t1);line-height:1.3}
+.ag-matrix-cell .mc-sub{font-family:var(--fm);font-size:7.5px;color:var(--t3);margin-top:2px}
+.ag-matrix-cell .mc-paths{position:absolute;top:4px;right:4px;font-family:var(--fm);font-size:7px;background:var(--c3);padding:0 4px;border-radius:3px;color:var(--t3)}
+.ag-matrix-cell.severity-crit{border-left:2px solid var(--cr)}
+.ag-matrix-cell.severity-high{border-left:2px solid var(--co)}
+.ag-matrix-cell.severity-med{border-left:2px solid var(--ca)}
+.ag-matrix-cell.severity-low{border-left:2px solid var(--cg)}
+.expand-card{cursor:pointer;transition:border-color .15s var(--e)}
+.expand-card:hover{border-color:var(--bd2)}
+.expand-card .expand-body{max-height:0;overflow:hidden;transition:max-height .3s var(--e)}
+.expand-card.open .expand-body{max-height:400px}
+.expand-card .expand-chevron{color:var(--t3);font-size:11px;transition:transform .2s var(--e);float:right}
+.expand-card.open .expand-chevron{transform:rotate(180deg)}
+.hm-toggle{background:var(--c3);border:1px solid var(--bd);color:var(--t2);font-family:var(--fm);font-size:9px;padding:4px 12px;border-radius:4px;cursor:pointer;transition:all .15s var(--e)}
+.hm-toggle:hover{border-color:var(--bd2);color:var(--t1)}
+.hm-toggle.active{background:var(--cbs);border-color:var(--cb2);color:var(--cb2)}
+.rhm{display:grid;grid-template-columns:28px repeat(5,1fr);grid-template-rows:repeat(5,36px) 20px;gap:2px;max-width:520px}
+.rhm-cell{border-radius:4px;display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all .12s var(--e);position:relative;padding:2px 4px}
+.rhm-cell:hover{transform:scale(1.04);z-index:2;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.rhm-count{font-family:var(--fm);font-size:13px;font-weight:600;line-height:1}
+.rhm-ids{font-family:var(--fm);font-size:6.5px;opacity:.7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60px}
+.rhm-label{font-family:var(--fm);font-size:7px;color:var(--t3);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1}
+.rhm-ylabel{font-family:var(--fm);font-size:7px;color:var(--t3);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1}
+.DD{background:var(--c1);border:1px solid var(--bd);border-radius:var(--rl);padding:16px;margin-bottom:16px}
+.DD .dd-title{font-size:12px;font-weight:600;margin-bottom:8px}
+.DS{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.DS .ds-item{text-align:center}
+.DS .ds-val{font-family:var(--fd);font-size:18px;font-weight:600}
+.DS .ds-label{font-family:var(--fm);font-size:8px;text-transform:uppercase;color:var(--t3)}
+.funnel{margin:16px 0}
+.funnel .funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.funnel .funnel-label{font-size:10px;color:var(--t2);width:110px;flex-shrink:0;text-align:right}
+.funnel .funnel-bar{height:22px;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-family:var(--fm);font-size:9px;color:#fff;font-weight:500;min-width:30px;transition:width .6s var(--e)}
+.MR{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.MT{background:var(--c1);border:1px solid var(--bd);border-radius:var(--r);padding:12px;text-align:center}
+.MT .mt-val{font-family:var(--fd);font-size:20px;font-weight:600}
+.MT .mt-label{font-family:var(--fm);font-size:8px;text-transform:uppercase;color:var(--t3);margin-top:2px}
+.MO{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;background:var(--ov);align-items:center;justify-content:center}
+.MO.open{display:flex}
+.MOD{background:var(--c1);border:1px solid var(--bd2);border-radius:var(--rl);width:90%;max-width:700px;max-height:80vh;overflow-y:auto;padding:24px;position:relative}
+.MOD .mod-close{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--t3);font-size:18px;cursor:pointer}
+.MOD .mod-title{font-family:var(--fd);font-size:16px;font-weight:600;margin-bottom:12px;padding-right:30px}
+.MOD .mod-body{font-size:12px;color:var(--t2);line-height:1.6}
+.search-ov{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:210;background:var(--ov);padding-top:15vh}
+.search-ov.open{display:block}
+.search-box{max-width:560px;margin:0 auto;background:var(--c1);border:1px solid var(--bd2);border-radius:var(--rl);overflow:hidden}
+.search-box input{width:100%;background:transparent;border:none;color:var(--t1);font-size:15px;padding:16px 20px;outline:none;font-family:var(--fb)}
+.search-box .search-results{max-height:50vh;overflow-y:auto;border-top:1px solid var(--bd)}
+.search-box .sr-item{padding:10px 20px;cursor:pointer;font-size:12px;color:var(--t2);border-bottom:1px solid var(--bd)}
+.search-box .sr-item:hover{background:var(--c2);color:var(--t1)}
+.search-box .sr-item .sr-type{font-family:var(--fm);font-size:8px;text-transform:uppercase;color:var(--t3);margin-right:8px}
+.toast{position:fixed;bottom:48px;right:24px;background:var(--c1);border:1px solid var(--bd2);border-radius:var(--r);padding:10px 16px;font-size:11px;color:var(--t1);z-index:300;transform:translateY(20px);opacity:0;transition:all .3s var(--e);pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.toast.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.ftr{padding:24px;max-width:1200px;border-top:1px solid var(--bd);margin-top:20px;font-size:10px;color:var(--t3);display:flex;justify-content:space-between;align-items:center}
+.ftr .ftr-actions{display:flex;gap:8px}
+.hero-glow{position:relative;overflow:hidden}
+.hero-glow::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(75,139,255,var(--glow)) 0%,transparent 70%);pointer-events:none}
+.this-week{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.tw-card{border-radius:var(--r);padding:12px 14px;font-size:11px;line-height:1.5}
+.tw-card.tw-red{background:var(--crs);color:var(--cr);border:1px solid rgba(255,77,79,.2)}
+.tw-card.tw-green{background:var(--cgs);color:var(--cg);border:1px solid rgba(82,196,26,.15)}
+.tw-card.tw-blue{background:var(--cbs);color:var(--cb2);border:1px solid rgba(75,139,255,.15)}
+.tw-card strong{display:block;margin-bottom:4px;font-size:12px}
+.rec-item{background:var(--c1);border:1px solid var(--bd);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;font-size:11.5px;line-height:1.5;color:var(--t2)}
+.rec-item .rec-pri{font-family:var(--fm);font-size:8.5px;padding:2px 6px;border-radius:4px;flex-shrink:0;margin-top:2px}
+.rec-item .rec-pri.p1{background:var(--crs);color:var(--cr)}
+.rec-item .rec-pri.p2{background:var(--cos);color:var(--co)}
+.rec-item .rec-pri.p3{background:var(--cbs);color:var(--cb2)}
+.rec-item .rec-ticket{margin-left:auto;flex-shrink:0}
+.rec-item .rec-ticket button{background:var(--c3);border:1px solid var(--bd);color:var(--t2);border-radius:4px;padding:3px 8px;font-size:9px;cursor:pointer;font-family:var(--fb)}
+.rec-item .rec-ticket button:hover{background:var(--c4);color:var(--t1)}
+.scenario-wrap{padding:16px;background:var(--c1);border:1px solid var(--bd);border-radius:var(--rl);margin-bottom:16px}
+.scenario-wrap .sc-row{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.scenario-wrap label{font-size:10px;color:var(--t2);width:160px}
+.scenario-wrap input[type=range]{flex:1;accent-color:var(--cb2)}
+.scenario-wrap .sc-val{font-family:var(--fm);font-size:10px;color:var(--t1);width:40px;text-align:right}
+.scenario-wrap .sc-result{font-family:var(--fd);font-size:20px;font-weight:600;text-align:center;margin-top:8px}
+.corr-table{margin-top:16px}
+.ec-table .ec-pass{color:var(--cg)}
+.ec-table .ec-fail{color:var(--cr)}
+.gap-card{background:var(--c1);border:1px solid var(--bd);border-left:3px solid var(--cr);border-radius:var(--r);padding:12px 14px;margin-bottom:8px}
+.gap-card .gap-id{font-family:var(--fm);font-size:9px;color:var(--cr);margin-bottom:2px}
+.gap-card .gap-desc{font-size:11.5px;color:var(--t1);margin-bottom:4px}
+.gap-card .gap-meta{font-size:10px;color:var(--t3)}
+.blind-card{background:var(--c1);border:1px solid var(--bd);border-radius:var(--r);padding:12px;margin-bottom:8px}
+.blind-card .blind-area{font-size:12px;font-weight:600;color:var(--t1);margin-bottom:2px}
+.blind-card .blind-desc{font-size:10.5px;color:var(--t2);margin-bottom:4px}
+.blind-card .blind-stat{font-family:var(--fm);font-size:9px;color:var(--t3)}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--bd);margin-bottom:16px}
+.tabs .tab{padding:8px 14px;font-size:11px;color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s var(--e)}
+.tabs .tab:hover{color:var(--t2)}
+.tabs .tab.active{color:var(--t1);border-bottom-color:var(--cb2)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.personnel-card{background:var(--c1);border:1px solid var(--bd);border-radius:var(--r);padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px;font-size:11px}
+.personnel-card .p-team{font-weight:600;color:var(--t1);width:100px;flex-shrink:0}
+.personnel-card .p-risk{flex:1;color:var(--t2)}
+.threat-card{background:var(--c1);border:1px solid var(--bd);border-radius:var(--r);padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px;font-size:11px}
+.threat-card .ti-cve{font-family:var(--fm);font-size:10px;color:var(--t1);width:140px;flex-shrink:0}
+.threat-card .ti-title{flex:1;color:var(--t2)}
+.threat-card .ti-epss{font-family:var(--fm);font-size:10px;width:60px;text-align:right}
+.shared-dep{background:var(--c1);border:1px solid var(--bd);border-radius:var(--r);padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px;font-size:11px}
+.shared-dep .sd-name{font-family:var(--fm);font-size:11px;color:var(--t1);width:100px;flex-shrink:0}
+.shared-dep .sd-products{flex:1;color:var(--t2);font-size:10px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media print{
+  body{background:#fff;color:#000;font-size:10px}
+  .S,.TB,.TK,.MO,.search-ov,.toast,.tb-btn,.rec-ticket,.scenario-wrap{display:none!important}
+  .M{padding:0}
+  .sec{opacity:1!important;transform:none!important;page-break-inside:avoid}
+  .CC,.K,.AP,.DD{break-inside:avoid;border-color:#ddd}
+  [data-theme="dark"]{--bg:#fff;--c1:#fff;--c2:#f8f8f8;--c3:#f0f0f0;--c4:#e8e8e8;--bd:#ddd;--bd2:#ccc;--t1:#000;--t2:#555;--t3:#888}
+}
+/* --- Responsive --- */
+@media(max-width:1400px){
+  .M{padding:0 0 40px}
+  .sec{padding:16px 20px;max-width:100%}
+  .hdr{padding:24px 20px 12px}
+}
+@media(max-width:1100px){
+  .S{width:180px;min-width:180px}
+  .S .ng a{font-size:10.5px;padding:4px 6px}
+  .TK{left:180px}
+  .KG{grid-template-columns:repeat(3,1fr)}
+  .KG.cols8{grid-template-columns:repeat(4,1fr)}
+  .CR{grid-template-columns:1fr}
+  .RH{grid-template-columns:1fr}
+  .MR{grid-template-columns:repeat(2,1fr)}
+  .AP .ap-header{flex-direction:column;align-items:flex-start}
+  .AP .ap-nodes{flex-wrap:wrap}
+  .rhm{max-width:100%}
+}
+@media(max-width:900px){
+  .S{display:none}
+  .TK{left:0}
+  .TB{padding:8px 16px}
+  .sec{padding:12px 16px}
+  .hdr{padding:20px 16px 10px}
+  .hdr h1{font-size:18px}
+  .KG{grid-template-columns:repeat(2,1fr)}
+  .KG.cols8{grid-template-columns:repeat(2,1fr)}
+  .CR{grid-template-columns:1fr}
+  .RH{grid-template-columns:1fr}
+  .this-week{grid-template-columns:1fr}
+  .MR{grid-template-columns:repeat(2,1fr)}
+  .DS{grid-template-columns:repeat(2,1fr)}
+  .SR{width:160px;height:160px}
+  .SR canvas{width:160px!important;height:160px!important}
+  .AP .ap-meta{flex-wrap:wrap;gap:4px}
+  .AP .ap-nodes{gap:0}
+  .AP .ap-node{min-width:70px;font-size:9px;padding:6px 8px}
+  .chart-wrap{height:180px}
+  .chart-wrap.tall{height:240px}
+  .DT thead th{font-size:7.5px;padding:6px 6px}
+  .DT tbody td{padding:5px 6px;font-size:10px}
+  .HM th,.HM td{padding:4px 4px;font-size:8px}
+  .rhm{grid-template-rows:repeat(5,32px) 18px}
+  .rhm-count{font-size:11px}
+}
+@media(max-width:600px){
+  .KG{grid-template-columns:1fr 1fr}
+  .K .kv{font-size:1.1rem}
+  .K .kl{font-size:7.5px}
+  .MR{grid-template-columns:1fr}
+  .TB .tb-left{overflow-x:auto;flex-wrap:nowrap}
+  .TB .tb-right{gap:4px}
+  .AP .ap-node{min-width:60px;font-size:8px;padding:4px 6px}
+  .AP .ap-arrow{font-size:12px;padding:0 2px}
+  .sec{padding:10px 12px}
+  .hdr h1{font-size:16px}
+  .st{font-size:14px}
+  .funnel-label{min-width:70px;font-size:9px}
+  .funnel-bar{height:22px;font-size:8px}
+  .chart-wrap{height:150px}
+  .chart-wrap.tall{height:200px}
+  .chart-wrap.short{height:120px}
+  .rhm{grid-template-columns:20px repeat(5,1fr);grid-template-rows:repeat(5,28px) 16px}
+  .rhm-count{font-size:10px}
+  .rhm-ylabel,.rhm-label{font-size:6px}
+}
+</style>
+</head>
+<body>
+<div class="W">
+  <nav class="S" id="sidebar">
+    <div class="logo">Security Intelligence</div>
+    <div class="ng">
+      <div class="ngl">Overview</div>
+      <a href="#s1" class="active"><span class="sn">1</span> Command Center</a>
+      <a href="#s2"><span class="sn">2</span> Attack Paths</a>
+    </div>
+    <div class="ng">
+      <div class="ngl">Findings</div>
+      <a href="#s3"><span class="sn">3</span> Triage &amp; SLA</a>
+      <a href="#s4"><span class="sn">4</span> Severity &amp; CWE</a>
+      <a href="#s5"><span class="sn">5</span> Teams</a>
+      <a href="#s6"><span class="sn">6</span> Risk Trajectory</a>
+    </div>
+    <div class="ng">
+      <div class="ngl">Coverage</div>
+      <a href="#s7"><span class="sn">7</span> Scan Coverage</a>
+      <a href="#s8"><span class="sn">8</span> Active Findings</a>
+    </div>
+    <div class="ng">
+      <div class="ngl">Governance</div>
+      <a href="#s9"><span class="sn">9</span> Maturity</a>
+      <a href="#s10"><span class="sn">10</span> Recommendations</a>
+      <a href="#s11"><span class="sn">11</span> Risk Register</a>
+      <a href="#s12"><span class="sn">12</span> Compliance</a>
+    </div>
+    <div class="st-sel">
+      <label>Team Filter</label>
+      <select id="team-select" onchange="filterTeam(this.value)">
+        <option value="all">All Teams</option>
+        <!-- Team options populated dynamically from TEAM_DATA -->
+      </select>
+    </div>
+  </nav>
+  <div class="M">
+    <!-- Toolbar -->
+    <div class="TB">
+      <div class="tb-left">
+        <span class="tb-title" id="tb-team-label">All Teams</span>
+        <span class="tb-date" id="tb-date"></span>
+      </div>
+      <div class="tb-right">
+        <button class="tb-btn" onclick="openSearch()" title="Search (/)">Search</button>
+        <button class="tb-btn" onclick="copyOnePager()">Copy Brief</button>
+        <button class="tb-btn" onclick="exportMD()">Export MD</button>
+        <button class="tb-btn" onclick="toggleTheme()" id="theme-btn">Light</button>
+        <button class="tb-btn" onclick="window.print()">Print</button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="hdr">
+      <h1 id="report-title">Security Posture Report</h1>
+      <div class="hdr-sub" id="report-subtitle"></div>
+    </div>
+
+    <!-- S1: Command Center -->
+    <section class="sec hero-glow" id="s1">
+      <div class="sh"><span class="sn">1</span><span class="st">Command Center</span></div>
+      <div class="RH">
+        <div class="SR" id="score-ring-wrap">
+          <div style="position:relative;width:200px;height:200px;">
+            <canvas id="score-ring" width="200" height="200"></canvas>
+          </div>
+          <div class="sr-center">
+            <div class="sr-grade" id="sr-grade"></div>
+            <div class="sr-score" id="sr-score"></div>
+            <div class="sr-delta" id="sr-delta"></div>
+          </div>
+        </div>
+        <div class="RB" id="score-factors"></div>
+      </div>
+      <!-- "Things that changed this week" cards are populated dynamically from HISTORY deltas -->
+      <div class="this-week" id="this-week"></div>
+      <!-- KPI tiles are populated dynamically from META.kpi -->
+      <div class="KG cols8" id="kpi-grid"></div>
+    </section>
+
+    <!-- S2: Attack Paths -->
+    <section class="sec" id="s2">
+      <div class="sh"><span class="sn">2</span><span class="st">Attack Paths</span></div>
+
+      <!-- Aggregate Stats Ribbon -->
+      <!-- stats ribbon removed -->
+
+      <!-- Attack Graph -->
+      <div class="CC ag-graph-wrap" style="margin-bottom:16px;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+          <div>
+            <div class="ct" style="margin-bottom:2px">Attack Graph — Multi-Path Convergence</div>
+            <div class="cs">Click any node for full intelligence · Select paths to trace kill chains · Particle flow shows attack direction</div>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button class="ag-view-btn active" onclick="agSetView('graph',this)" title="Graph View">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><line x1="7" y1="5" x2="17" y2="5"/><line x1="5" y1="7" x2="12" y2="17"/><line x1="19" y1="7" x2="12" y2="17"/></svg>
+            </button>
+            <button class="ag-view-btn" onclick="agSetView('matrix',this)" title="MITRE Matrix View">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </button>
+            <div style="width:1px;height:16px;background:var(--bd2)"></div>
+            <label class="ag-toggle-label"><input type="checkbox" id="ag-particles-toggle" onchange="agToggleParticles(this.checked)"><span class="ag-toggle-text">Particles</span></label>
+            <label class="ag-toggle-label"><input type="checkbox" id="ag-heatmap-toggle" onchange="agToggleHeatmap(this.checked)"><span class="ag-toggle-text">Heat Map</span></label>
+          </div>
+        </div>
+        <div id="ag-path-btns" style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px"></div>
+        <div id="ag-graph-container" style="position:relative">
+          <canvas id="attack-graph" style="width:100%;height:640px;cursor:pointer"></canvas>
+          <div id="ag-tooltip" class="ag-tooltip"></div>
+        </div>
+        <div id="ag-matrix-container" style="display:none"></div>
+        <div class="ag-legend" id="ag-legend"></div>
+      </div>
+
+      <!-- Intel Drawer -->
+      <div class="ag-drawer-overlay" id="ag-drawer-overlay" onclick="agCloseDrawer()"></div>
+      <div class="ag-drawer" id="ag-drawer">
+        <div class="ag-drawer-header">
+          <div class="ag-drawer-title" id="ag-drawer-title"></div>
+          <button class="ag-drawer-close" onclick="agCloseDrawer()">&times;</button>
+        </div>
+        <div class="ag-drawer-body" id="ag-drawer-body"></div>
+      </div>
+
+      <!-- Individual Kill Chains -->
+      <div class="ct" style="margin-bottom:8px">Individual Kill Chains</div>
+      <div id="attack-paths-container"></div>
+
+      <!-- Corroborated Risks -->
+      <div class="CC corr-table">
+        <div class="ct">Corroborated Risks</div>
+        <div class="cs">Top cross-source evidence matches</div>
+        <table class="DT" id="corr-table">
+          <thead><tr><th>Risk</th><th>Finding</th><th>Type</th><th>Confidence</th></tr></thead>
+          <tbody id="corr-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S3: Triage & SLA -->
+    <section class="sec" id="s3">
+      <div class="sh"><span class="sn">3</span><span class="st">Triage &amp; SLA</span></div>
+      <div class="MR" id="triage-metrics">
+        <div class="MT"><div class="mt-val" id="tm-triage">93%</div><div class="mt-label">Triage Rate</div></div>
+        <div class="MT"><div class="mt-val" id="tm-mttr-c">12d</div><div class="mt-label">MTTR Critical</div></div>
+        <div class="MT"><div class="mt-val" id="tm-mttr-h">5d</div><div class="mt-label">MTTR High</div></div>
+        <div class="MT"><div class="mt-val" id="tm-mttr-m">45d</div><div class="mt-label">MTTR Medium</div></div>
+      </div>
+      <div class="funnel" id="triage-funnel"></div>
+      <div class="CC">
+        <div class="ct">SLA Tracker</div>
+        <div class="cs">Findings approaching or breaching SLA</div>
+        <table class="DT" id="sla-table">
+          <thead><tr><th>Finding</th><th>Severity</th><th>Age (d)</th><th>SLA (d)</th><th>Remaining</th><th>Predicted MTTR</th><th>Status</th></tr></thead>
+          <tbody id="sla-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S4: Severity & CWE -->
+    <section class="sec" id="s4">
+      <div class="sh"><span class="sn">4</span><span class="st">Severity &amp; CWE Breakdown</span></div>
+      <div class="CR">
+        <div class="CC">
+          <div class="ct">Severity Distribution</div>
+          <div class="cs">Active findings by severity</div>
+          <div class="chart-wrap" style="height:200px"><canvas id="chart-donut" width="400" height="200"></canvas></div>
+        </div>
+        <div class="CC">
+          <div class="ct">CWE Categories</div>
+          <div class="cs">Top weakness types</div>
+          <div class="chart-wrap"><canvas id="chart-cwe" width="400" height="220"></canvas></div>
+        </div>
+      </div>
+      <div class="CR">
+        <div class="CC">
+          <div class="ct">Severity Trend</div>
+          <div class="cs">6-month trend</div>
+          <div class="chart-wrap"><canvas id="chart-trend" width="400" height="220"></canvas></div>
+        </div>
+        <div class="CC">
+          <div class="ct">Tool Distribution</div>
+          <div class="cs">Findings by scanner</div>
+          <div class="chart-wrap"><canvas id="chart-tools" width="400" height="220"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S5: Teams -->
+    <section class="sec" id="s5">
+      <div class="sh"><span class="sn">5</span><span class="st">Team Performance</span></div>
+      <div class="CC">
+        <table class="DT" id="team-table">
+          <thead><tr><th>Team</th><th>Crit</th><th>High</th><th>Med</th><th>Active</th><th>MTTR (d)</th><th>SLA %</th><th>Score</th></tr></thead>
+          <tbody id="team-tbody"></tbody>
+        </table>
+      </div>
+      <!--
+        Optional deep-dive section for an application/platform with a finding hotspot.
+        Hidden by default; shown when TD[team].show_focus === true and TD[team].focus_*
+        arrays are populated. Configure your own focus app via the data block.
+      -->
+      <div class="CR" id="focus-section" style="display:none">
+        <div class="CC">
+          <div class="ct" id="focus-mods-title">Module Heatmap</div>
+          <div class="cs" id="focus-mods-sub">Findings by module</div>
+          <div class="chart-wrap"><canvas id="chart-focus-mods" width="400" height="220"></canvas></div>
+        </div>
+        <div class="CC">
+          <div class="ct" id="focus-age-title">Finding Age Distribution</div>
+          <div class="cs">Days since discovery</div>
+          <div class="chart-wrap"><canvas id="chart-focus-age" width="400" height="220"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S6: Risk Trajectory -->
+    <section class="sec" id="s6">
+      <div class="sh"><span class="sn">6</span><span class="st">Risk Trajectory</span></div>
+      <div class="CR">
+        <div class="CC">
+          <div class="ct">Burndown &#8212; Critical &amp; High</div>
+          <div class="cs">13-week active count</div>
+          <div class="chart-wrap"><canvas id="chart-burn" width="400" height="220"></canvas></div>
+        </div>
+        <div class="CC">
+          <div class="ct">Risk Score History</div>
+          <div class="cs">8-week composite score</div>
+          <div class="chart-wrap"><canvas id="chart-history" width="400" height="220"></canvas></div>
+        </div>
+      </div>
+      <div class="CC">
+        <div class="ct">Compliance Trend</div>
+        <div class="cs">Framework A &amp; Framework B test pass rates</div>
+        <div class="chart-wrap short"><canvas id="chart-compliance-trend" width="800" height="160"></canvas></div>
+      </div>
+      <div class="scenario-wrap" id="scenario-sim">
+        <div class="ct">Scenario Simulator</div>
+        <div class="cs">Adjust parameters to project score impact</div>
+        <div class="sc-row"><label>Resolve Critical CVEs</label><input type="range" id="sc-crit" min="0" max="10" value="0" oninput="updateScenario()"><span class="sc-val" id="sc-crit-val">0</span></div>
+        <div class="sc-row"><label>Fix top finding cluster</label><input type="range" id="sc-cluster" min="0" max="100" value="0" oninput="updateScenario()"><span class="sc-val" id="sc-cluster-val">0</span></div>
+        <div class="sc-row"><label>Patch endpoint vulns</label><input type="range" id="sc-endpoint" min="0" max="2000" value="0" step="50" oninput="updateScenario()"><span class="sc-val" id="sc-endpoint-val">0</span></div>
+        <div class="sc-row"><label>Improve container scan %</label><input type="range" id="sc-container" min="60" max="100" value="60" oninput="updateScenario()"><span class="sc-val" id="sc-container-val">60%</span></div>
+        <div class="sc-result">Projected Score: <span id="sc-projected">0</span> / 100</div>
+      </div>
+    </section>
+
+    <!-- S7: Scan Coverage -->
+    <section class="sec" id="s7">
+      <div class="sh"><span class="sn">7</span><span class="st">Scan Coverage</span></div>
+      <div class="CC">
+        <div class="ct">Maturity Radar</div>
+        <div class="cs">Security capability assessment</div>
+        <div class="chart-wrap tall"><canvas id="chart-radar" width="400" height="300"></canvas></div>
+      </div>
+      <div class="CC">
+        <div class="ct">Blind Spots</div>
+        <div class="cs">Areas with no automated scanning</div>
+        <div id="blind-spots-container"></div>
+      </div>
+    </section>
+
+    <!-- S8: Active Findings -->
+    <section class="sec" id="s8">
+      <div class="sh"><span class="sn">8</span><span class="st">Active Findings</span></div>
+      <div class="tabs" id="findings-tabs">
+        <div class="tab active" onclick="showFindingsTab('critical')">Critical</div>
+        <div class="tab" onclick="showFindingsTab('high')">High</div>
+        <div class="tab" onclick="showFindingsTab('medium')">Medium</div>
+      </div>
+      <div class="tab-content active" id="findings-critical">
+        <table class="DT"><thead><tr><th>Finding</th><th>Product</th><th>Team</th><th>CWE</th><th>Date</th><th>Status</th><th>Remediation</th></tr></thead><tbody id="findings-crit-tbody"></tbody></table>
+      </div>
+      <div class="tab-content" id="findings-high">
+        <table class="DT"><thead><tr><th>Finding</th><th>Product</th><th>Team</th><th>CWE</th><th>Date</th><th>Status</th><th>Remediation</th></tr></thead><tbody id="findings-high-tbody"></tbody></table>
+      </div>
+      <div class="tab-content" id="findings-medium">
+        <table class="DT"><thead><tr><th>Finding</th><th>Product</th><th>Team</th><th>CWE</th><th>Date</th><th>Status</th><th>Remediation</th></tr></thead><tbody id="findings-med-tbody"></tbody></table>
+      </div>
+    </section>
+
+    <!-- S9: Maturity -->
+    <section class="sec" id="s9">
+      <div class="sh"><span class="sn">9</span><span class="st">Maturity &amp; Intelligence</span></div>
+      <div class="CR">
+        <div class="DD" style="grid-column:1/-1">
+          <div class="dd-title">Cross-Source Intelligence Flow</div>
+          <div class="cs">How vuln findings, GRC risks, and IR incidents corroborate</div>
+          <canvas id="xsrc-flow" style="width:100%;height:340px"></canvas>
+        </div>
+        <div class="DD">
+          <div class="dd-title">Control Validation</div>
+          <div class="cs">Vuln findings vs GRC controls</div>
+          <table class="DT ec-table" id="cv-table">
+            <thead><tr><th>Control</th><th>Description</th><th>Finding</th><th>Status</th></tr></thead>
+            <tbody id="cv-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="CC">
+        <div class="ct">Gap Proofs</div>
+        <div class="cs">Compliance gaps with dual-source evidence</div>
+        <div id="gap-proofs-container"></div>
+      </div>
+      <div class="CR">
+        <div class="DD">
+          <div class="dd-title">Threat Intelligence</div>
+          <div id="threat-intel-container"></div>
+        </div>
+        <div class="DD">
+          <div class="dd-title">Personnel Risk</div>
+          <div id="personnel-risk-container"></div>
+        </div>
+      </div>
+      <div class="CC">
+        <div class="ct">Shared Dependencies</div>
+        <div class="cs">High-blast-radius libraries across products</div>
+        <div id="shared-deps-container"></div>
+      </div>
+      <div class="CC">
+        <div class="ct">Cost Estimates by Attack Path</div>
+        <div class="cs">Estimated breach impact (low / mid / high)</div>
+        <table class="DT" id="cost-table">
+          <thead><tr><th>Path</th><th>Low</th><th>Mid</th><th>High</th><th>Basis</th></tr></thead>
+          <tbody id="cost-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S10: Recommendations -->
+    <section class="sec" id="s10">
+      <div class="sh"><span class="sn">10</span><span class="st">Recommendations</span></div>
+      <div id="recs-container"></div>
+    </section>
+
+    <!-- S11: Risk Register -->
+    <section class="sec" id="s11">
+      <div class="sh"><span class="sn">11</span><span class="st">Risk Register</span></div>
+      <div class="CR" style="grid-template-columns:1fr 1fr;align-items:start">
+        <div>
+          <div class="CC" style="margin-bottom:10px">
+            <div class="ct">Risk Heatmap</div>
+            <div class="cs">Likelihood x Impact · Click a cell to drill down</div>
+            <div style="display:flex;gap:8px;margin-bottom:8px">
+              <button class="hm-toggle active" onclick="toggleHeatmap('residual',this)">Residual</button>
+              <button class="hm-toggle" onclick="toggleHeatmap('inherent',this)">Inherent</button>
+            </div>
+            <div id="risk-heatmap-grid"></div>
+          </div>
+        </div>
+        <div>
+          <div class="CC" style="margin-bottom:10px">
+            <div class="ct">Risk Posture</div>
+            <div class="cs">39 risks across 3 data sources</div>
+            <div id="risk-summary-cards"></div>
+          </div>
+          <div class="CC" style="margin-bottom:10px">
+            <div class="ct">Risk Reduction</div>
+            <div class="cs">Inherent → Residual movement</div>
+            <div id="risk-movement"></div>
+          </div>
+          <div class="CC" style="margin-bottom:10px">
+            <div class="ct">By Category</div>
+            <div id="risk-categories"></div>
+          </div>
+        </div>
+      </div>
+      <div class="CC">
+        <div class="ct">Risk Register</div>
+        <table class="DT" id="vr-table">
+          <thead><tr><th>ID</th><th>Description</th><th>Category</th><th>Inherent</th><th>Residual</th><th>IR</th><th>Treatment</th><th>Owner</th><th>Status</th></tr></thead>
+          <tbody id="vr-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S12: Compliance -->
+    <section class="sec" id="s12">
+      <div class="sh"><span class="sn">12</span><span class="st">Compliance Evidence</span></div>
+      <div class="CR">
+        <div class="CC">
+          <div class="ct" id="framework-a-name">Framework A</div>
+          <div class="DS">
+            <div class="ds-item"><div class="ds-val" id="fa-ctrl-pct">0%</div><div class="ds-label">Control Pass</div></div>
+            <div class="ds-item"><div class="ds-val" id="fa-test-pct">0%</div><div class="ds-label">Test Pass</div></div>
+            <div class="ds-item"><div class="ds-val" id="fa-doc-pct">0%</div><div class="ds-label">Doc Pass</div></div>
+            <div class="ds-item"><div class="ds-val" id="fa-unowned">0</div><div class="ds-label">Unowned</div></div>
+          </div>
+          <table class="DT ec-table">
+            <thead><tr><th>ID</th><th>Control</th><th>Test</th><th>Status</th><th>Evidence</th></tr></thead>
+            <tbody id="framework-a-tbody"></tbody>
+          </table>
+        </div>
+        <div class="CC">
+          <div class="ct" id="framework-b-name">Framework B</div>
+          <div class="DS">
+            <div class="ds-item"><div class="ds-val" id="fb-ctrl-pct">0%</div><div class="ds-label">Control Pass</div></div>
+            <div class="ds-item"><div class="ds-val" id="fb-test-pct">0%</div><div class="ds-label">Test Pass</div></div>
+            <div class="ds-item"><div class="ds-val" id="fb-doc-pct">0%</div><div class="ds-label">Doc Pass</div></div>
+            <div class="ds-item"><div class="ds-val" id="fb-fail-tests">0</div><div class="ds-label">Failing Tests</div></div>
+          </div>
+          <table class="DT ec-table">
+            <thead><tr><th>ID</th><th>Control</th><th>Test</th><th>Status</th><th>Evidence</th></tr></thead>
+            <tbody id="framework-b-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="ftr">
+      <div>Security Intelligence Report</div>
+      <div class="ftr-actions">
+        <button class="tb-btn" onclick="copyOnePager()">Copy Executive Brief</button>
+        <button class="tb-btn" onclick="exportMD()">Export Markdown</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ticker -->
+<div class="TK" id="ticker">
+  <div class="tk-item">Score <span class="tk-val" id="tk-score">0</span></div>
+  <div class="tk-item">Critical <span class="tk-val tk-crit" id="tk-crit">0 active</span></div>
+  <div class="tk-item">High <span class="tk-val tk-warn" id="tk-high">0 active</span></div>
+  <div class="tk-item">MTTR-C <span class="tk-val" id="tk-mttr">0d</span></div>
+  <div class="tk-item">Triage <span class="tk-val tk-good" id="tk-triage">0%</span></div>
+  <div class="tk-item">Framework A <span class="tk-val tk-warn" id="tk-framework-a">0%</span></div>
+  <div class="tk-item">Framework B <span class="tk-val" id="tk-framework-b">0%</span></div>
+</div>
+
+<!-- Search overlay -->
+<div class="search-ov" id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Search findings, risks, teams, CWEs..." oninput="doSearch(this.value)">
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="MO" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="MOD">
+    <button class="mod-close" onclick="closeModal()">&times;</button>
+    <div class="mod-title" id="modal-title"></div>
+    <div class="mod-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script id="report-data">
+// ===REPORT_DATA_START===
+//
+// EMPTY SCHEMA STUB — populated weekly by /security-report.
+//
+// Every object below shows the shape the renderer expects. Replace the
+// placeholder values with live data via the skill; do not hand-edit.
+//
+// All labels (team names, framework names, risk IDs, etc.) are properties
+// of the data, so the renderer stays environment-agnostic. Configure your
+// own taxonomy when you populate this block.
+
+const META={
+  date:'',period:'',products:0,teams:0,
+  kpi:{total:0,crit:{n:0,active:0,delta:''},high:{n:0,active:0,delta:''},med:{n:0,active:0,delta:''},low_info:0},
+  mttr:{crit:{d:0,sla:0},high:{d:0,sla:0},med:{d:0,sla:0}},
+  triage:{rate:0,resolved:0,total:0},
+  score:{grade:'',n:0},
+  grc:{risks:0,crit_tier:0,avg_res:0,unmit:0,approved:0,
+    framework_a:{name:'',ctrl_pct:0,test_pct:0,doc_pct:0,ctrl:'0/0',test:'0/0',doc:'0/0'},
+    framework_b:{name:'',ctrl_pct:0,test_pct:0,doc_pct:0,ctrl:'0/0',test:'0/0',doc:'0/0'},
+    fail_tests:0,unowned:0},
+  xsrc:{mapped:0,corroborated:0,gap:0,confidence:0,ctrl_valid:0,ctrl_contra:0,ctrl_unverif:0,gaps:0,ir_total:0,ir_confirmed:0,ir_near_miss:0,ir_mapped:0},
+  deep:{team:'',count:0,pct:0,cwe:'',product:''}
+};
+
+const TM={};
+// Per-team benchmark data. Keys are team slugs; values:
+// { n: <display name>, c: crit_active, h: high_active, m: med_active, a: total_active, mt: mttr_days, sl: sla_pct }
+
+const FD={critical:[],high:[],medium:[]};
+// Sample findings for drill-down modals. Each entry:
+// { t: title, p: product, tm: team_label, cwe: 'CWE-NNN', d: discovered_date, s: status ('ac'|'mt'|...), desc: description, rem: remediation }
+
+const TEAM_DATA={
+  all:{id:null,label:'All teams',crit:0,high:0,med:0,total:0,active_total:0,products:0,mttr_c:0,mttr_h:0,mttr_m:0,sla_c:0,sla_h:0,sla_m:0,triage:0,score:'',scoreN:0}
+};
+// Per-team detail data. Add one entry per team you track. The `all` entry is required.
+
+const TD={
+  all:{crit:0,high:0,med:0,total:0,acrit:0,ahigh:0,amed:0,
+    donut:[0,0,0],
+    trend_c:[0,0,0,0,0,0],trend_h:[0,0,0,0,0,0],trend_m:[0,0,0,0,0,0],
+    burn_c:[0,0,0,0,0,0,0,0,0,0,0,0,0],burn_h:[0,0,0,0,0,0,0,0,0,0,0,0,0],burn_t:[0,0,0,0,0,0,0,0,0,0,0,0,0],
+    cwe_labels:[],cwe_data:[],cwe_colors:[],
+    tools:[],tool_labels:[],
+    ra_data:[0,0,0,0,0],td_data:[0,0,0,0,0,0],
+    focus_mod_labels:[],focus_mods:[],focus_age:[0,0,0,0,0],
+    funnel:[],
+    radar:[0,0,0,0,0,0],
+    findings_c:[],findings_h:[],findings_m:[],
+    show_focus:false}
+};
+// Per-team chart data. Add one entry per team you track. Same key as TEAM_DATA.
+
+const RECS={all:[]};
+// Per-team recommendations: { p: 'p1'|'p2'|'p3', text: html, ticket: ticket_id_or_null }
+
+const VR=[];
+// Risk register. Each entry:
+// { id, d: description, l: inherent_likelihood, i: inherent_impact, rl: residual_likelihood, ri: residual_impact,
+//   c: category, t: treatment, o: owner, s: status, ir: incident_count, ir_refs: [incident_names] }
+
+const RFE_MAP=[];
+// Risk-to-finding evidence: { risk: <risk_id>, finding: <title>, type: 'Direct'|'Incident'|'Partial', conf: 0-100 }
+
+const CV_MAP=[];
+// Control validation: { ctrl: <control_id>, desc, finding: <finding_or_null>, status: 'Verified'|'Contradicted'|'Unverified', risk: <risk_id_or_null> }
+
+const GAP_PROOFS=[];
+// Corroborated compliance gaps: { id, desc, grc_risk, finding, ir_ref, framework, impact }
+
+const OWNER_MAP={};
+// GRC owner -> [team_slug, ...] mapping. Used to attribute control owners to teams.
+
+const ATTACK_PATHS=[];
+// Kill chains: { id, name, risk, impact, likelihood, findings, incidents,
+//   steps: [{ tactic, label, detail, count?, countType? }] }
+
+const SLA_FINDINGS=[];
+// Active findings with SLA projection: { id, title, severity, product, team, age, sla_window, remaining, predicted, status }
+
+const BLIND_SPOTS=[];
+// Areas with no scan coverage: { area, desc, controls, products }
+
+const PERSONNEL_RISK=[];
+// Per-person risk concentration: { team, person, risk, severity }
+
+const THREAT_INTEL=[];
+// CVE enrichment: { cve, title, epss, exploited, ransomware, advisory, status? }
+
+const EVIDENCE_CHAINS={framework_a:[],framework_b:[]};
+// Per-framework evidence chains. Each entry:
+// { id, control, test, status: 'PASS'|'FAIL', evidence, finding_ref, ir_ref }
+// Replace `framework_a` / `framework_b` keys with your real framework slugs.
+
+const HISTORY={weeks:[],risk_score:[],active_crit:[],active_high:[],active_med:[],framework_a_test:[],framework_b_test:[]};
+// Sparkline source: parallel arrays, oldest first. Length should match `weeks`.
+
+const COST_EST=[];
+// Per-attack-path cost ranges: { path, low, mid, high, basis }
+
+const SHARED_DEPS=[];
+// Cross-product vulnerable packages: { dep, version, products: [], cves, severity }
+
+// ===REPORT_DATA_END===
+</script>
+
+<script>
+/* ================================================
+   RENDERING ENGINE
+   ================================================ */
+var currentTeam = 'all';
+var chartInstances = {};
+var knowledgeGraph = [];
+
+function init() {
+  drawRing('score-ring', META.score.n, META.score.grade);
+  buildScoreFactors();
+  buildFunnel('triage-funnel');
+  buildCharts();
+  buildTables();
+  agAutoGenerate();
+  buildAttackPaths();
+  buildAttackGraph();
+  agCanvasSetup();
+  agStartAnimation();
+  buildRecs();
+  buildBlindSpots();
+  buildGapProofs();
+  buildThreatIntel();
+  buildPersonnelRisk();
+  buildSharedDeps();
+  buildCostTable();
+  buildRiskHeatmap();
+  buildRiskSummary();
+  buildRiskMovement();
+  buildRiskCategories();
+  buildControlValidation();
+  buildComplianceTables();
+  buildXsrcFlow();
+  buildKnowledgeGraph();
+  animateCounters();
+  setupScrollSpy();
+  setupTicker();
+  updateSrDelta();
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
+      var tag = (e.target.tagName || '').toLowerCase();
+      if (tag !== 'input' && tag !== 'textarea') {
+        e.preventDefault();
+        openSearch();
+      }
+    }
+    if (e.key === 'Escape') {
+      closeSearch();
+      closeModal();
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+/* --- Helpers --- */
+function esc(s) {
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function fmt(n) {
+  return Number(n).toLocaleString();
+}
+
+/* --- Score Ring --- */
+function drawRing(canvasId, score, grade) {
+  var canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width;
+  var h = canvas.height;
+  var cx = w / 2;
+  var cy = h / 2;
+  var r = Math.min(cx, cy) - 16;
+  var lw = 10;
+  var startAngle = -Math.PI / 2;
+  var endAngle = startAngle + (2 * Math.PI * score / 100);
+
+  ctx.clearRect(0, 0, w, h);
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+  ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--c3').trim() || '#1A202A';
+  ctx.lineWidth = lw;
+  ctx.stroke();
+
+  var gradient = ctx.createLinearGradient(0, 0, w, h);
+  if (score >= 80) {
+    gradient.addColorStop(0, '#52C41A');
+    gradient.addColorStop(1, '#13C2C2');
+  } else if (score >= 60) {
+    gradient.addColorStop(0, '#4B8BFF');
+    gradient.addColorStop(1, '#13C2C2');
+  } else {
+    gradient.addColorStop(0, '#FF7A45');
+    gradient.addColorStop(1, '#FF4D4F');
+  }
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, startAngle, endAngle);
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = lw;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+}
+
+function updateSrDelta() {
+  var el = document.getElementById('sr-delta');
+  if (!el) return;
+  var first = HISTORY.risk_score[0];
+  var last = HISTORY.risk_score[HISTORY.risk_score.length - 1];
+  var delta = last - first;
+  el.textContent = (delta >= 0 ? '+' : '') + delta + ' from 8 weeks ago';
+}
+
+/* --- Score Factors --- */
+function buildScoreFactors() {
+  var el = document.getElementById('score-factors');
+  if (!el) return;
+  var d = TD[currentTeam] || TD.all;
+  var td2 = TEAM_DATA[currentTeam] || TEAM_DATA.all;
+  // Score factor values come from META.score.factors when populated;
+  // these defaults are a starting point — tune the right-hand-side
+  // numbers in your data block, not here.
+  var f = (META.score && META.score.factors) || {};
+  var factors = [
+    { label: 'Crit Triage', val: td2.triage, color: '#52C41A' },
+    { label: 'SCA Coverage', val: f.sca_coverage || 0, color: '#4B8BFF' },
+    { label: 'SAST Coverage', val: f.sast_coverage || 0, color: '#4B8BFF' },
+    { label: 'High SLA', val: td2.sla_h, color: td2.sla_h >= 80 ? '#52C41A' : '#FF7A45' },
+    { label: 'Container Scan', val: d.radar ? d.radar[2] : 0, color: '#13C2C2' },
+    { label: 'Active Crits', val: d.acrit, color: d.acrit > 0 ? '#FF4D4F' : '#52C41A', isCount: true },
+    { label: 'Compliance', val: f.compliance || 0, color: '#FAAD14' },
+    { label: 'Risk Posture', val: d.radar ? d.radar[3] : 0, color: '#9254DE' }
+  ];
+  var html = '';
+  for (var i = 0; i < factors.length; i++) {
+    var f = factors[i];
+    var pct = f.isCount ? (f.val === 0 ? 100 : Math.max(0, 100 - f.val * 20)) : f.val;
+    var display = f.isCount ? f.val : f.val + '%';
+    html += '<div class="rb-row"><span class="rb-label">' + esc(f.label) + '</span><div class="rb-bar"><div class="rb-fill" style="width:' + pct + '%;background:' + f.color + '"></div></div><span class="rb-val">' + display + '</span></div>';
+  }
+  el.innerHTML = html;
+}
+
+/* --- Funnel --- */
+function buildFunnel(containerId) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  var d = TD[currentTeam] || TD.all;
+  var funnelData = d.funnel || [];
+  var colorMap = {'var(--cr)':'#FF4D4F','var(--cb2)':'#4B8BFF','var(--cg)':'#52C41A','var(--ca)':'#FAAD14'};
+  var html = '';
+  for (var i = 0; i < funnelData.length; i++) {
+    var f = funnelData[i];
+    var bgColor = colorMap[f.c] || f.c;
+    html += '<div class="funnel-row"><span class="funnel-label">' + esc(f.l) + '</span><div class="funnel-bar" style="width:' + Math.max(5, f.w) + '%;background:' + bgColor + '">' + fmt(f.v) + '</div></div>';
+  }
+  el.innerHTML = html;
+}
+
+/* --- Charts --- */
+function buildCharts() {
+  var d = TD[currentTeam] || TD.all;
+  var cs = getComputedStyle(document.documentElement);
+  var gridColor = cs.getPropertyValue('--grid').trim() || 'rgba(255,255,255,.03)';
+  var t2Color = cs.getPropertyValue('--t2').trim() || '#828A98';
+  var t3Color = cs.getPropertyValue('--t3').trim() || '#515969';
+  var baseScaleX = { grid: { color: gridColor }, ticks: { color: t3Color, font: { size: 9, family: "'JetBrains Mono', monospace" } } };
+  var baseScaleY = { grid: { color: gridColor }, ticks: { color: t3Color, font: { size: 9, family: "'JetBrains Mono', monospace" } } };
+
+  Object.keys(chartInstances).forEach(function(k) {
+    if (chartInstances[k]) { chartInstances[k].destroy(); chartInstances[k] = null; }
+  });
+
+  // Donut
+  (function() {
+    var el = document.getElementById('chart-donut');
+    if (!el) return;
+    chartInstances.donut = new Chart(el, {
+      type: 'doughnut',
+      data: {
+        labels: ['Critical', 'High', 'Medium'],
+        datasets: [{ data: d.donut, backgroundColor: ['#FF4D4F', '#FF7A45', '#FAAD14'], borderWidth: 0 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '70%',
+        plugins: {
+          legend: { position: 'bottom', labels: { color: t2Color, font: { size: 10, family: "'DM Sans', sans-serif" }, padding: 12 } }
+        }
+      }
+    });
+  })();
+
+  // CWE
+  (function() {
+    var el = document.getElementById('chart-cwe');
+    if (!el) return;
+    chartInstances.cwe = new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: d.cwe_labels,
+        datasets: [{ data: d.cwe_data, backgroundColor: d.cwe_colors, borderRadius: 4, barThickness: 18 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: baseScaleX, y: baseScaleY } }
+    });
+  })();
+
+  // Trend
+  (function() {
+    var el = document.getElementById('chart-trend');
+    if (!el) return;
+    chartInstances.trend = new Chart(el, {
+      type: 'line',
+      data: {
+        labels: ['Nov','Dec','Jan','Feb','Mar','Apr'],
+        datasets: [
+          { label: 'Critical', data: d.trend_c, borderColor: '#FF4D4F', backgroundColor: 'rgba(255,77,79,.08)', fill: true, tension: .4, pointRadius: 3, pointBackgroundColor: '#FF4D4F', borderWidth: 2 },
+          { label: 'High', data: d.trend_h, borderColor: '#FF7A45', backgroundColor: 'rgba(255,122,69,.06)', fill: true, tension: .4, pointRadius: 3, pointBackgroundColor: '#FF7A45', borderWidth: 2 },
+          { label: 'Medium', data: d.trend_m, borderColor: '#FAAD14', backgroundColor: 'rgba(250,173,20,.06)', fill: true, tension: .4, pointRadius: 3, pointBackgroundColor: '#FAAD14', borderWidth: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { color: t2Color, font: { size: 9 }, padding: 8 } } }, scales: { x: baseScaleX, y: baseScaleY } }
+    });
+  })();
+
+  // Tools
+  (function() {
+    var el = document.getElementById('chart-tools');
+    if (!el) return;
+    chartInstances.tools = new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: d.tool_labels,
+        datasets: [{ data: d.tools, backgroundColor: ['#4B8BFF','#9254DE','#13C2C2'], borderRadius: 4, barThickness: 28 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: baseScaleX, y: baseScaleY } }
+    });
+  })();
+
+  // Burndown
+  (function() {
+    var el = document.getElementById('chart-burn');
+    if (!el) return;
+    var labels = [];
+    for (var i = 0; i < 13; i++) labels.push('W' + (i - 12));
+    chartInstances.burn = new Chart(el, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: 'Critical', data: d.burn_c, borderColor: '#FF4D4F', tension: .3, pointRadius: 2, borderWidth: 2 },
+          { label: 'High', data: d.burn_h, borderColor: '#FF7A45', tension: .3, pointRadius: 2, borderWidth: 2 },
+          { label: 'Triage Backlog', data: d.burn_t, borderColor: '#4B8BFF', borderDash: [4, 4], tension: .3, pointRadius: 2, borderWidth: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { color: t2Color, font: { size: 9 }, padding: 8 } } }, scales: { x: baseScaleX, y: baseScaleY } }
+    });
+  })();
+
+  // History
+  (function() {
+    var el = document.getElementById('chart-history');
+    if (!el) return;
+    chartInstances.history = new Chart(el, {
+      type: 'line',
+      data: {
+        labels: HISTORY.weeks,
+        datasets: [{ label: 'Risk Score', data: HISTORY.risk_score, borderColor: '#4B8BFF', backgroundColor: 'rgba(75,139,255,.08)', fill: true, tension: .3, pointRadius: 3, borderWidth: 2, pointBackgroundColor: '#4B8BFF' }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: baseScaleX, y: { min: 70, max: 100, grid: { color: gridColor }, ticks: { color: t3Color, font: { size: 9 } } } } }
+    });
+  })();
+
+  // Compliance trend
+  (function() {
+    var el = document.getElementById('chart-compliance-trend');
+    if (!el) return;
+    chartInstances.compTrend = new Chart(el, {
+      type: 'line',
+      data: {
+        labels: HISTORY.weeks,
+        datasets: [
+          { label: 'Framework A Test %', data: HISTORY.framework_a_test, borderColor: '#FF7A45', tension: .3, pointRadius: 3, borderWidth: 2 },
+          { label: 'Framework B Test %', data: HISTORY.framework_b_test, borderColor: '#4B8BFF', tension: .3, pointRadius: 3, borderWidth: 2 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'bottom', labels: { color: t2Color, font: { size: 9 }, padding: 8 } } },
+        scales: { x: baseScaleX, y: { min: 40, max: 80, grid: { color: gridColor }, ticks: { color: t3Color, font: { size: 9 } } } }
+      }
+    });
+  })();
+
+  // Radar
+  (function() {
+    var el = document.getElementById('chart-radar');
+    if (!el) return;
+    var radarData = d.radar || [85, 95, 60, 70, 80, 93];
+    chartInstances.radar = new Chart(el, {
+      type: 'radar',
+      data: {
+        labels: ['Vuln Mgmt', 'SCA Coverage', 'Container Sec', 'Risk Posture', 'Compliance', 'Triage Rate'],
+        datasets: [{
+          data: radarData,
+          backgroundColor: 'rgba(75,139,255,.12)',
+          borderColor: '#4B8BFF',
+          borderWidth: 2,
+          pointBackgroundColor: '#4B8BFF',
+          pointBorderColor: '#4B8BFF',
+          pointBorderWidth: 2,
+          pointRadius: 5,
+          pointHoverRadius: 7
+        },{
+          data: [100,100,100,100,100,100],
+          backgroundColor: 'rgba(75,139,255,.03)',
+          borderColor: 'rgba(75,139,255,.08)',
+          borderWidth: 1,
+          pointRadius: 0,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          r: {
+            min: 0, max: 100,
+            grid: { color: gridColor },
+            angleLines: { color: gridColor },
+            pointLabels: { color: t2Color, font: { size: 10, family: "'DM Sans', sans-serif" } },
+            ticks: { display: false }
+          }
+        }
+      }
+    });
+  })();
+
+  // Focus modules (optional per-team deep-dive — populate d.focus_mod_labels + d.focus_mods to enable)
+  (function() {
+    var el = document.getElementById('chart-focus-mods');
+    if (!el) return;
+    var focusSec = document.getElementById('focus-section');
+    if (focusSec) focusSec.style.display = d.show_focus ? '' : 'none';
+    if (!d.show_focus) return;
+    chartInstances.focusMods = new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: d.focus_mod_labels || [],
+        datasets: [{ data: d.focus_mods || [], backgroundColor: '#9254DE', borderRadius: 4, barThickness: 20 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: baseScaleX, y: baseScaleY } }
+    });
+  })();
+
+  // Focus age
+  (function() {
+    var el = document.getElementById('chart-focus-age');
+    if (!el) return;
+    if (!d.show_focus) return;
+    chartInstances.focusAge = new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: ['0-7d', '8-14d', '15-21d', '22-30d', '30+d'],
+        datasets: [{ data: d.focus_age || [], backgroundColor: '#FF7A45', borderRadius: 4, barThickness: 24 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: baseScaleX, y: baseScaleY } }
+    });
+  })();
+
+}
+
+/* --- Risk Heatmap Grid --- */
+var heatmapMode = 'residual';
+function toggleHeatmap(mode, btn) {
+  heatmapMode = mode;
+  document.querySelectorAll('.hm-toggle').forEach(function(b){b.classList.remove('active')});
+  if (btn) btn.classList.add('active');
+  buildRiskHeatmap();
+}
+
+function buildRiskHeatmap() {
+  var container = document.getElementById('risk-heatmap-grid');
+  if (!container) return;
+  var isResidual = heatmapMode === 'residual';
+
+  // Build 5x5 grid: cells[likelihood][impact] = array of VR ids
+  var cells = {};
+  for (var li = 1; li <= 5; li++) for (var im = 1; im <= 5; im++) cells[li+','+im] = [];
+  for (var v = 0; v < VR.length; v++) {
+    var r = VR[v];
+    var lk = isResidual ? r.rl : r.l;
+    var ip = isResidual ? r.ri : r.i;
+    if (lk >= 1 && lk <= 5 && ip >= 1 && ip <= 5) cells[lk+','+ip].push(r);
+  }
+
+  function cellColor(lk, ip) {
+    var s = lk * ip;
+    if (s >= 15) return 'rgba(255,77,79,.55)';
+    if (s >= 10) return 'rgba(255,77,79,.35)';
+    if (s >= 6) return 'rgba(255,122,69,.3)';
+    if (s >= 3) return 'rgba(250,173,20,.2)';
+    return 'rgba(82,196,26,.12)';
+  }
+  function textColor(lk, ip) {
+    var s = lk * ip;
+    if (s >= 15) return '#FF4D4F';
+    if (s >= 10) return '#FF6B6D';
+    if (s >= 6) return '#FF7A45';
+    if (s >= 3) return '#FAAD14';
+    return '#52C41A';
+  }
+
+  var html = '<div class="rhm">';
+  // Y-axis labels (likelihood 5→1 top to bottom)
+  var likeLabels = ['Rare','Unlikely','Possible','Likely','Almost Certain'];
+  var impLabels = ['Negligible','Minor','Moderate','Major','Catastrophic'];
+
+  for (var row = 5; row >= 1; row--) {
+    html += '<div class="rhm-ylabel">' + row + '</div>';
+    for (var col = 1; col <= 5; col++) {
+      var key = row + ',' + col;
+      var risks = cells[key];
+      var count = risks.length;
+      var ids = risks.map(function(r){return r.id}).join(' ');
+      var bg = count > 0 ? cellColor(row, col) : 'rgba(128,128,128,.04)';
+      var tc = count > 0 ? textColor(row, col) : 'var(--t3)';
+      var irCount = 0;
+      for (var ri = 0; ri < risks.length; ri++) irCount += (risks[ri].ir || 0);
+      var irDot = irCount > 0 ? '<span style="width:5px;height:5px;border-radius:50%;background:var(--cp);flex-shrink:0" title="' + irCount + ' incidents"></span>' : '';
+      html += '<div class="rhm-cell" style="background:' + bg + '" onclick="openHeatmapCell(' + row + ',' + col + ')" title="' + ids + '">';
+      if (count > 0) {
+        html += '<span class="rhm-count" style="color:' + tc + '">' + count + '</span>' + irDot;
+      }
+      html += '</div>';
+    }
+  }
+  // X-axis labels
+  html += '<div></div>'; // empty corner
+  for (var xi = 1; xi <= 5; xi++) {
+    html += '<div class="rhm-label">' + xi + '</div>';
+  }
+  html += '</div>';
+
+  // Axis titles
+  html += '<div style="display:flex;justify-content:space-between;margin-top:6px;font-family:var(--fm);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em">';
+  html += '<span>&#8593; LIKELIHOOD</span><span>IMPACT &#8594;</span></div>';
+
+  container.innerHTML = html;
+}
+
+function openHeatmapCell(lk, ip) {
+  var isResidual = heatmapMode === 'residual';
+  var matched = VR.filter(function(r) {
+    return (isResidual ? r.rl : r.l) === lk && (isResidual ? r.ri : r.i) === ip;
+  });
+  if (!matched.length) return;
+  var body = matched.map(function(r) {
+    var irHtml = r.ir_refs && r.ir_refs.length ? '<div style="margin-top:4px"><span style="font-family:var(--fm);font-size:8px;color:var(--cp)">INCIDENTS:</span> ' + r.ir_refs.map(esc).join(', ') + '</div>' : '';
+    return '<div style="background:var(--c3);border-radius:var(--r);padding:10px;margin-bottom:6px">' +
+      '<div style="font-weight:500;color:var(--t1);margin-bottom:2px">' + esc(r.id) + ': ' + esc(r.d) + '</div>' +
+      '<div style="font-size:10px;color:var(--t2)">' +
+      '<span style="font-family:var(--fm);font-size:9px">Inherent: ' + r.l + '×' + r.i + '=' + (r.l*r.i) + '</span> · ' +
+      '<span style="font-family:var(--fm);font-size:9px">Residual: ' + r.rl + '×' + r.ri + '=' + (r.rl*r.ri) + '</span> · ' +
+      esc(r.t) + ' · ' + esc(r.o) +
+      '</div>' + irHtml + '</div>';
+  }).join('');
+  openModal('L' + lk + ' × I' + ip + ' — ' + matched.length + ' risks (' + heatmapMode + ')', body);
+}
+
+function buildRiskSummary() {
+  var el = document.getElementById('risk-summary-cards');
+  if (!el) return;
+  var draft = 0, awaiting = 0, withIR = 0, noTreat = 0, critTier = 0;
+  for (var i = 0; i < VR.length; i++) {
+    var r = VR[i];
+    if (r.s === 'DRAFT') draft++;
+    if (r.s === 'AWAITING_SUBMISSION') awaiting++;
+    if (r.ir > 0) withIR++;
+    if (r.t === 'Unset') noTreat++;
+    if (r.rl * r.ri >= 16) critTier++;
+  }
+  var items = [
+    {n: VR.length, l: 'Total', c: 'var(--t1)'},
+    {n: critTier, l: 'Critical Tier', c: 'var(--cr)'},
+    {n: withIR, l: 'With Incidents', c: 'var(--cp)'},
+    {n: noTreat, l: 'No Treatment', c: 'var(--ca)'},
+    {n: draft, l: 'Draft', c: 'var(--co)'},
+    {n: awaiting, l: 'Awaiting Review', c: 'var(--cb2)'}
+  ];
+  var html = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">';
+  for (var j = 0; j < items.length; j++) {
+    html += '<div style="text-align:center;padding:8px 4px;background:var(--c3);border-radius:6px">';
+    html += '<div style="font-family:var(--fd);font-size:1.1rem;font-weight:600;color:' + items[j].c + '">' + items[j].n + '</div>';
+    html += '<div style="font-family:var(--fm);font-size:7.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-top:1px">' + items[j].l + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function buildRiskMovement() {
+  var el = document.getElementById('risk-movement');
+  if (!el) return;
+  var reduced = 0, same = 0, increased = 0;
+  var totalInherent = 0, totalResidual = 0;
+  for (var i = 0; i < VR.length; i++) {
+    var r = VR[i];
+    var inh = r.l * r.i, res = r.rl * r.ri;
+    totalInherent += inh;
+    totalResidual += res;
+    if (res < inh) reduced++;
+    else if (res === inh) same++;
+    else increased++;
+  }
+  var reductionPct = totalInherent > 0 ? Math.round((1 - totalResidual / totalInherent) * 100) : 0;
+  var html = '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">';
+  html += '<div style="font-family:var(--fd);font-size:1.8rem;font-weight:600;color:var(--cg)">' + reductionPct + '%</div>';
+  html += '<div style="font-size:10px;color:var(--t2);line-height:1.4">overall risk<br>reduction</div>';
+  html += '</div>';
+  html += '<div style="display:flex;gap:4px;margin-bottom:6px">';
+  var barW = reduced + same + increased;
+  html += '<div style="flex:' + reduced + ';height:6px;background:var(--cg);border-radius:3px" title="' + reduced + ' reduced"></div>';
+  html += '<div style="flex:' + same + ';height:6px;background:var(--ca);border-radius:3px" title="' + same + ' unchanged"></div>';
+  if (increased > 0) html += '<div style="flex:' + increased + ';height:6px;background:var(--cr);border-radius:3px" title="' + increased + ' increased"></div>';
+  html += '</div>';
+  html += '<div style="display:flex;gap:12px;font-size:9px;color:var(--t3)">';
+  html += '<span><span style="color:var(--cg);font-weight:500">' + reduced + '</span> reduced</span>';
+  html += '<span><span style="color:var(--ca);font-weight:500">' + same + '</span> unchanged</span>';
+  if (increased > 0) html += '<span><span style="color:var(--cr);font-weight:500">' + increased + '</span> increased</span>';
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function buildRiskCategories() {
+  var el = document.getElementById('risk-categories');
+  if (!el) return;
+  var cats = {};
+  for (var i = 0; i < VR.length; i++) {
+    var c = VR[i].c || 'Other';
+    if (!cats[c]) cats[c] = {count: 0, ir: 0};
+    cats[c].count++;
+    cats[c].ir += (VR[i].ir || 0);
+  }
+  var sorted = Object.keys(cats).sort(function(a, b) { return cats[b].count - cats[a].count; });
+  var max = cats[sorted[0]].count;
+  var catColors = {'Data Exfiltration':'var(--cr)','Fraud And Abuse':'var(--co)','Denial Of Service':'var(--ca)','Reputational Damage':'var(--cp)','Physical':'var(--t3)','Extortion':'var(--cr)','Privacy':'var(--cb2)','Supply Chain':'var(--cc)','Application':'var(--co)','Endpoint':'var(--ca)'};
+  var html = '';
+  for (var j = 0; j < sorted.length; j++) {
+    var name = sorted[j], d = cats[name];
+    var color = catColors[name] || 'var(--cb2)';
+    var pct = Math.round(d.count / max * 100);
+    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
+    html += '<span style="font-size:9px;color:var(--t2);min-width:100px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(name) + '</span>';
+    html += '<div style="flex:1;height:10px;background:var(--c3);border-radius:3px;overflow:hidden"><div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:3px;transition:width .5s var(--e)"></div></div>';
+    html += '<span style="font-family:var(--fm);font-size:9px;color:var(--t1);min-width:16px">' + d.count + '</span>';
+    if (d.ir > 0) html += '<span style="font-family:var(--fm);font-size:8px;color:var(--cp)" title="' + d.ir + ' incidents">' + d.ir + ' IR</span>';
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+/* --- Tables --- */
+function buildTables() {
+  buildSLATable();
+  buildTeamTable();
+  buildFindingsTables();
+  buildVRTable();
+  buildCorrTable();
+}
+
+function buildSLATable() {
+  var tbody = document.getElementById('sla-tbody');
+  if (!tbody) return;
+  var html = '';
+  for (var i = 0; i < SLA_FINDINGS.length; i++) {
+    var f = SLA_FINDINGS[i];
+    var sevClass = f.sev === 'Critical' ? 'crit' : f.sev === 'High' ? 'high' : 'med';
+    var statusColor = f.status === 'BREACHED' ? 'var(--cr)' : f.status === 'AT RISK' ? 'var(--ca)' : 'var(--cg)';
+    var remColor = f.remaining < 0 ? 'var(--cr)' : f.remaining <= 5 ? 'var(--ca)' : 'var(--cg)';
+    html += '<tr><td style="color:var(--t1);font-weight:500">' + esc(f.title) + '</td><td><span class="sev-badge ' + sevClass + '">' + esc(f.sev) + '</span></td><td>' + f.age + '</td><td>' + f.sla + '</td><td style="color:' + remColor + '">' + f.remaining + 'd</td><td>' + f.predicted_mttr + 'd</td><td style="color:' + statusColor + ';font-weight:500">' + esc(f.status) + '</td></tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+function buildTeamTable() {
+  var tbody = document.getElementById('team-tbody');
+  if (!tbody) return;
+  var teams = Object.keys(TM);
+  var html = '';
+  for (var i = 0; i < teams.length; i++) {
+    var t = TM[teams[i]];
+    html += '<tr><td style="color:var(--t1);font-weight:500">' + esc(t.n) + '</td>';
+    html += '<td>' + (t.c > 0 ? '<span style="color:var(--cr)">' + t.c + '</span>' : '0') + '</td>';
+    html += '<td>' + (t.h > 0 ? '<span style="color:var(--co)">' + t.h + '</span>' : '0') + '</td>';
+    html += '<td>' + (t.m > 0 ? '<span style="color:var(--ca)">' + t.m + '</span>' : '0') + '</td>';
+    html += '<td style="font-weight:500">' + t.a + '</td>';
+    html += '<td>' + t.mt + '</td>';
+    html += '<td>' + t.sl + '%</td>';
+    html += '<td>--</td></tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+function buildFindingsTables() {
+  var d = TD[currentTeam] || TD.all;
+  buildFindingsTable('findings-crit-tbody', d.findings_c);
+  buildFindingsTable('findings-high-tbody', d.findings_h);
+  buildFindingsTable('findings-med-tbody', d.findings_m);
+}
+
+function buildFindingsTable(tbodyId, findings) {
+  var tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  if (!findings || findings.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--t3);padding:20px">No findings in this category for the selected team.</td></tr>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < findings.length; i++) {
+    var f = findings[i];
+    var statusClass = f.s === 'ac' ? 'ac' : f.s === 'mt' ? 'mt' : 'ra';
+    var statusLabel = f.s === 'ac' ? 'Active' : f.s === 'mt' ? 'Mitigated' : 'Risk Accepted';
+    html += '<tr><td style="color:var(--t1);font-weight:500;cursor:pointer" onclick="openFinding(' + i + ',\'' + tbodyId + '\')">' + esc(f.t) + '</td><td>' + esc(f.p) + '</td><td>' + esc(f.tm) + '</td><td><span style="font-family:var(--fm);font-size:10px">' + esc(f.cwe) + '</span></td><td>' + esc(f.d) + '</td><td><span class="pill ' + statusClass + '">' + statusLabel + '</span></td><td style="font-size:10px">' + esc(f.rem) + '</td></tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+function openFinding(idx, tbodyId) {
+  var d = TD[currentTeam] || TD.all;
+  var arr;
+  if (tbodyId === 'findings-crit-tbody') arr = d.findings_c;
+  else if (tbodyId === 'findings-high-tbody') arr = d.findings_h;
+  else arr = d.findings_m;
+  if (!arr || !arr[idx]) return;
+  var f = arr[idx];
+  openModal(f.t, '<p>' + esc(f.desc) + '</p><p><strong>Remediation:</strong> ' + esc(f.rem) + '</p><p><strong>Product:</strong> ' + esc(f.p) + '</p><p><strong>Team:</strong> ' + esc(f.tm) + '</p><p><strong>CWE:</strong> ' + esc(f.cwe) + '</p>');
+}
+
+function buildVRTable() {
+  var tbody = document.getElementById('vr-tbody');
+  if (!tbody) return;
+  var html = '';
+  for (var i = 0; i < VR.length; i++) {
+    var r = VR[i];
+    var inherent = r.l * r.i;
+    var residual = r.rl * r.ri;
+    var statusClass = r.s === 'DRAFT' ? 'dr' : 'ac';
+    var inherentColor = inherent >= 15 ? 'var(--cr)' : inherent >= 9 ? 'var(--co)' : inherent >= 4 ? 'var(--ca)' : 'var(--cg)';
+    var residualColor = residual >= 15 ? 'var(--cr)' : residual >= 9 ? 'var(--co)' : residual >= 4 ? 'var(--ca)' : 'var(--cg)';
+    var irBadge = r.ir ? '<span style="font-family:var(--fm);font-size:9px;padding:2px 5px;border-radius:4px;background:var(--cps);color:var(--cp)">' + r.ir + '</span>' : '<span style="font-family:var(--fm);font-size:9px;color:var(--t3)">—</span>';
+    html += '<tr><td style="font-family:var(--fm);font-size:10px;color:var(--cb2);cursor:pointer" onclick="openVR(' + i + ')">' + esc(r.id) + '</td><td style="color:var(--t1)">' + esc(r.d) + '</td><td>' + esc(r.c) + '</td><td style="color:' + inherentColor + ';font-weight:500">' + inherent + '</td><td style="color:' + residualColor + ';font-weight:500">' + residual + '</td><td>' + irBadge + '</td><td>' + esc(r.t) + '</td><td>' + esc(r.o) + '</td><td><span class="pill ' + statusClass + '">' + esc(r.s) + '</span></td></tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+function openVR(idx) {
+  var r = VR[idx];
+  if (!r) return;
+  var irHtml = r.ir_refs && r.ir_refs.length ? '<p><strong>Incidents/Investigations (' + r.ir + '):</strong> ' + r.ir_refs.map(esc).join(', ') + '</p>' : '';
+  openModal(r.id, '<p>' + esc(r.d) + '</p><p><strong>Category:</strong> ' + esc(r.c) + '</p><p><strong>Treatment:</strong> ' + esc(r.t) + '</p><p><strong>Owner:</strong> ' + esc(r.o) + '</p><p><strong>Inherent:</strong> ' + r.l + 'L x ' + r.i + 'I = ' + (r.l * r.i) + '</p><p><strong>Residual:</strong> ' + r.rl + 'L x ' + r.ri + 'I = ' + (r.rl * r.ri) + '</p>' + irHtml);
+}
+
+function buildCorrTable() {
+  var tbody = document.getElementById('corr-tbody');
+  if (!tbody) return;
+  var sorted = RFE_MAP.slice().sort(function(a, b) { return b.conf - a.conf; });
+  var top7 = sorted.slice(0, 7);
+  var html = '';
+  for (var i = 0; i < top7.length; i++) {
+    var r = top7[i];
+    var barColor = r.conf >= 80 ? 'var(--cg)' : r.conf >= 60 ? 'var(--ca)' : 'var(--co)';
+    var typeStyle = r.type === 'Incident' ? 'color:var(--cp);font-weight:500' : '';
+    html += '<tr><td style="font-family:var(--fm);font-size:10px;color:var(--cb2)">' + esc(r.risk) + '</td><td style="color:var(--t1)">' + esc(r.finding) + '</td><td style="' + typeStyle + '">' + esc(r.type) + '</td><td><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;height:4px;background:var(--c3);border-radius:2px;overflow:hidden"><div style="height:100%;width:' + r.conf + '%;background:' + barColor + ';border-radius:2px"></div></div><span style="font-family:var(--fm);font-size:9px;width:28px;text-align:right">' + r.conf + '%</span></div></td></tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+/* --- Attack Paths --- */
+function buildAttackPaths() {
+  var container = document.getElementById('attack-paths-container');
+  if (!container) return;
+  var html = '';
+  for (var i = 0; i < ATTACK_PATHS.length; i++) {
+    var ap = ATTACK_PATHS[i];
+    var lh = ap.likelihood || 'Unknown';
+    var likeClass = lh === 'High' ? 'crit-path' : lh === 'Medium' ? 'med-path' : lh.indexOf('mitigated') > -1 ? 'mit-path' : 'low-path';
+    var likeBg = lh === 'High' ? 'var(--crs)' : lh === 'Medium' ? 'var(--cos)' : 'var(--cas)';
+    var likeColor = lh === 'High' ? 'var(--cr)' : lh === 'Medium' ? 'var(--co)' : 'var(--ca)';
+    if (lh.indexOf('mitigated') > -1) { likeBg = 'var(--cgs)'; likeColor = 'var(--cg)'; }
+    if (lh === 'Unknown') { likeBg = 'var(--c3)'; likeColor = 'var(--t3)'; likeClass = 'low-path'; }
+
+    var costEntry = null;
+    for (var k = 0; k < COST_EST.length; k++) {
+      if (COST_EST[k].path === ap.id) { costEntry = COST_EST[k]; break; }
+    }
+    var costBadge = costEntry ? '<span class="ap-badge" style="background:var(--crs);color:var(--cr)">Est. ' + costEntry.mid + '</span>' : '';
+
+    var steps = ap.steps || [];
+    var chainHtml = '<div class="ap-chain">';
+    for (var j = 0; j < steps.length; j++) {
+      var s = steps[j];
+      var countHtml = '';
+      if (s.count !== undefined && s.count > 0) {
+        var cBg = s.countType === 'incidents' ? 'var(--cps)' : 'var(--cbs)';
+        var cColor = s.countType === 'incidents' ? 'var(--cp)' : 'var(--cb2)';
+        countHtml = '<span class="ap-step-count" style="background:' + cBg + ';color:' + cColor + '">' + s.count + ' ' + (s.countType === 'incidents' ? 'IR' : 'fnd') + '</span>';
+      } else if (s.count === 0) {
+        countHtml = '<span class="ap-step-count" style="background:var(--cgs);color:var(--cg)">0</span>';
+      }
+      chainHtml += '<div class="ap-step">';
+      chainHtml += '<div class="ap-step-box">';
+      chainHtml += '<div class="ap-step-tactic">' + esc(s.tactic) + '</div>';
+      chainHtml += '<div class="ap-step-label">' + esc(s.label) + '</div>';
+      chainHtml += '<div style="font-size:8px;color:var(--t3);margin-bottom:3px">' + esc(s.detail || '') + '</div>';
+      chainHtml += countHtml;
+      chainHtml += '</div></div>';
+      if (j < steps.length - 1) {
+        chainHtml += '<div class="ap-connector"><div class="ap-conn-line"></div></div>';
+      }
+    }
+    chainHtml += '</div>';
+
+    var vrEntry = VR.find(function(v){return v.id===ap.risk});
+    var irDetail = '';
+    if (vrEntry && vrEntry.ir_refs && vrEntry.ir_refs.length) {
+      irDetail = '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd)"><span style="font-family:var(--fm);font-size:8.5px;color:var(--cp)">INCIDENT HISTORY:</span><ul style="margin:4px 0 0 16px;font-size:10px;color:var(--t2);list-style:disc">';
+      for (var m = 0; m < vrEntry.ir_refs.length; m++) irDetail += '<li>' + esc(vrEntry.ir_refs[m]) + '</li>';
+      irDetail += '</ul></div>';
+    }
+    var costDetail = costEntry ? '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:10px;color:var(--t2)"><span style="font-family:var(--fm);font-size:8.5px;color:var(--cr)">COST ESTIMATE:</span> Low ' + esc(costEntry.low) + ' · Mid ' + esc(costEntry.mid) + ' · High ' + esc(costEntry.high) + '<br><span style="color:var(--t3)">' + esc(costEntry.basis) + '</span></div>' : '';
+
+    // Gather compliance gaps for this path
+    var pathGaps = GAP_PROOFS.filter(function(g){return g.grc_risk === ap.risk});
+    var gapHtml = '';
+    if (pathGaps.length) {
+      gapHtml = '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd)"><span style="font-family:var(--fm);font-size:8.5px;color:var(--co)">COMPLIANCE GAPS:</span><ul style="margin:4px 0 0 16px;font-size:10px;color:var(--t2);list-style:disc">';
+      for (var gi = 0; gi < pathGaps.length; gi++) gapHtml += '<li><strong>' + esc(pathGaps[gi].framework) + '</strong> — ' + esc(pathGaps[gi].desc) + '</li>';
+      gapHtml += '</ul></div>';
+    }
+
+    // Gather SLA findings relevant to this path
+    var pathSla = SLA_FINDINGS.filter(function(f){
+      for(var si=0;si<steps.length;si++){if(f.title.indexOf(steps[si].label)>-1||steps[si].detail.indexOf(f.title.substring(0,10))>-1)return true}
+      return ap.risk==='VR-021'&&f.title.indexOf('authorize')>-1;
+    });
+    var slaHtml = '';
+    if (pathSla.length) {
+      slaHtml = '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd)"><span style="font-family:var(--fm);font-size:8.5px;color:var(--ca)">SLA STATUS:</span>';
+      for (var si2 = 0; si2 < pathSla.length; si2++) {
+        var sf = pathSla[si2];
+        var slColor = sf.status === 'BREACHED' ? 'var(--cr)' : sf.status === 'RESOLVED' ? 'var(--cg)' : 'var(--ca)';
+        slaHtml += '<div style="margin-top:4px;font-size:10px"><span style="color:' + slColor + ';font-family:var(--fm);font-size:8px">' + esc(sf.status) + '</span> ' + esc(sf.title) + ' <span style="color:var(--t3)">(' + sf.age + 'd / ' + sf.sla + 'd SLA)</span></div>';
+      }
+      slaHtml += '</div>';
+    }
+
+    // Personnel risk for this path
+    var pathPersonnel = PERSONNEL_RISK.filter(function(pr){
+      for(var si=0;si<steps.length;si++){if(pr.risk.indexOf(steps[si].label.substring(0,8))>-1)return true}
+      return vrEntry && pr.team === vrEntry.o;
+    });
+    var persHtml = '';
+    if (pathPersonnel.length) {
+      persHtml = '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd)"><span style="font-family:var(--fm);font-size:8.5px;color:var(--cc)">PERSONNEL RISK:</span>';
+      for (var pri = 0; pri < pathPersonnel.length; pri++) {
+        var pr = pathPersonnel[pri];
+        persHtml += '<div style="margin-top:4px;font-size:10px;color:var(--t2)"><strong>' + esc(pr.team) + '</strong> — ' + esc(pr.risk) + '</div>';
+      }
+      persHtml += '</div>';
+    }
+
+    var autoBadge = ap.blindSpot ? '<span class="ap-badge" style="background:var(--cas);color:var(--ca)">BLIND SPOT</span>' : (ap.auto ? '<span class="ap-badge" style="background:var(--c3);color:var(--t3)">AUTO</span>' : '');
+
+    html += '<div class="AP ' + likeClass + '" onclick="this.classList.toggle(\'open\')">';
+    html += '<div class="ap-header"><span class="ap-name">' + esc(ap.id) + ': ' + esc(ap.name) + '</span>';
+    var irBadgeAP = ap.incidents ? '<span class="ap-badge" style="background:var(--cps);color:var(--cp)">' + ap.incidents + ' IR</span>' : '';
+    html += '<div class="ap-meta">' + autoBadge + '<span class="ap-badge" style="background:var(--cbs);color:var(--cb2)">' + ap.findings + ' fnd</span>' + irBadgeAP;
+    html += '<span class="ap-badge" style="color:' + likeColor + ';background:' + likeBg + '">' + esc(ap.likelihood) + '</span>';
+    html += costBadge + '<span class="ap-chevron">&#9662;</span></div></div>';
+    html += '<div class="ap-body">';
+    html += chainHtml;
+    html += '<div class="ap-footer"><span>Risk: <span style="font-family:var(--fm);color:var(--cb2)">' + esc(ap.risk || 'N/A') + '</span></span>';
+    html += '<span>Impact: <strong>' + esc(ap.impact) + '</strong></span></div>';
+    html += irDetail + costDetail + gapHtml + slaHtml + persHtml;
+    html += '</div></div>';
+  }
+  container.innerHTML = html;
+}
+
+/* ================================================
+   ATTACK GRAPH ENGINE — Production Grade
+   ================================================ */
+var agHighlight = null;
+var agSelectedNode = null;
+var agHoverNode = null;
+var agNodes = [], agEdges = [], agTacticCols = [];
+var agParticles = [];
+var agParticlesEnabled = false;
+var agHeatmapEnabled = false;
+var agCurrentView = 'graph';
+var agAnimFrame = null;
+var agNodeMapGlobal = {};
+
+// --- Stats Ribbon ---
+function buildAttackStatsRibbon() {
+  var el = document.getElementById('ag-stats-ribbon');
+  if (!el) return;
+  var totalPaths = ATTACK_PATHS.length;
+  var highPaths = ATTACK_PATHS.filter(function(a){return a.likelihood==='High'}).length;
+  var totalFindings = 0, totalIncidents = 0, totalCostMid = 0;
+  for (var i = 0; i < ATTACK_PATHS.length; i++) {
+    totalFindings += ATTACK_PATHS[i].findings || 0;
+    totalIncidents += ATTACK_PATHS[i].incidents || 0;
+  }
+  for (var j = 0; j < COST_EST.length; j++) {
+    var v = COST_EST[j].mid.replace(/[^0-9.]/g, '');
+    totalCostMid += parseFloat(v) || 0;
+  }
+  var gapCount = GAP_PROOFS.filter(function(g){return g.desc.indexOf('RESOLVED')===-1}).length;
+  var blindCount = BLIND_SPOTS.length;
+  var breachedSla = SLA_FINDINGS.filter(function(f){return f.status==='BREACHED'}).length;
+
+  el.innerHTML =
+    '<div class="ag-stat-card crit"><div class="ag-stat-label">Attack Paths</div><div class="ag-stat-val" style="color:var(--cr)">' + totalPaths + '</div><div class="ag-stat-sub">' + highPaths + ' high likelihood</div></div>' +
+    '<div class="ag-stat-card warn"><div class="ag-stat-label">Total Exposure</div><div class="ag-stat-val" style="color:var(--co)">$' + totalCostMid.toFixed(1) + 'M</div><div class="ag-stat-sub">Mid-range aggregate</div></div>' +
+    '<div class="ag-stat-card purp"><div class="ag-stat-label">Incidents</div><div class="ag-stat-val" style="color:var(--cp)">' + totalIncidents + '</div><div class="ag-stat-sub">Across all kill chains</div></div>' +
+    '<div class="ag-stat-card info"><div class="ag-stat-label">Findings in Paths</div><div class="ag-stat-val" style="color:var(--cb2)">' + totalFindings.toLocaleString() + '</div><div class="ag-stat-sub">' + breachedSla + ' SLA breached</div></div>' +
+    '<div class="ag-stat-card crit"><div class="ag-stat-label">Compliance Gaps</div><div class="ag-stat-val" style="color:var(--cr)">' + gapCount + '</div><div class="ag-stat-sub">' + blindCount + ' blind spots</div></div>';
+}
+
+// --- Dynamic Attack Path Generation ---
+// Generates full kill chains for every VR risk with evidence, using category-specific
+// tactic chains with distinct intermediate and terminal nodes.
+var agAutoGenerated = false;
+function agAutoGenerate() {
+  if (agAutoGenerated) return;
+  agAutoGenerated = true;
+
+  var covered = {};
+  for (var i = 0; i < ATTACK_PATHS.length; i++) {
+    if (ATTACK_PATHS[i].risk) covered[ATTACK_PATHS[i].risk] = true;
+  }
+
+  // Full kill chain templates per category — each step has a unique label that
+  // creates real intermediate nodes in the graph, not just generic merges.
+  // Format: [{tactic, label, detailFn}]
+  // Full 4–5 step chains spanning all graph columns.
+  // Labels are specific enough to create DISTINCT nodes in columns 1–3,
+  // not collapse into the same 3 merged nodes.
+  var TEMPLATES = {
+    'Data Exfiltration': function(vr) { return [
+      {tactic:'Execution', label:'API/Session Abuse', detail:'Authenticated misuse'},
+      {tactic:'Cred Access', label:'Token Harvesting', detail:'API keys, session tokens'},
+      {tactic:'Collection', label:'Bulk Data Staging', detail:'sensitive data aggregation'},
+      {tactic:'Exfiltration', label:'Data Exfiltration', detail:'Channel: network/API'}
+    ];},
+    'Fraud And Abuse': function(vr) { return [
+      {tactic:'Execution', label:'Identity Spoofing', detail:'Impersonation/forgery'},
+      {tactic:'Cred Access', label:'Account Takeover', detail:'Session or credential theft'},
+      {tactic:'Collection', label:'Transaction Tampering', detail:'Order/payment manipulation'},
+      {tactic:'Impact', label:'Financial Loss', detail:'Direct monetary impact'}
+    ];},
+    'Supply Chain': function(vr) { return [
+      {tactic:'Execution', label:'Dependency Exploit', detail:'Compromised package'},
+      {tactic:'Cred Access', label:'Secret Extraction', detail:'Env vars, CI tokens'},
+      {tactic:'Lateral Movement', label:'Cross-Service Spread', detail:'Service-to-service'},
+      {tactic:'Impact', label:'Supply Chain Breach', detail:'Multi-product impact'}
+    ];},
+    'Denial Of Service': function(vr) { return [
+      {tactic:'Execution', label:'Flood/Amplification', detail:'Volumetric or app-layer'},
+      {tactic:'Cred Access', label:'Rate Limit Bypass', detail:'Auth/WAF evasion'},
+      {tactic:'Impact', label:'Service Disruption', detail:'Availability loss'}
+    ];},
+    'Physical': function(vr) { return [
+      {tactic:'Execution', label:'Device Compromise', detail:'Physical device access'},
+      {tactic:'Cred Access', label:'Cached Credential Access', detail:'Stored passwords/tokens'},
+      {tactic:'Collection', label:'Local File Exfil', detail:'Disk/cache extraction'},
+      {tactic:'Impact', label:'Physical Compromise', detail:'Asset/data exposure'}
+    ];},
+    'Endpoint': function(vr) { return [
+      {tactic:'Execution', label:'Endpoint Exploit', detail:'Local code execution'},
+      {tactic:'Cred Access', label:'Credential Dumping', detail:'Memory/registry extraction'},
+      {tactic:'Lateral Movement', label:'Network Pivot', detail:'Endpoint to network'},
+      {tactic:'Collection', label:'Host Data Harvest', detail:'Files, keys, configs'}
+    ];},
+    'Privacy': function(vr) { return [
+      {tactic:'Execution', label:'Access Escalation', detail:'Permission bypass'},
+      {tactic:'Discovery', label:'PII Store Discovery', detail:'Locate sensitive data'},
+      {tactic:'Collection', label:'Privacy Data Harvest', detail:'PII collection'},
+      {tactic:'Exfiltration', label:'Privacy Breach', detail:'Unauthorized disclosure'}
+    ];},
+    'Extortion': function(vr) { return [
+      {tactic:'Execution', label:'Malware Deployment', detail:'Ransomware payload'},
+      {tactic:'Cred Access', label:'Admin Key Theft', detail:'Backup/admin creds'},
+      {tactic:'Collection', label:'Encryption of Data', detail:'Files held hostage'},
+      {tactic:'Impact', label:'Extortion Demand', detail:'Payment + downtime'}
+    ];},
+    'Reputational Damage': function(vr) { return [
+      {tactic:'Execution', label:'Web Shell/Inject', detail:'Server-side access'},
+      {tactic:'Cred Access', label:'CMS/DNS Takeover', detail:'Publishing control'},
+      {tactic:'Impact', label:'Brand Damage', detail:'Public-facing defacement'}
+    ];},
+    'Application': function(vr) { return [
+      {tactic:'Execution', label:'App Logic Abuse', detail:'Business logic exploit'},
+      {tactic:'Cred Access', label:'Session Hijacking', detail:'Auth token theft'},
+      {tactic:'Collection', label:'App Data Extraction', detail:'API data harvesting'},
+      {tactic:'Exfiltration', label:'Data Exfiltration', detail:'Exfil via app channel'}
+    ];}
+  };
+
+  function entryLabel(d) {
+    var via = d.match(/via\s+(.+)/i);
+    if (via) { var t = via[1].replace(/^(the|a|an)\s+/i,''); return t.charAt(0).toUpperCase() + t.slice(1).substring(0,28); }
+    var verb = d.match(/^(.{4,30}?)\s+(?:exposes?|leads?|compromises?|targets?|abuses?)/i);
+    if (verb) return verb[1].charAt(0).toUpperCase() + verb[1].slice(1);
+    return d.substring(0, 28);
+  }
+
+  function likelihoodStr(vr) {
+    var s = vr.rl * vr.ri;
+    return s >= 16 ? 'High' : s >= 9 ? 'Medium' : 'Low';
+  }
+
+  var nextId = ATTACK_PATHS.length + 1;
+
+  for (var v = 0; v < VR.length; v++) {
+    var vr = VR[v];
+    if (covered[vr.id]) continue;
+
+    var rfes = RFE_MAP.filter(function(r){return r.risk===vr.id});
+    var hasEvidence = (vr.ir_refs && vr.ir_refs.length > 0) || rfes.length > 0 || (vr.rl * vr.ri >= 9);
+    if (!hasEvidence) continue;
+
+    var irCount = vr.ir || 0;
+    var entryDetail = '';
+    if (rfes.length) entryDetail = rfes[0].finding.substring(0, 35);
+    else if (vr.ir_refs && vr.ir_refs.length) entryDetail = vr.ir_refs[0].split('(')[0].trim().substring(0, 35);
+
+    // Build full chain: entry → category-specific middle/impact steps
+    var templateFn = TEMPLATES[vr.c] || TEMPLATES['Data Exfiltration'];
+    var midSteps = templateFn(vr);
+
+    var steps = [];
+
+    // Entry vector
+    steps.push({
+      tactic: 'Initial Access',
+      label: entryLabel(vr.d),
+      detail: entryDetail,
+      count: irCount,
+      countType: irCount > 0 ? 'incidents' : 'findings'
+    });
+
+    // Category-specific middle and impact steps
+    var directFindings = rfes.filter(function(r){return r.type==='Direct'}).length;
+    for (var mi = 0; mi < midSteps.length; mi++) {
+      var ms = midSteps[mi];
+      var isLast = mi === midSteps.length - 1;
+      steps.push({
+        tactic: ms.tactic,
+        label: ms.label,
+        detail: ms.detail,
+        count: isLast ? directFindings : undefined,
+        countType: isLast ? 'findings' : undefined
+      });
+    }
+
+    var riskScore = vr.rl * vr.ri;
+    var costMidVal = riskScore >= 16 ? 2.5 : riskScore >= 9 ? 1.2 : riskScore >= 4 ? 0.5 : 0.2;
+
+    ATTACK_PATHS.push({
+      id: 'AP-' + nextId,
+      name: vr.d.substring(0, 45),
+      risk: vr.id,
+      impact: '$' + costMidVal.toFixed(1) + 'M',
+      likelihood: likelihoodStr(vr),
+      findings: directFindings,
+      incidents: irCount,
+      steps: steps,
+      auto: true
+    });
+
+    COST_EST.push({
+      path: 'AP-' + nextId,
+      low: '$' + (costMidVal * 0.35).toFixed(1) + 'M',
+      mid: '$' + costMidVal.toFixed(1) + 'M',
+      high: '$' + (costMidVal * 2.8).toFixed(1) + 'M',
+      basis: 'Estimated from residual risk (' + vr.rl + '\u00D7' + vr.ri + '), category: ' + vr.c
+    });
+
+    nextId++;
+  }
+
+  // Blind spot entries
+  for (var bi = 0; bi < BLIND_SPOTS.length; bi++) {
+    var bs = BLIND_SPOTS[bi];
+    ATTACK_PATHS.push({
+      id: 'AP-' + nextId,
+      name: 'Blind Spot: ' + bs.area,
+      risk: null,
+      impact: 'Unknown',
+      likelihood: 'Unknown',
+      findings: 0,
+      incidents: 0,
+      steps: [
+        {tactic:'Initial Access', label: bs.area, detail: bs.products + ' unmonitored assets', count: bs.products, countType: 'findings'},
+        {tactic:'Execution', label: 'Unscanned Exploit', detail: 'No scan coverage'},
+        {tactic:'Impact', label: 'Undetected Breach', detail: bs.desc.substring(0, 35)}
+      ],
+      auto: true,
+      blindSpot: true
+    });
+    COST_EST.push({
+      path: 'AP-' + nextId,
+      low: '$0.1M', mid: '$0.5M', high: '$2.0M',
+      basis: 'Unknown — no scanning on ' + bs.products + ' assets'
+    });
+    nextId++;
+  }
+
+  // Extend GRAPH_MERGE for auto-generated labels.
+  // Only merge labels that are TRULY the same technique; keep category-specific
+  // impact nodes distinct so the graph shows real topology.
+  if (typeof GRAPH_MERGE !== 'undefined') {
+    // Merge rules: dedupe into ~5-7 distinct nodes per column.
+    // Col 1: App Exploit, Code Execution, Malware/RAT, Account/App Access, DoS Vector
+    // Col 2: Credential Access, Account Takeover, Internal Access, Physical Access
+    // Col 3: Data Access, Lateral Movement, Data Encryption
+    // Col 4: Data Exfiltration, Financial Loss, Service Disruption, Brand Damage, Physical Compromise, Ransomware, Undetected Breach
+    var MERGE_RULES = {
+      // -- Col 0: Initial Access (28 → ~10) --
+      'MCP/SSRF Vector': 'AI/MCP Vector',
+      'MCP/LLM-assisted coding': 'AI/MCP Vector',
+      'MCP/LLM tools': 'AI/MCP Vector',
+      'Unpatched Endpoint': 'Endpoint/Device',
+      'Laptop Lost/Sold': 'Endpoint/Device',
+      'No MDM for Windows machines': 'Endpoint/Device',
+      'Vendor Compromised': 'Third-Party Breach',
+      'Third-party breach': 'Third-Party Breach',
+      'DDoS extortion': 'Threat Actor',
+      'Ransomware': 'Threat Actor',
+      'Hacktivist defacing': 'Threat Actor',
+      'CWE-862 Auth Bypass': 'App Vulnerability',
+      'Critical CVEs': 'App Vulnerability',
+      'Credential Stuffing': 'Credential Attack',
+      'Account compromise': 'Credential Attack',
+      'Employee Departs': 'Insider Threat',
+      'Insider threat (contractor)': 'Insider Threat',
+      'S3/SaaS Misconfig': 'Cloud Misconfig',
+      'Publicly accessible admin': 'Cloud Misconfig',
+      'Invoice fraud': 'Fraud Vector',
+      'Insurance fraud': 'Fraud Vector',
+      'Physical harm threat': 'Physical Threat',
+      'Burglary at facilities': 'Physical Threat',
+      'Accidental data exposure': 'SaaS Data Leak',
+      'Malicious browser extension': 'SaaS Data Leak',
+      'Malicious code in production': 'Code Tampering',
+      // Blind spots (6 → 2)
+      'Mobile Applications': 'Unscanned Surface',
+      'Serverless Functions': 'Unscanned Surface',
+      'Infrastructure as Code': 'Unscanned Surface',
+      'API Gateway Configs': 'Unscanned Surface',
+      'Third-Party Integrations': 'Unscanned Surface',
+      'Database Configurations': 'Unscanned Surface',
+      // -- Col 1: Execution --
+      'Sensitive Record Access': 'Account/App Access',
+      'Account Access': 'Account/App Access',
+      'Public Exposure': 'Account/App Access',
+      'Code Injection': 'Code Execution',
+      'Server Compromise': 'Code Execution',
+      'Dependency Exploit': 'Code Execution',
+      'Web Shell/Inject': 'Code Execution',
+      'Unscanned Exploit': 'Code Execution',
+      'RAT Installed': 'Malware/RAT',
+      'Malware Execution': 'Malware/RAT',
+      'Malware Deployment': 'Malware/RAT',
+      'API/Session Abuse': 'App Exploit',
+      'Identity Spoofing': 'App Exploit',
+      'App Logic Abuse': 'App Exploit',
+      'Access Escalation': 'App Exploit',
+      'Device Compromise': 'Endpoint Exploit',
+      'Endpoint Exploit': 'Endpoint Exploit',
+      'Flood/Amplification': 'DoS Vector',
+      // -- Col 2: Credential Access --
+      'Credential Theft': 'Credential Access',
+      'Shared Creds Exposed': 'Credential Access',
+      'Access Not Revoked': 'Credential Access',
+      'Token Harvesting': 'Credential Access',
+      'Secret Extraction': 'Credential Access',
+      'Credential Dumping': 'Credential Access',
+      'Cached Credential Access': 'Credential Access',
+      'Admin Key Theft': 'Credential Access',
+      'Account Takeover': 'Account Takeover',
+      'Session Hijacking': 'Account Takeover',
+      'CMS/DNS Takeover': 'Account Takeover',
+      'Rate Limit Bypass': 'Auth Bypass',
+      'Internal API Access': 'Internal Access',
+      'Credentials Used': 'Internal Access',
+      'PII Store Discovery': 'Internal Access',
+      'Device Not Wiped': 'Physical Access',
+      // -- Col 3: Collection --
+      'Sensitive Data Store': 'Data Access',
+      'PII Harvest': 'Data Access',
+      'Sensitive Data': 'Data Access',
+      'Local Data Access': 'Data Access',
+      'Screen Capture': 'Data Access',
+      'Unauthorized Access': 'Data Access',
+      'Bulk Data Staging': 'Data Access',
+      'Host Data Harvest': 'Data Access',
+      'Privacy Data Harvest': 'Data Access',
+      'App Data Extraction': 'Data Access',
+      'Local File Exfil': 'Data Access',
+      'Transaction Tampering': 'Fraudulent Activity',
+      'Encryption of Data': 'Data Encryption',
+      'Internal Access': 'Lateral Movement',
+      'Privilege Escalation': 'Lateral Movement',
+      'Lateral Movement': 'Lateral Movement',
+      'Cross-Service Spread': 'Lateral Movement',
+      'Network Pivot': 'Lateral Movement',
+      // -- Col 4: Impact --
+      'Data Exfiltration': 'Data Exfiltration',
+      'Data Harvested': 'Data Exfiltration',
+      'Sensitive Data Exfil': 'Data Exfiltration',
+      'Records Compromised': 'Data Exfiltration',
+      'Privacy Breach': 'Data Exfiltration',
+      'Ransomware Deploy': 'Ransomware',
+      'Extortion Demand': 'Ransomware',
+      'Financial Loss': 'Financial Loss',
+      'Service Disruption': 'Service Disruption',
+      'Brand Damage': 'Brand Damage',
+      'Physical Compromise': 'Physical Compromise',
+      'Supply Chain Breach': 'Supply Chain Breach',
+      'Undetected Breach': 'Undetected Breach'
+    };
+
+    // Apply rules to all labels in all paths
+    for (var pi = 0; pi < ATTACK_PATHS.length; pi++) {
+      var ap = ATTACK_PATHS[pi];
+      var ss = ap.steps || [];
+      for (var si = 0; si < ss.length; si++) {
+        var key = ss[si].tactic + '::' + ss[si].label;
+        if (!GRAPH_MERGE[key] && MERGE_RULES[ss[si].label]) {
+          GRAPH_MERGE[key] = MERGE_RULES[ss[si].label];
+        }
+      }
+    }
+  }
+}
+
+// --- Dynamic Layout Engine ---
+function agComputeDynamicLayout() {
+  // Column assignments for deduped node IDs
+  var NODE_COL = {
+    // Col 0: Initial Access (consolidated)
+    'AI/MCP Vector':0, 'Endpoint/Device':0, 'Third-Party Breach':0,
+    'Threat Actor':0, 'App Vulnerability':0, 'Credential Attack':0,
+    'Insider Threat':0, 'Cloud Misconfig':0, 'Fraud Vector':0,
+    'Physical Threat':0, 'SaaS Data Leak':0, 'Code Tampering':0,
+    'Spear Phishing':0, 'Unscanned Surface':0,
+    // Col 1: Execution
+    'Account/App Access':1, 'Code Execution':1, 'Malware/RAT':1,
+    'App Exploit':1, 'Endpoint Exploit':1, 'DoS Vector':1,
+    // Col 2: Credential/Discovery
+    'Credential Access':2, 'Account Takeover':2, 'Auth Bypass':2,
+    'Internal Access':2, 'Physical Access':2,
+    // Col 3: Collection/Lateral
+    'Data Access':3, 'Lateral Movement':3, 'Fraudulent Activity':3,
+    'Data Encryption':3,
+    // Col 4: Impact
+    'Data Exfiltration':4, 'Ransomware':4, 'Financial Loss':4,
+    'Service Disruption':4, 'Brand Damage':4, 'Physical Compromise':4,
+    'Supply Chain Breach':4, 'Undetected Breach':4, 'Impact/Exfil':4
+  };
+
+  var TACTIC_COL = {
+    'Initial Access':0, 'Misconfiguration':0, 'Supply Chain':0, 'Physical':0,
+    'Execution':1, 'Persistence':1,
+    'Discovery':2, 'Cred Access':2, 'Priv Escalation':2,
+    'Collection':3, 'Lateral Movement':3,
+    'Exfiltration':4, 'Impact':4
+  };
+
+  // Build fresh layout for ALL nodes — ignore stale GRAPH_LAYOUT entries
+  // that reference pre-merge node IDs
+  var colBuckets = {};
+  for (var i = 0; i < agNodes.length; i++) {
+    var nd = agNodes[i];
+    var col = NODE_COL[nd.id];
+    if (col === undefined) col = TACTIC_COL[nd.tactic];
+    if (col === undefined) col = 2;
+    if (!colBuckets[col]) colBuckets[col] = [];
+    colBuckets[col].push(nd);
+  }
+
+  // Reset GRAPH_LAYOUT entirely — we compute everything fresh
+  window.GRAPH_LAYOUT = {};
+
+  // Sort each column: highest blast radius first (convergence hubs at top)
+  var maxRow = 0;
+  for (var col2 in colBuckets) {
+    var nodes = colBuckets[col2];
+    nodes.sort(function(a, b) { return b.blastRadius - a.blastRadius; });
+    for (var ni = 0; ni < nodes.length; ni++) {
+      GRAPH_LAYOUT[nodes[ni].id] = { col: parseInt(col2), row: ni };
+      if (ni > maxRow) maxRow = ni;
+    }
+  }
+
+  return maxRow;
+}
+
+// --- Graph Derivation (enriched) ---
+function deriveAttackGraph() {
+  var tacticOrder = [];
+  var tacticSet = {};
+  for (var p = 0; p < ATTACK_PATHS.length; p++) {
+    var steps = ATTACK_PATHS[p].steps || [];
+    for (var s = 0; s < steps.length; s++) {
+      var t = steps[s].tactic;
+      if (!tacticSet[t]) { tacticSet[t] = true; tacticOrder.push(t); }
+    }
+  }
+  agTacticCols = tacticOrder;
+
+  var hasMerge = typeof GRAPH_MERGE !== 'undefined';
+  function resolveId(tactic, label) {
+    var raw = tactic + '::' + label;
+    if (hasMerge && GRAPH_MERGE[raw]) return GRAPH_MERGE[raw];
+    return label;
+  }
+
+  var nodeMap = {};
+  for (var p2 = 0; p2 < ATTACK_PATHS.length; p2++) {
+    var ap = ATTACK_PATHS[p2];
+    var steps2 = ap.steps || [];
+    for (var s2 = 0; s2 < steps2.length; s2++) {
+      var st = steps2[s2];
+      var key = resolveId(st.tactic, st.label);
+      if (!nodeMap[key]) {
+        nodeMap[key] = {
+          id: key, label: key, tactic: st.tactic, detail: st.detail || '',
+          icon: st.icon || '', color: '#4B8BFF', paths: [],
+          findings: 0, incidents: 0, risks: [], costExposure: 0,
+          gaps: [], slaItems: [], personnel: [], threats: [], sharedDeps: [],
+          blindSpots: [], evidenceChains: [], rawSteps: [], allIrRefs: []
+        };
+      }
+      var node = nodeMap[key];
+      if (node.paths.indexOf(ap.id) === -1) node.paths.push(ap.id);
+      if (st.count && st.countType === 'findings') node.findings += st.count;
+      if (st.count && st.countType === 'incidents') node.incidents += st.count;
+      node.rawSteps.push({step: st, path: ap});
+    }
+  }
+
+  // Enrich nodes with all data sources
+  var nodeKeys = Object.keys(nodeMap);
+  for (var nk = 0; nk < nodeKeys.length; nk++) {
+    var nd = nodeMap[nodeKeys[nk]];
+
+    // Linked VR risks
+    var seenRisks = {};
+    for (var pi = 0; pi < nd.paths.length; pi++) {
+      var pathObj = ATTACK_PATHS.find(function(a){return a.id===nd.paths[pi]});
+      if (pathObj && pathObj.risk && !seenRisks[pathObj.risk]) {
+        seenRisks[pathObj.risk] = true;
+        var vrObj = VR.find(function(v){return v.id===pathObj.risk});
+        if (vrObj) {
+          nd.risks.push(vrObj);
+          if (vrObj.ir_refs) nd.allIrRefs = nd.allIrRefs.concat(vrObj.ir_refs);
+        }
+        var ce = COST_EST.find(function(c){return c.path===pathObj.id});
+        if (ce) {
+          var cv = parseFloat(ce.mid.replace(/[^0-9.]/g,'')) || 0;
+          nd.costExposure += cv;
+        }
+      }
+    }
+
+    // Compliance gaps
+    for (var gi = 0; gi < GAP_PROOFS.length; gi++) {
+      if (seenRisks[GAP_PROOFS[gi].grc_risk]) nd.gaps.push(GAP_PROOFS[gi]);
+    }
+
+    // SLA findings — match by keyword overlap
+    for (var si = 0; si < SLA_FINDINGS.length; si++) {
+      var sf = SLA_FINDINGS[si];
+      var match = false;
+      for (var ri = 0; ri < nd.rawSteps.length && !match; ri++) {
+        var rs = nd.rawSteps[ri];
+        if (sf.title.indexOf(rs.step.label.substring(0, 8)) > -1) match = true;
+        if (rs.step.detail && sf.title.toLowerCase().indexOf(rs.step.detail.substring(0, 8).toLowerCase()) > -1) match = true;
+      }
+      if (match && nd.slaItems.indexOf(sf) === -1) nd.slaItems.push(sf);
+    }
+
+    // Personnel risk
+    for (var pri = 0; pri < PERSONNEL_RISK.length; pri++) {
+      var pr = PERSONNEL_RISK[pri];
+      for (var ri2 = 0; ri2 < nd.risks.length; ri2++) {
+        if (pr.team === nd.risks[ri2].o || pr.risk.indexOf(nd.label.substring(0, 8)) > -1) {
+          if (nd.personnel.indexOf(pr) === -1) nd.personnel.push(pr);
+        }
+      }
+    }
+
+    // Threat intel
+    for (var ti = 0; ti < THREAT_INTEL.length; ti++) {
+      var thr = THREAT_INTEL[ti];
+      for (var ri3 = 0; ri3 < nd.rawSteps.length; ri3++) {
+        if (nd.rawSteps[ri3].step.label.indexOf(thr.cve) > -1 || nd.rawSteps[ri3].step.detail.indexOf(thr.title.substring(0, 10)) > -1 || (thr.cve.indexOf('CWE') > -1 && nd.rawSteps[ri3].step.label.indexOf(thr.cve) > -1)) {
+          if (nd.threats.indexOf(thr) === -1) nd.threats.push(thr);
+        }
+      }
+    }
+
+    // Shared dependencies
+    for (var di = 0; di < SHARED_DEPS.length; di++) {
+      var dep = SHARED_DEPS[di];
+      if (dep.severity.indexOf('Critical') > -1 || dep.severity.indexOf('High') > -1) {
+        for (var ri4 = 0; ri4 < nd.rawSteps.length; ri4++) {
+          if (nd.rawSteps[ri4].step.label.indexOf('CVE') > -1 || nd.rawSteps[ri4].step.tactic === 'Supply Chain' || nd.rawSteps[ri4].step.detail.indexOf('dependency') > -1) {
+            if (nd.sharedDeps.indexOf(dep) === -1) nd.sharedDeps.push(dep);
+          }
+        }
+      }
+    }
+
+    // Blind spots
+    for (var bi = 0; bi < BLIND_SPOTS.length; bi++) {
+      var bs = BLIND_SPOTS[bi];
+      for (var ri5 = 0; ri5 < nd.rawSteps.length; ri5++) {
+        if (nd.rawSteps[ri5].step.detail.toLowerCase().indexOf(bs.area.toLowerCase().substring(0, 6)) > -1) {
+          if (nd.blindSpots.indexOf(bs) === -1) nd.blindSpots.push(bs);
+        }
+      }
+    }
+
+    // Evidence chains (HIPAA + SOC2)
+    var allChains = (EVIDENCE_CHAINS.framework_a || []).concat(EVIDENCE_CHAINS.framework_b || []);
+    for (var ei = 0; ei < allChains.length; ei++) {
+      var ec = allChains[ei];
+      if (ec.status === 'FAIL') {
+        for (var ri6 = 0; ri6 < nd.gaps.length; ri6++) {
+          if (ec.control.indexOf(nd.gaps[ri6].framework.substring(0, 10)) > -1 || (ec.dojo_ref && nd.gaps[ri6].dojo_finding && ec.dojo_ref.indexOf(nd.gaps[ri6].dojo_finding.substring(0, 12)) > -1)) {
+            if (nd.evidenceChains.indexOf(ec) === -1) nd.evidenceChains.push(ec);
+          }
+        }
+      }
+    }
+
+    // Dedupe IR refs
+    var irSet = {};
+    nd.allIrRefs = nd.allIrRefs.filter(function(r){if(irSet[r])return false;irSet[r]=true;return true});
+
+    // Color logic
+    var maxRiskScore = 0;
+    for (var rsi = 0; rsi < nd.risks.length; rsi++) {
+      var score = nd.risks[rsi].l * nd.risks[rsi].i;
+      if (score > maxRiskScore) maxRiskScore = score;
+    }
+    if (nd.findings > 100) nd.color = '#FF4D4F';
+    else if (nd.findings > 0) nd.color = '#FF7A45';
+    else if (nd.incidents > 3) nd.color = '#FF4D4F';
+    else if (nd.incidents > 0) nd.color = '#9254DE';
+    else if (maxRiskScore >= 16) nd.color = '#FF4D4F';
+    else if (maxRiskScore >= 9) nd.color = '#FF7A45';
+    else if (nd.detail && nd.detail.indexOf('mit') > -1) nd.color = '#52C41A';
+    else nd.color = '#4B8BFF';
+
+    nd.riskScore = maxRiskScore;
+    nd.blastRadius = nd.paths.length + (nd.findings > 0 ? 2 : 0) + (nd.incidents > 0 ? 1 : 0) + nd.gaps.length;
+  }
+
+  agNodes = nodeKeys.map(function(k) { return nodeMap[k]; });
+
+  // Build edges
+  var hasMerge2 = typeof GRAPH_MERGE !== 'undefined';
+  var edgeMap = {};
+  for (var p3 = 0; p3 < ATTACK_PATHS.length; p3++) {
+    var ap3 = ATTACK_PATHS[p3];
+    var steps3 = ap3.steps || [];
+    for (var s3 = 0; s3 < steps3.length - 1; s3++) {
+      var fromKey = resolveId(steps3[s3].tactic, steps3[s3].label);
+      var toKey = resolveId(steps3[s3 + 1].tactic, steps3[s3 + 1].label);
+      if (fromKey === toKey) continue;
+      var eKey = fromKey + '>' + toKey;
+      if (!edgeMap[eKey]) edgeMap[eKey] = { from: fromKey, to: toKey, paths: [], riskScore: 0 };
+      if (edgeMap[eKey].paths.indexOf(ap3.id) === -1) edgeMap[eKey].paths.push(ap3.id);
+    }
+  }
+
+  if (typeof GRAPH_BRANCHES !== 'undefined') {
+    for (var b = 0; b < GRAPH_BRANCHES.length; b++) {
+      var br = GRAPH_BRANCHES[b];
+      var brFrom = hasMerge2 && GRAPH_MERGE[br.from] ? GRAPH_MERGE[br.from] : br.from.split('::')[1] || br.from;
+      var brTo = hasMerge2 && GRAPH_MERGE[br.to] ? GRAPH_MERGE[br.to] : br.to.split('::')[1] || br.to;
+      if (brFrom === brTo || !nodeMap[brFrom] || !nodeMap[brTo]) continue;
+      var bKey = brFrom + '>' + brTo;
+      if (!edgeMap[bKey]) edgeMap[bKey] = { from: brFrom, to: brTo, paths: [], riskScore: 0 };
+      for (var bp = 0; bp < br.paths.length; bp++) {
+        if (edgeMap[bKey].paths.indexOf(br.paths[bp]) === -1) edgeMap[bKey].paths.push(br.paths[bp]);
+        if (nodeMap[brFrom].paths.indexOf(br.paths[bp]) === -1) nodeMap[brFrom].paths.push(br.paths[bp]);
+        if (nodeMap[brTo].paths.indexOf(br.paths[bp]) === -1) nodeMap[brTo].paths.push(br.paths[bp]);
+      }
+    }
+  }
+
+  // Compute edge risk scores
+  var eKeys = Object.keys(edgeMap);
+  for (var ek = 0; ek < eKeys.length; ek++) {
+    var edge = edgeMap[eKeys[ek]];
+    var maxRS = 0;
+    for (var epi = 0; epi < edge.paths.length; epi++) {
+      var epObj = ATTACK_PATHS.find(function(a){return a.id===edge.paths[epi]});
+      if (epObj && epObj.likelihood === 'High') maxRS = Math.max(maxRS, 3);
+      else if (epObj && epObj.likelihood === 'Medium') maxRS = Math.max(maxRS, 2);
+      else maxRS = Math.max(maxRS, 1);
+    }
+    edge.riskScore = maxRS;
+  }
+
+  agEdges = eKeys.map(function(k) { return edgeMap[k]; });
+  agNodeMapGlobal = nodeMap;
+}
+
+// --- Particle System ---
+function agInitParticles() {
+  agParticles = [];
+  for (var i = 0; i < agEdges.length; i++) {
+    var e = agEdges[i];
+    var count = Math.min(e.paths.length, 4);
+    for (var j = 0; j < count; j++) {
+      agParticles.push({
+        edge: i,
+        t: Math.random(),
+        speed: 0.002 + Math.random() * 0.003,
+        size: 1.5 + e.paths.length * 0.3,
+        opacity: 0.4 + e.paths.length * 0.1
+      });
+    }
+  }
+}
+
+function agBezierPoint(x1, y1, cx1, cy1, cx2, cy2, x2, y2, t) {
+  var u = 1 - t;
+  return {
+    x: u*u*u*x1 + 3*u*u*t*cx1 + 3*u*t*t*cx2 + t*t*t*x2,
+    y: u*u*u*y1 + 3*u*u*t*cy1 + 3*u*t*t*cy2 + t*t*t*y2
+  };
+}
+
+// --- Main Graph Renderer ---
+var agBoxW = 130, agBoxH = 38;
+
+function buildAttackGraph() {
+  var canvas = document.getElementById('attack-graph');
+  if (!canvas) return;
+  deriveAttackGraph();
+  if (!agNodes.length) return;
+
+  // Dynamic layout: compute positions for any nodes not in GRAPH_LAYOUT
+  var dynamicMaxRow = agComputeDynamicLayout();
+
+  var dpr = window.devicePixelRatio || 1;
+  var W = canvas.getBoundingClientRect().width;
+
+  // Dynamic canvas height based on node count
+  var hasLayout = typeof GRAPH_LAYOUT !== 'undefined';
+  var maxCol = 0, maxRow = 0;
+  if (hasLayout) {
+    for (var lk in GRAPH_LAYOUT) {
+      if (GRAPH_LAYOUT[lk].col > maxCol) maxCol = GRAPH_LAYOUT[lk].col;
+      if (GRAPH_LAYOUT[lk].row > maxRow) maxRow = GRAPH_LAYOUT[lk].row;
+    }
+  } else { maxCol = 4; maxRow = Math.max(dynamicMaxRow, 9); }
+  var numCols = maxCol + 1;
+  var numRows = maxRow + 1;
+
+  var H = Math.max(640, numRows * 48 + 80);
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.height = H + 'px';
+  var ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  var cs = getComputedStyle(document.documentElement);
+  var t1 = cs.getPropertyValue('--t1').trim();
+  var t2 = cs.getPropertyValue('--t2').trim();
+  var t3 = cs.getPropertyValue('--t3').trim();
+  var c1 = cs.getPropertyValue('--c1').trim();
+  var c2 = cs.getPropertyValue('--c2').trim();
+  var c3 = cs.getPropertyValue('--c3').trim();
+  var bd = cs.getPropertyValue('--bd2').trim();
+  var bg = cs.getPropertyValue('--bg').trim();
+
+  var padL = 85, padR = 85, padT = 52, padB = 16;
+  var colSpacing = (W - padL - padR) / Math.max(numCols - 1, 1);
+  var rowSpacing = (H - padT - padB) / numRows;
+
+  var colLabels = [
+    {label:'INITIAL ACCESS', sub:'Entry vectors', icon:'T1190'},
+    {label:'EXECUTION', sub:'Pivot & persist', icon:'T1059'},
+    {label:'CREDENTIAL ACCESS', sub:'Keys & tokens', icon:'T1110'},
+    {label:'COLLECTION', sub:'Data staging', icon:'T1560'},
+    {label:'IMPACT', sub:'Exfil & damage', icon:'T1486'}
+  ];
+
+  // Count nodes per column for vertical centering
+  var nodesPerCol = {};
+  for (var ci = 0; ci < agNodes.length; ci++) {
+    var cly = hasLayout ? GRAPH_LAYOUT[agNodes[ci].id] : null;
+    var ccol = cly ? cly.col : 0;
+    nodesPerCol[ccol] = (nodesPerCol[ccol] || 0) + 1;
+  }
+
+  // Position nodes — center shorter columns vertically
+  var nodeMap = {};
+  for (var ni = 0; ni < agNodes.length; ni++) {
+    var nd = agNodes[ni];
+    var ly = hasLayout ? GRAPH_LAYOUT[nd.id] : null;
+    if (ly) {
+      var colCount = nodesPerCol[ly.col] || 1;
+      var colH = colCount * rowSpacing;
+      var colOffset = (H - padT - padB - colH) / 2;
+      nd.x = padL + ly.col * colSpacing;
+      nd.y = padT + colOffset + ly.row * rowSpacing + rowSpacing / 2;
+    } else {
+      nd.x = padL;
+      nd.y = padT + ni * rowSpacing + rowSpacing / 2;
+    }
+    var parts = [];
+    if (nd.findings > 0) parts.push(nd.findings.toLocaleString() + ' findings');
+    if (nd.incidents > 0) parts.push(nd.incidents + ' incidents');
+    if (nd.gaps.length > 0) parts.push(nd.gaps.length + ' gaps');
+    nd.sub = parts.length ? parts.join(' · ') : (nd.detail || nd.paths.length + ' paths');
+    nodeMap[nd.id] = nd;
+  }
+  agNodeMapGlobal = nodeMap;
+
+  // Store edge paths for particle animation
+  for (var ei2 = 0; ei2 < agEdges.length; ei2++) {
+    var e2 = agEdges[ei2];
+    var a2 = nodeMap[e2.from], b2 = nodeMap[e2.to];
+    if (a2 && b2) {
+      e2.x1 = a2.x + agBoxW / 2 + 2; e2.y1 = a2.y;
+      e2.x2 = b2.x - agBoxW / 2 - 8; e2.y2 = b2.y;
+      var dx2 = Math.abs(e2.x2 - e2.x1);
+      e2.cx1 = e2.x1 + dx2 * 0.35; e2.cy1 = e2.y1;
+      e2.cx2 = e2.x2 - dx2 * 0.35; e2.cy2 = e2.y2;
+    }
+  }
+
+  if (!agParticles.length) agInitParticles();
+
+  function getEdgeColor(e) {
+    if (e.riskScore >= 3) return '#FF4D4F';
+    if (e.riskScore >= 2) return '#FF7A45';
+    return '#4B8BFF';
+  }
+
+  // Check if any of a set of path IDs match the current highlight/group filter
+  function isPathSetActive(pathIds) {
+    if (agHighlight) return pathIds.indexOf(agHighlight) > -1;
+    if (agHighlightGroup) {
+      for (var i = 0; i < pathIds.length; i++) {
+        var apObj = ATTACK_PATHS.find(function(a){return a.id===pathIds[i]});
+        if (!apObj) continue;
+        if (agHighlightGroup === 'blind' && apObj.blindSpot) return true;
+        if (apObj.likelihood === agHighlightGroup) return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
+  var hasFilter = agHighlight || agHighlightGroup || agSelectedNode;
+
+  function drawEdge(e) {
+    var a = nodeMap[e.from], b = nodeMap[e.to];
+    if (!a || !b) return;
+    var selNode = agSelectedNode;
+    var active = hasFilter ? (isPathSetActive(e.paths) || (selNode && (e.from === selNode || e.to === selNode))) : false;
+    var dim = hasFilter && !active;
+    var weight = Math.min(e.paths.length, 6);
+
+    ctx.globalAlpha = dim ? 0.04 : (active ? 0.9 : 0.15 + weight * 0.06);
+    var baseColor = getEdgeColor(e);
+    ctx.strokeStyle = (active && hasFilter) ? baseColor : 'rgba(255,255,255,0.12)';
+    ctx.lineWidth = (active && hasFilter) ? 2.5 + weight * 0.3 : 0.6 + weight * 0.35;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(e.x1, e.y1);
+    ctx.bezierCurveTo(e.cx1, e.cy1, e.cx2, e.cy2, e.x2, e.y2);
+    ctx.stroke();
+
+    // Arrowhead
+    if (!dim) {
+      ctx.fillStyle = ctx.strokeStyle;
+      ctx.beginPath();
+      ctx.moveTo(e.x2 + 2, e.y2);
+      ctx.lineTo(e.x2 - 7, e.y2 - 4.5);
+      ctx.lineTo(e.x2 - 7, e.y2 + 4.5);
+      ctx.fill();
+    }
+
+    // Path count on edge
+    if (active && hasFilter && e.paths.length > 1) {
+      var mid = agBezierPoint(e.x1, e.y1, e.cx1, e.cy1, e.cx2, e.cy2, e.x2, e.y2, 0.5);
+      ctx.globalAlpha = 0.9;
+      ctx.fillStyle = c2;
+      ctx.strokeStyle = baseColor;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(mid.x, mid.y - 8, 8, 0, Math.PI * 2);
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = baseColor;
+      ctx.font = '600 7px "JetBrains Mono",monospace';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(String(e.paths.length), mid.x, mid.y - 8);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function drawNode(nd) {
+    var selNode = agSelectedNode;
+    var hovNode = agHoverNode;
+    var active = !hasFilter ? true : (isPathSetActive(nd.paths) || nd.id === selNode);
+    if (selNode && !active) {
+      for (var echeck = 0; echeck < agEdges.length; echeck++) {
+        if ((agEdges[echeck].from === selNode && agEdges[echeck].to === nd.id) ||
+            (agEdges[echeck].to === selNode && agEdges[echeck].from === nd.id)) {
+          active = true; break;
+        }
+      }
+    }
+    var isHover = hovNode === nd.id;
+    ctx.globalAlpha = active ? 1 : 0.08;
+
+    var x = nd.x - agBoxW / 2, y = nd.y - agBoxH / 2;
+
+    // Heatmap mode background
+    if (agHeatmapEnabled && !hasFilter) {
+      var heatAlpha = Math.min(nd.blastRadius / 12, 0.6);
+      ctx.fillStyle = nd.color;
+      ctx.globalAlpha = heatAlpha * 0.15;
+      ctx.beginPath();
+      ctx.arc(nd.x, nd.y, 30 + nd.blastRadius * 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = active ? 1 : 0.08;
+    }
+
+    // Glow
+    if ((active && hasFilter) || isHover) {
+      ctx.shadowColor = nd.color + '55';
+      ctx.shadowBlur = 18;
+    } else if (!hasFilter && nd.blastRadius >= 6) {
+      ctx.shadowColor = nd.color + '22';
+      ctx.shadowBlur = 10;
+    }
+
+    // Node body
+    ctx.fillStyle = isHover ? c3 : c2;
+    ctx.strokeStyle = isHover ? nd.color : ((active && hasFilter) ? nd.color : bd);
+    ctx.lineWidth = isHover ? 1.5 : ((active && hasFilter) ? 1.5 : 0.5);
+    ctx.beginPath();
+    ctx.roundRect(x, y, agBoxW, agBoxH, 8);
+    ctx.fill();
+    ctx.stroke();
+    ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+
+    // Left accent bar (height proportional to blast radius)
+    var accentH = Math.min(agBoxH, 8 + nd.blastRadius * 2.5);
+    ctx.fillStyle = nd.color;
+    ctx.beginPath();
+    ctx.roundRect(x, y + (agBoxH - accentH) / 2, 3, accentH, [6, 0, 0, 6]);
+    ctx.fill();
+
+    // Label
+    ctx.fillStyle = t1;
+    ctx.font = '500 9.5px "DM Sans",sans-serif';
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    var labelX = x + 10;
+    var labelText = nd.label;
+    ctx.fillText(labelText.length > 18 ? labelText.substring(0, 17) + '..' : labelText, labelX, nd.y - 5);
+
+    // Sub info
+    ctx.fillStyle = t3;
+    ctx.font = '400 7px "JetBrains Mono",monospace';
+    var subText = nd.sub.length > 24 ? nd.sub.substring(0, 23) + '..' : nd.sub;
+    ctx.fillText(subText, labelX, nd.y + 8);
+
+    ctx.globalAlpha = 1;
+
+    // Gap warning indicator (small triangle)
+    if (nd.gaps.length > 0 && active) {
+      ctx.globalAlpha = 0.8;
+      ctx.fillStyle = '#FF7A45';
+      ctx.beginPath();
+      var tx = x + agBoxW - 8, ty = nd.y + 10;
+      ctx.moveTo(tx, ty - 4); ctx.lineTo(tx + 4, ty + 3); ctx.lineTo(tx - 4, ty + 3);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = c2;
+      ctx.font = '600 5px "JetBrains Mono",monospace';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('!', tx, ty + 0.5);
+      ctx.globalAlpha = 1;
+    }
+
+    // SLA breach indicator (small diamond)
+    var hasBreach = nd.slaItems.some(function(s){return s.status==='BREACHED'});
+    if (hasBreach && active) {
+      ctx.globalAlpha = 0.8;
+      ctx.fillStyle = '#FF4D4F';
+      ctx.beginPath();
+      var dx2 = x + agBoxW - 8, dy2 = nd.y - 12;
+      ctx.moveTo(dx2, dy2 - 4); ctx.lineTo(dx2 + 4, dy2); ctx.lineTo(dx2, dy2 + 4); ctx.lineTo(dx2 - 4, dy2);
+      ctx.closePath(); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  function drawParticles() {
+    if (!agParticlesEnabled) return;
+    for (var i = 0; i < agParticles.length; i++) {
+      var p = agParticles[i];
+      var e = agEdges[p.edge];
+      if (!e || !e.x1) continue;
+      var active = !hasFilter ? true : isPathSetActive(e.paths) || (agSelectedNode && (e.from === agSelectedNode || e.to === agSelectedNode));
+      if (!active) continue;
+
+      var pt = agBezierPoint(e.x1, e.y1, e.cx1, e.cy1, e.cx2, e.cy2, e.x2, e.y2, p.t);
+      var eColor = getEdgeColor(e);
+      ctx.globalAlpha = p.opacity * (active ? 0.8 : 0.15);
+      ctx.fillStyle = eColor;
+      ctx.shadowColor = eColor;
+      ctx.shadowBlur = 6;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+
+      p.t += p.speed;
+      if (p.t > 1) p.t = 0;
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // Clear and draw
+  ctx.clearRect(0, 0, W, H);
+
+  // Column headers with MITRE ATT&CK styling
+  for (var ch = 0; ch < numCols && ch < colLabels.length; ch++) {
+    var cx = padL + ch * colSpacing;
+    // Column background stripe
+    ctx.fillStyle = ch % 2 === 0 ? 'rgba(255,255,255,0.008)' : 'transparent';
+    ctx.fillRect(cx - colSpacing / 2, padT - 10, colSpacing, H - padT);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = t2;
+    ctx.font = '600 9px "JetBrains Mono",monospace';
+    ctx.fillText(colLabels[ch].label, cx, 18);
+    ctx.fillStyle = t3;
+    ctx.font = '400 7.5px "JetBrains Mono",monospace';
+    ctx.fillText(colLabels[ch].sub, cx, 30);
+
+    // Separator line
+    if (ch < numCols - 1) {
+      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.moveTo(cx + colSpacing / 2, padT);
+      ctx.lineTo(cx + colSpacing / 2, H - padB);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+
+  // Draw edges, then particles, then nodes (painter's order)
+  for (var ei = 0; ei < agEdges.length; ei++) drawEdge(agEdges[ei]);
+  drawParticles();
+  for (var ni2 = 0; ni2 < agNodes.length; ni2++) drawNode(agNodes[ni2]);
+
+  // Build buttons — grouped by likelihood
+  var btnC = document.getElementById('ag-path-btns');
+  if (btnC && !btnC.children.length) {
+    // Sort: High first, then Medium, then Low/mitigated/Unknown, curated before auto
+    var sorted = ATTACK_PATHS.slice().sort(function(a, b) {
+      var order = {'High':0,'Medium':1,'Low':2};
+      var aO = order[a.likelihood] !== undefined ? order[a.likelihood] : 3;
+      var bO = order[b.likelihood] !== undefined ? order[b.likelihood] : 3;
+      if (aO !== bO) return aO - bO;
+      return (a.auto ? 1 : 0) - (b.auto ? 1 : 0);
+    });
+    var bh = '<button class="hm-toggle active" onclick="agSelect(null,this)">All (' + ATTACK_PATHS.length + ')</button>';
+    bh += '<button class="hm-toggle" onclick="agSelectGroup(\'High\',this)" style="border-left:2px solid var(--cr)">High</button>';
+    bh += '<button class="hm-toggle" onclick="agSelectGroup(\'Medium\',this)" style="border-left:2px solid var(--co)">Med</button>';
+    bh += '<button class="hm-toggle" onclick="agSelectGroup(\'Low\',this)" style="border-left:2px solid var(--ca)">Low</button>';
+    bh += '<button class="hm-toggle" onclick="agSelectGroup(\'blind\',this)" style="border-left:2px solid var(--t3)">Blind Spots</button>';
+    bh += '<span style="width:1px;height:16px;background:var(--bd2);margin:0 4px;display:inline-block"></span>';
+    for (var pi = 0; pi < sorted.length; pi++) {
+      var ap = sorted[pi];
+      var lh2 = ap.likelihood || 'Unknown';
+      var lc = lh2 === 'High' ? 'var(--cr)' : lh2 === 'Medium' ? 'var(--co)' : lh2.indexOf('mitigated') > -1 ? 'var(--cg)' : 'var(--ca)';
+      if (ap.blindSpot) lc = 'var(--t3)';
+      bh += '<button class="hm-toggle" onclick="agSelect(\'' + ap.id + '\',this)" style="border-left:2px solid ' + lc + '" title="' + esc(ap.name) + '"><strong>' + ap.id + '</strong> <span class="ap-btn-name" style="font-size:8px;opacity:.7;display:none">' + esc(ap.name) + '</span></button>';
+    }
+    btnC.innerHTML = bh;
+  }
+
+  // Build legend
+  var legEl = document.getElementById('ag-legend');
+  if (legEl && !legEl.children.length) {
+    legEl.innerHTML =
+      '<div class="ag-legend-item"><div class="ag-legend-swatch" style="background:#FF4D4F"></div>Critical / High findings</div>' +
+      '<div class="ag-legend-item"><div class="ag-legend-swatch" style="background:#FF7A45"></div>Medium risk</div>' +
+      '<div class="ag-legend-item"><div class="ag-legend-swatch" style="background:#9254DE"></div>Incident evidence</div>' +
+      '<div class="ag-legend-item"><div class="ag-legend-swatch" style="background:#4B8BFF"></div>Standard node</div>' +
+      '<div class="ag-legend-item"><div class="ag-legend-swatch" style="background:#52C41A"></div>Mitigated</div>' +
+      '<div class="ag-legend-item"><svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,1 9,8 1,8" fill="#FF7A45"/><text x="5" y="7" text-anchor="middle" fill="#fff" font-size="5" font-weight="600">!</text></svg> Compliance gap</div>' +
+      '<div class="ag-legend-item"><svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,1 9,5 5,9 1,5" fill="#FF4D4F"/></svg> SLA breach</div>' +
+      '<div class="ag-legend-item"><span style="font-family:var(--fm);font-size:8px;color:var(--t3)">3p</span> = paths through node</div>' +
+      '<div class="ag-legend-item"><span style="font-family:var(--fm);font-size:8px;color:#9254DE">2ir</span> = real incidents</div>';
+  }
+}
+
+// --- Animation Loop ---
+function agAnimate() {
+  if (agCurrentView !== 'graph' || !agParticlesEnabled) return;
+  buildAttackGraph();
+  agAnimFrame = requestAnimationFrame(agAnimate);
+}
+
+function agStartAnimation() {
+  if (agAnimFrame) cancelAnimationFrame(agAnimFrame);
+  if (agParticlesEnabled && agCurrentView === 'graph') agAnimate();
+}
+
+function agStopAnimation() {
+  if (agAnimFrame) { cancelAnimationFrame(agAnimFrame); agAnimFrame = null; }
+}
+
+// --- Hit Testing ---
+function agHitTest(mx, my) {
+  for (var i = 0; i < agNodes.length; i++) {
+    var nd = agNodes[i];
+    if (mx >= nd.x - agBoxW / 2 && mx <= nd.x + agBoxW / 2 &&
+        my >= nd.y - agBoxH / 2 && my <= nd.y + agBoxH / 2) {
+      return nd;
+    }
+  }
+  return null;
+}
+
+function agCanvasSetup() {
+  var canvas = document.getElementById('attack-graph');
+  if (!canvas || canvas._agBound) return;
+  canvas._agBound = true;
+
+  canvas.addEventListener('mousemove', function(ev) {
+    var rect = canvas.getBoundingClientRect();
+    var mx = ev.clientX - rect.left;
+    var my = ev.clientY - rect.top;
+    var hit = agHitTest(mx, my);
+    var prevHover = agHoverNode;
+    agHoverNode = hit ? hit.id : null;
+    canvas.style.cursor = hit ? 'pointer' : 'default';
+
+    // Tooltip
+    var tt = document.getElementById('ag-tooltip');
+    if (hit && tt) {
+      var costStr = hit.costExposure > 0 ? '$' + hit.costExposure.toFixed(1) + 'M' : 'N/A';
+      var riskBadges = '';
+      for (var ri = 0; ri < hit.risks.length && ri < 3; ri++) {
+        var vr = hit.risks[ri];
+        var sc = vr.rl * vr.ri;
+        var scColor = sc >= 16 ? '#FF4D4F' : sc >= 9 ? '#FF7A45' : sc >= 4 ? '#FAAD14' : '#52C41A';
+        riskBadges += '<div class="tt-row"><div class="tt-dot" style="background:' + scColor + '"></div><span class="tt-val">' + esc(vr.id) + ' — ' + esc(vr.d.substring(0, 40)) + '</span></div>';
+      }
+      var irCount = hit.allIrRefs.length;
+      tt.innerHTML =
+        '<div class="tt-title">' + esc(hit.label) + '</div>' +
+        '<div class="tt-row"><span class="tt-label">Paths:</span> <span class="tt-val">' + hit.paths.length + '</span></div>' +
+        '<div class="tt-row"><span class="tt-label">Findings:</span> <span class="tt-val">' + hit.findings.toLocaleString() + '</span></div>' +
+        '<div class="tt-row"><span class="tt-label">Incidents:</span> <span class="tt-val">' + irCount + '</span></div>' +
+        '<div class="tt-row"><span class="tt-label">Cost Exposure:</span> <span class="tt-val" style="color:var(--cr)">' + costStr + '</span></div>' +
+        '<div class="tt-row"><span class="tt-label">Blast Radius:</span> <span class="tt-val">' + hit.blastRadius + '</span></div>' +
+        (hit.gaps.length ? '<div class="tt-row"><span class="tt-label">Compliance Gaps:</span> <span class="tt-val" style="color:var(--co)">' + hit.gaps.length + '</span></div>' : '') +
+        (riskBadges ? '<div style="margin-top:4px;border-top:1px solid rgba(255,255,255,.1);padding-top:4px">' + riskBadges + '</div>' : '') +
+        '<div style="margin-top:6px;font-size:8px;color:var(--t3)">Click for full intelligence</div>';
+      tt.classList.add('show');
+      var ttX = ev.clientX - rect.left + 16;
+      var ttY = ev.clientY - rect.top - 10;
+      if (ttX + 280 > rect.width) ttX = ev.clientX - rect.left - 290;
+      if (ttY + 200 > rect.height) ttY = rect.height - 200;
+      tt.style.left = ttX + 'px';
+      tt.style.top = ttY + 'px';
+    } else if (tt) {
+      tt.classList.remove('show');
+    }
+
+    if (prevHover !== agHoverNode && !agParticlesEnabled) buildAttackGraph();
+  });
+
+  canvas.addEventListener('mouseleave', function() {
+    agHoverNode = null;
+    var tt = document.getElementById('ag-tooltip');
+    if (tt) tt.classList.remove('show');
+    if (!agParticlesEnabled) buildAttackGraph();
+  });
+
+  canvas.addEventListener('click', function(ev) {
+    var rect = canvas.getBoundingClientRect();
+    var mx = ev.clientX - rect.left;
+    var my = ev.clientY - rect.top;
+    var hit = agHitTest(mx, my);
+    if (hit) {
+      agOpenDrawer(hit);
+    } else {
+      agSelectedNode = null;
+      if (!agParticlesEnabled) buildAttackGraph();
+    }
+  });
+}
+
+// --- Intel Drawer ---
+function agOpenDrawer(nd) {
+  agSelectedNode = nd.id;
+  if (!agParticlesEnabled) buildAttackGraph();
+
+  var titleEl = document.getElementById('ag-drawer-title');
+  var bodyEl = document.getElementById('ag-drawer-body');
+  if (!titleEl || !bodyEl) return;
+
+  titleEl.innerHTML = esc(nd.label);
+
+  var html = '';
+
+  // Overview card
+  var costStr = nd.costExposure > 0 ? '$' + nd.costExposure.toFixed(1) + 'M' : 'N/A';
+  html += '<div class="ag-drawer-section">';
+  html += '<div class="ag-drawer-section-title">Overview</div>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">';
+  html += '<div class="ag-intel-card"><div class="ag-ic-label">Paths Through</div><div style="font-size:18px;font-weight:600;color:var(--cb2)">' + nd.paths.length + '</div></div>';
+  html += '<div class="ag-intel-card"><div class="ag-ic-label">Blast Radius</div><div style="font-size:18px;font-weight:600;color:var(--co)">' + nd.blastRadius + '</div><div class="ag-blast-bar"><div class="ag-blast-fill" style="width:' + Math.min(nd.blastRadius / 12 * 100, 100) + '%;background:var(--co)"></div></div></div>';
+  html += '<div class="ag-intel-card"><div class="ag-ic-label">Cost Exposure</div><div style="font-size:18px;font-weight:600;color:var(--cr)">' + costStr + '</div></div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Kill chain paths through this node
+  html += '<div class="ag-drawer-section">';
+  html += '<div class="ag-drawer-section-title">Kill Chain Paths <span class="ag-ds-count">' + nd.paths.length + '</span></div>';
+  for (var pi = 0; pi < nd.paths.length; pi++) {
+    var pathObj = ATTACK_PATHS.find(function(a){return a.id===nd.paths[pi]});
+    if (!pathObj) continue;
+    var lColor = pathObj.likelihood === 'High' ? 'var(--cr)' : pathObj.likelihood === 'Medium' ? 'var(--co)' : 'var(--cg)';
+    var ce = COST_EST.find(function(c){return c.path===pathObj.id});
+
+    html += '<div class="ag-intel-card">';
+    html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(pathObj.id) + ': ' + esc(pathObj.name) + '</span>';
+    html += '<span class="ag-ic-badge" style="background:' + lColor + '22;color:' + lColor + '">' + esc(pathObj.likelihood) + '</span></div>';
+    html += '<div style="display:flex;gap:8px;margin-top:4px;font-size:9px">';
+    html += '<span style="color:var(--cb2)">' + (pathObj.findings || 0) + ' findings</span>';
+    html += '<span style="color:var(--cp)">' + (pathObj.incidents || 0) + ' incidents</span>';
+    if (ce) html += '<span style="color:var(--cr)">' + esc(ce.mid) + ' exposure</span>';
+    html += '</div>';
+
+    // Path trace visualization
+    html += '<div class="ag-path-trace">';
+    var steps = pathObj.steps || [];
+    for (var si = 0; si < steps.length; si++) {
+      var isCurrent = steps[si].label === nd.label || (typeof GRAPH_MERGE !== 'undefined' && GRAPH_MERGE[steps[si].tactic + '::' + steps[si].label] === nd.id);
+      html += '<span class="ag-pt-node' + (isCurrent ? ' current' : '') + '">' + esc(steps[si].label) + '</span>';
+      if (si < steps.length - 1) html += '<span class="ag-pt-arrow">\u2192</span>';
+    }
+    html += '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // Risk Register
+  if (nd.risks.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">Risk Register <span class="ag-ds-count">' + nd.risks.length + '</span></div>';
+    for (var ri = 0; ri < nd.risks.length; ri++) {
+      var vr = nd.risks[ri];
+      var residual = vr.rl * vr.ri;
+      var inherent = vr.l * vr.i;
+      var reduction = inherent > 0 ? Math.round((1 - residual / inherent) * 100) : 0;
+      var rColor = residual >= 16 ? 'var(--cr)' : residual >= 9 ? 'var(--co)' : residual >= 4 ? 'var(--ca)' : 'var(--cg)';
+      var treatColor = vr.t === 'Mitigate' ? 'var(--cb2)' : vr.t === 'Accept' ? 'var(--ca)' : 'var(--t3)';
+
+      html += '<div class="ag-intel-card">';
+      html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(vr.id) + '</span>';
+      html += '<span class="ag-ic-badge" style="background:' + rColor + '22;color:' + rColor + '">Residual: ' + residual + '</span></div>';
+      html += '<div class="ag-ic-row">' + esc(vr.d) + '</div>';
+      html += '<div style="display:flex;gap:10px;margin-top:4px;font-size:9px">';
+      html += '<span><span class="ag-ic-label">Category:</span> ' + esc(vr.c) + '</span>';
+      html += '<span><span class="ag-ic-label">Owner:</span> ' + esc(vr.o) + '</span>';
+      html += '<span><span class="ag-ic-label">Treatment:</span> <span style="color:' + treatColor + '">' + esc(vr.t) + '</span></span>';
+      html += '<span><span class="ag-ic-label">Reduction:</span> ' + reduction + '%</span>';
+      html += '</div>';
+      html += '<div class="ag-blast-bar" style="margin-top:4px"><div class="ag-blast-fill" style="width:' + Math.min(residual / 25 * 100, 100) + '%;background:' + rColor + '"></div></div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // Incident History
+  if (nd.allIrRefs.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">Incident History <span class="ag-ds-count">' + nd.allIrRefs.length + '</span></div>';
+    for (var ii = 0; ii < nd.allIrRefs.length; ii++) {
+      var ref = nd.allIrRefs[ii];
+      var isActive = ref.toLowerCase().indexOf('active') > -1;
+      html += '<div class="ag-intel-card" style="border-left:2px solid ' + (isActive ? 'var(--cr)' : 'var(--cp)') + '">';
+      html += '<div class="ag-ic-row">' + (isActive ? '<span class="ag-ic-badge" style="background:var(--crs);color:var(--cr);margin-right:4px">ACTIVE</span>' : '') + esc(ref) + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // Compliance Gaps
+  if (nd.gaps.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">Compliance Gaps <span class="ag-ds-count">' + nd.gaps.length + '</span></div>';
+    for (var ggi = 0; ggi < nd.gaps.length; ggi++) {
+      var gap = nd.gaps[ggi];
+      var isResolved = gap.desc.indexOf('RESOLVED') > -1;
+      html += '<div class="ag-intel-card" style="border-left:2px solid ' + (isResolved ? 'var(--cg)' : 'var(--co)') + '">';
+      html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(gap.id) + '</span>';
+      html += '<span class="ag-ic-badge" style="background:' + (isResolved ? 'var(--cgs)' : 'var(--cos)') + ';color:' + (isResolved ? 'var(--cg)' : 'var(--co)') + '">' + esc(gap.framework) + '</span></div>';
+      html += '<div class="ag-ic-row">' + esc(gap.desc) + '</div>';
+      if (gap.finding) html += '<div class="ag-ic-row" style="margin-top:2px"><span class="ag-ic-label">Finding:</span> ' + esc(gap.finding) + '</div>';
+      if (gap.ir_ref) html += '<div class="ag-ic-row"><span class="ag-ic-label">IR Evidence:</span> ' + esc(gap.ir_ref) + '</div>';
+      html += '<div class="ag-ic-row" style="color:var(--cr)"><span class="ag-ic-label">Impact:</span> ' + esc(gap.impact) + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // Evidence Chains (failed controls)
+  if (nd.evidenceChains.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">Failed Control Evidence <span class="ag-ds-count">' + nd.evidenceChains.length + '</span></div>';
+    for (var eci = 0; eci < nd.evidenceChains.length; eci++) {
+      var ec = nd.evidenceChains[eci];
+      html += '<div class="ag-intel-card" style="border-left:2px solid var(--cr)">';
+      html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(ec.id) + ' — ' + esc(ec.control) + '</span>';
+      html += '<span class="ag-ic-badge" style="background:var(--crs);color:var(--cr)">FAIL</span></div>';
+      html += '<div class="ag-ic-row"><span class="ag-ic-label">Test:</span> ' + esc(ec.test) + '</div>';
+      html += '<div class="ag-ic-row"><span class="ag-ic-label">Evidence:</span> ' + esc(ec.evidence) + '</div>';
+      if (ec.dojo_ref) html += '<div class="ag-ic-row"><span class="ag-ic-label">DefectDojo:</span> ' + esc(ec.dojo_ref) + '</div>';
+      if (ec.ir_ref) html += '<div class="ag-ic-row"><span class="ag-ic-label">IR Ref:</span> ' + esc(ec.ir_ref) + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // SLA Status
+  if (nd.slaItems.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">SLA Status <span class="ag-ds-count">' + nd.slaItems.length + '</span></div>';
+    for (var sli = 0; sli < nd.slaItems.length; sli++) {
+      var sl = nd.slaItems[sli];
+      var slColor = sl.status === 'BREACHED' ? 'var(--cr)' : sl.status === 'RESOLVED' ? 'var(--cg)' : 'var(--ca)';
+      var slaPct = sl.sla > 0 ? Math.min(sl.age / sl.sla * 100, 150) : 0;
+      html += '<div class="ag-intel-card" style="border-left:2px solid ' + slColor + '">';
+      html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(sl.title) + '</span>';
+      html += '<span class="ag-ic-badge" style="background:' + slColor + '22;color:' + slColor + '">' + esc(sl.status) + '</span></div>';
+      html += '<div style="display:flex;gap:10px;font-size:9px;margin-top:4px">';
+      html += '<span><span class="ag-ic-label">Age:</span> ' + sl.age + 'd</span>';
+      html += '<span><span class="ag-ic-label">SLA:</span> ' + sl.sla + 'd</span>';
+      html += '<span><span class="ag-ic-label">Remaining:</span> <span style="color:' + (sl.remaining < 0 ? 'var(--cr)' : 'var(--cg)') + '">' + sl.remaining + 'd</span></span>';
+      html += '<span><span class="ag-ic-label">Predicted MTTR:</span> ' + sl.predicted_mttr + 'd</span>';
+      html += '</div>';
+      html += '<div class="ag-blast-bar" style="margin-top:4px"><div class="ag-blast-fill" style="width:' + Math.min(slaPct, 100) + '%;background:' + slColor + '"></div></div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // Threat Intel
+  if (nd.threats.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">Threat Intelligence <span class="ag-ds-count">' + nd.threats.length + '</span></div>';
+    for (var thi = 0; thi < nd.threats.length; thi++) {
+      var thr = nd.threats[thi];
+      var thrColor = thr.exploited ? 'var(--cr)' : thr.status === 'RESOLVED' ? 'var(--cg)' : 'var(--ca)';
+      html += '<div class="ag-intel-card" style="border-left:2px solid ' + thrColor + '">';
+      html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(thr.cve) + ' — ' + esc(thr.title) + '</span>';
+      if (thr.status) html += '<span class="ag-ic-badge" style="background:' + thrColor + '22;color:' + thrColor + '">' + esc(thr.status) + '</span>';
+      html += '</div>';
+      html += '<div style="display:flex;gap:10px;font-size:9px;margin-top:4px">';
+      if (thr.epss !== null) html += '<span><span class="ag-ic-label">EPSS:</span> ' + (thr.epss * 100).toFixed(1) + '%</span>';
+      html += '<span><span class="ag-ic-label">Exploited:</span> <span style="color:' + (thr.exploited ? 'var(--cr)' : 'var(--cg)') + '">' + (thr.exploited ? 'YES' : 'No') + '</span></span>';
+      html += '<span><span class="ag-ic-label">Ransomware:</span> ' + (thr.ransomware ? 'YES' : 'No') + '</span>';
+      html += '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // Personnel Risk
+  if (nd.personnel.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">Personnel Risk <span class="ag-ds-count">' + nd.personnel.length + '</span></div>';
+    for (var pri2 = 0; pri2 < nd.personnel.length; pri2++) {
+      var prr = nd.personnel[pri2];
+      var prColor = prr.severity === 'High' ? 'var(--cr)' : 'var(--co)';
+      html += '<div class="ag-intel-card" style="border-left:2px solid ' + prColor + '">';
+      html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(prr.team) + ' — ' + esc(prr.person) + '</span>';
+      html += '<span class="ag-ic-badge" style="background:' + prColor + '22;color:' + prColor + '">' + esc(prr.severity) + '</span></div>';
+      html += '<div class="ag-ic-row">' + esc(prr.risk) + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // Shared Dependencies
+  if (nd.sharedDeps.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">Shared Dependencies <span class="ag-ds-count">' + nd.sharedDeps.length + '</span></div>';
+    for (var sdi = 0; sdi < nd.sharedDeps.length; sdi++) {
+      var sdep = nd.sharedDeps[sdi];
+      html += '<div class="ag-intel-card">';
+      html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(sdep.dep) + ' ' + esc(sdep.version) + '</span>';
+      html += '<span class="ag-ic-badge" style="background:var(--crs);color:var(--cr)">' + esc(sdep.severity) + '</span></div>';
+      html += '<div class="ag-ic-row"><span class="ag-ic-label">Products:</span> ' + sdep.products.map(esc).join(', ') + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // Corroborating Evidence (RFE_MAP)
+  var nodeRfes = RFE_MAP.filter(function(r){
+    for (var rri = 0; rri < nd.risks.length; rri++) {
+      if (r.risk === nd.risks[rri].id) return true;
+    }
+    return false;
+  });
+  if (nodeRfes.length) {
+    html += '<div class="ag-drawer-section">';
+    html += '<div class="ag-drawer-section-title">Corroborating Evidence <span class="ag-ds-count">' + nodeRfes.length + '</span></div>';
+    for (var rfi = 0; rfi < nodeRfes.length; rfi++) {
+      var rf = nodeRfes[rfi];
+      var confColor = rf.conf >= 90 ? 'var(--cr)' : rf.conf >= 75 ? 'var(--co)' : 'var(--ca)';
+      html += '<div class="ag-intel-card">';
+      html += '<div class="ag-ic-header"><span class="ag-ic-title">' + esc(rf.risk) + '</span>';
+      html += '<span class="ag-ic-badge" style="background:' + confColor + '22;color:' + confColor + '">' + rf.conf + '% ' + esc(rf.type) + '</span></div>';
+      html += '<div class="ag-ic-row">' + esc(rf.finding) + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  bodyEl.innerHTML = html;
+  bodyEl.scrollTop = 0;
+
+  document.getElementById('ag-drawer-overlay').classList.add('open');
+  document.getElementById('ag-drawer').classList.add('open');
+}
+
+function agCloseDrawer() {
+  document.getElementById('ag-drawer-overlay').classList.remove('open');
+  document.getElementById('ag-drawer').classList.remove('open');
+  agSelectedNode = null;
+  if (!agParticlesEnabled) buildAttackGraph();
+}
+
+// --- MITRE Matrix View ---
+function buildAttackMatrix() {
+  var container = document.getElementById('ag-matrix-container');
+  if (!container) return;
+
+  var tactics = [
+    {name:'Initial Access',keys:['Initial Access','Misconfiguration','Supply Chain','Physical']},
+    {name:'Execution',keys:['Execution']},
+    {name:'Persistence',keys:['Persistence']},
+    {name:'Privilege Escalation',keys:['Priv Escalation']},
+    {name:'Discovery',keys:['Discovery']},
+    {name:'Credential Access',keys:['Cred Access']},
+    {name:'Lateral Movement',keys:['Lateral Movement']},
+    {name:'Collection',keys:['Collection']},
+    {name:'Exfiltration',keys:['Exfiltration']},
+    {name:'Impact',keys:['Impact']}
+  ];
+
+  // Gather all raw steps by tactic
+  var tacticSteps = {};
+  for (var i = 0; i < ATTACK_PATHS.length; i++) {
+    var ap = ATTACK_PATHS[i];
+    var steps = ap.steps || [];
+    for (var j = 0; j < steps.length; j++) {
+      var s = steps[j];
+      var key = s.tactic + '::' + s.label;
+      if (!tacticSteps[key]) {
+        tacticSteps[key] = {tactic: s.tactic, label: s.label, detail: s.detail, icon: s.icon, paths: [], findings: 0, incidents: 0};
+      }
+      if (tacticSteps[key].paths.indexOf(ap.id) === -1) tacticSteps[key].paths.push(ap.id);
+      if (s.count && s.countType === 'findings') tacticSteps[key].findings += s.count;
+      if (s.count && s.countType === 'incidents') tacticSteps[key].incidents += s.count;
+    }
+  }
+
+  var html = '<table class="ag-matrix"><thead><tr>';
+  for (var ti = 0; ti < tactics.length; ti++) {
+    html += '<th>' + esc(tactics[ti].name) + '</th>';
+  }
+  html += '</tr></thead><tbody><tr>';
+
+  for (var ti2 = 0; ti2 < tactics.length; ti2++) {
+    html += '<td>';
+    var tKeys = Object.keys(tacticSteps).filter(function(k){
+      var t = tacticSteps[k].tactic;
+      return tactics[ti2].keys.indexOf(t) > -1;
+    });
+    for (var ki = 0; ki < tKeys.length; ki++) {
+      var step = tacticSteps[tKeys[ki]];
+      var sevClass = step.findings > 100 ? 'severity-crit' : step.findings > 0 ? 'severity-high' : step.incidents > 0 ? 'severity-med' : 'severity-low';
+      html += '<div class="ag-matrix-cell ' + sevClass + '" onclick="agMatrixClick(\'' + esc(step.label) + '\')">';
+      html += '<div class="mc-label">' + esc(step.label) + '</div>';
+      html += '<div class="mc-sub">' + esc(step.detail || '') + '</div>';
+      if (step.findings > 0) html += '<div class="mc-sub" style="color:var(--cr)">' + step.findings + ' findings</div>';
+      if (step.incidents > 0) html += '<div class="mc-sub" style="color:var(--cp)">' + step.incidents + ' incidents</div>';
+      html += '<div class="mc-paths">' + step.paths.length + '</div>';
+      html += '</div>';
+    }
+    if (!tKeys.length) html += '<div style="font-size:9px;color:var(--t3);padding:8px;text-align:center">No techniques</div>';
+    html += '</td>';
+  }
+  html += '</tr></tbody></table>';
+  container.innerHTML = html;
+}
+
+function agMatrixClick(label) {
+  // Find matching node in graph and open its drawer
+  var nd = agNodes.find(function(n){
+    return n.label === label || n.rawSteps.some(function(rs){return rs.step.label === label});
+  });
+  if (nd) agOpenDrawer(nd);
+}
+
+// --- View / Toggle Controls ---
+function agSetView(view, btn) {
+  agCurrentView = view;
+  document.querySelectorAll('.ag-view-btn').forEach(function(b){b.classList.remove('active')});
+  if (btn) btn.classList.add('active');
+
+  var graphC = document.getElementById('ag-graph-container');
+  var matrixC = document.getElementById('ag-matrix-container');
+  var legend = document.getElementById('ag-legend');
+  var btns = document.getElementById('ag-path-btns');
+
+  if (view === 'graph') {
+    graphC.style.display = 'block';
+    matrixC.style.display = 'none';
+    legend.style.display = 'flex';
+    btns.style.display = 'flex';
+    buildAttackGraph();
+    agStartAnimation();
+  } else {
+    graphC.style.display = 'none';
+    matrixC.style.display = 'block';
+    legend.style.display = 'none';
+    btns.style.display = 'none';
+    agStopAnimation();
+    buildAttackMatrix();
+  }
+}
+
+function agToggleParticles(on) {
+  agParticlesEnabled = on;
+  if (on) { agInitParticles(); agStartAnimation(); }
+  else { agStopAnimation(); buildAttackGraph(); }
+}
+
+function agToggleHeatmap(on) {
+  agHeatmapEnabled = on;
+  if (!agParticlesEnabled) buildAttackGraph();
+}
+
+function agCollapseNames(collapse) {
+  document.querySelectorAll('#ag-path-btns .ap-btn-name').forEach(function(el) {
+    el.style.display = collapse ? 'none' : '';
+  });
+}
+
+function agSelect(pathId, btn) {
+  agHighlight = pathId;
+  agHighlightGroup = null;
+  agSelectedNode = null;
+  document.querySelectorAll('#ag-path-btns .hm-toggle').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  agCollapseNames(!pathId);
+  if (!agParticlesEnabled) buildAttackGraph();
+}
+
+var agHighlightGroup = null;
+function agSelectGroup(group, btn) {
+  agHighlight = null;
+  agHighlightGroup = group;
+  agSelectedNode = null;
+  agCollapseNames(false);
+  document.querySelectorAll('#ag-path-btns .hm-toggle').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  if (!agParticlesEnabled) buildAttackGraph();
+}
+
+/* --- Recommendations --- */
+function buildRecs() {
+  var container = document.getElementById('recs-container');
+  if (!container) return;
+  var recs = RECS[currentTeam] || RECS.all;
+  var html = '';
+  for (var i = 0; i < recs.length; i++) {
+    var r = recs[i];
+    var ticketBtn = r.ticket ? '<div class="rec-ticket"><button onclick="ticket(\'' + r.ticket.replace(/'/g, "\\'") + '\')">Create Ticket</button></div>' : '';
+    html += '<div class="rec-item"><span class="rec-pri ' + r.p + '">' + r.p.toUpperCase() + '</span><div>' + r.text + '</div>' + ticketBtn + '</div>';
+  }
+  container.innerHTML = html;
+}
+
+/* --- Blind Spots --- */
+function buildBlindSpots() {
+  var container = document.getElementById('blind-spots-container');
+  if (!container) return;
+  var html = '';
+  for (var i = 0; i < BLIND_SPOTS.length; i++) {
+    var b = BLIND_SPOTS[i];
+    html += '<div class="blind-card expand-card" onclick="this.classList.toggle(\'open\')">';
+    html += '<div class="blind-area">' + esc(b.area) + ' <span style="font-family:var(--fm);font-size:9px;color:var(--co);margin-left:6px">' + b.products + ' products</span><span class="expand-chevron">&#9662;</span></div>';
+    html += '<div class="expand-body"><div class="blind-desc" style="margin-top:6px">' + esc(b.desc) + '</div></div></div>';
+  }
+  container.innerHTML = html;
+}
+
+/* --- Gap Proofs --- */
+function buildGapProofs() {
+  var container = document.getElementById('gap-proofs-container');
+  if (!container) return;
+  var html = '';
+  for (var i = 0; i < GAP_PROOFS.length; i++) {
+    var g = GAP_PROOFS[i];
+    html += '<div class="gap-card expand-card" onclick="this.classList.toggle(\'open\')">';
+    html += '<div class="gap-id">' + esc(g.id) + ' \u00b7 ' + esc(g.framework) + '<span class="expand-chevron">&#9662;</span></div>';
+    html += '<div class="gap-desc">' + esc(g.desc) + '</div>';
+    html += '<div class="expand-body"><div class="gap-meta" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd)">';
+    html += '<div style="margin-bottom:4px"><span style="font-family:var(--fm);font-size:8.5px;color:var(--cb2)">VANTA:</span> ' + esc(g.grc_risk) + '</div>';
+    if (g.dojo_finding) html += '<div style="margin-bottom:4px"><span style="font-family:var(--fm);font-size:8.5px;color:var(--cr)">DEFECTDOJO:</span> ' + esc(g.dojo_finding) + '</div>';
+    if (g.ir_ref) html += '<div style="margin-bottom:4px"><span style="font-family:var(--fm);font-size:8.5px;color:var(--cp)">INCIDENTS:</span> ' + esc(g.ir_ref) + '</div>';
+    html += '<div><span style="font-family:var(--fm);font-size:8.5px;color:var(--co)">IMPACT:</span> ' + esc(g.impact) + '</div>';
+    html += '</div></div></div>';
+  }
+  container.innerHTML = html;
+}
+
+/* --- Threat Intel --- */
+function buildThreatIntel() {
+  var container = document.getElementById('threat-intel-container');
+  if (!container) return;
+  var html = '';
+  for (var i = 0; i < THREAT_INTEL.length; i++) {
+    var t = THREAT_INTEL[i];
+    var epssDisplay = t.epss !== null ? (t.epss * 100).toFixed(0) + '%' : 'N/A';
+    var epssColor = t.epss !== null && t.epss >= 0.3 ? 'var(--cr)' : t.epss !== null && t.epss >= 0.1 ? 'var(--ca)' : 'var(--t2)';
+    html += '<div class="threat-card"><span class="ti-cve">' + esc(t.cve) + '</span><span class="ti-title">' + esc(t.title) + (t.exploited ? ' <span class="pill ac">Exploited</span>' : '') + '</span><span class="ti-epss" style="color:' + epssColor + '">EPSS: ' + epssDisplay + '</span></div>';
+  }
+  container.innerHTML = html;
+}
+
+/* --- Personnel Risk --- */
+function buildPersonnelRisk() {
+  var container = document.getElementById('personnel-risk-container');
+  if (!container) return;
+  var html = '';
+  for (var i = 0; i < PERSONNEL_RISK.length; i++) {
+    var p = PERSONNEL_RISK[i];
+    var sevClass = p.severity === 'Critical' ? 'crit' : p.severity === 'High' ? 'high' : 'med';
+    html += '<div class="personnel-card expand-card" onclick="this.classList.toggle(\'open\')">';
+    html += '<div style="display:flex;align-items:center;gap:8px"><span class="p-team">' + esc(p.team) + '</span><span class="sev-badge ' + sevClass + '">' + esc(p.severity) + '</span><span style="font-family:var(--fm);font-size:9px;color:var(--t3)">' + esc(p.person) + '</span><span class="expand-chevron">&#9662;</span></div>';
+    html += '<div class="expand-body"><div style="margin-top:6px;font-size:10.5px;color:var(--t2);line-height:1.6">' + esc(p.risk) + '</div></div></div>';
+  }
+  container.innerHTML = html;
+}
+
+/* --- Shared Dependencies --- */
+function buildSharedDeps() {
+  var container = document.getElementById('shared-deps-container');
+  if (!container) return;
+  var html = '';
+  for (var i = 0; i < SHARED_DEPS.length; i++) {
+    var s = SHARED_DEPS[i];
+    var sevClass = s.severity === 'Critical' ? 'crit' : s.severity === 'High' ? 'high' : s.severity === 'Medium' ? 'med' : 'low';
+    html += '<div class="shared-dep expand-card" onclick="this.classList.toggle(\'open\')">';
+    html += '<div style="display:flex;align-items:center;gap:8px"><span class="sd-name">' + esc(s.dep) + ' <span style="color:var(--t3)">' + esc(s.version) + '</span></span><span class="sev-badge ' + sevClass + '">' + esc(s.severity) + '</span><span style="font-family:var(--fm);font-size:9px;color:var(--t3)">' + s.products.length + ' products</span><span class="expand-chevron">&#9662;</span></div>';
+    html += '<div class="expand-body"><div style="margin-top:6px;font-size:10.5px;color:var(--t2)">' + esc(s.products.join(', ')) + (s.cves ? '<br><span style="font-family:var(--fm);font-size:9px;color:var(--co)">' + s.cves + ' known CVEs</span>' : '') + '</div></div></div>';
+  }
+  container.innerHTML = html;
+}
+
+/* --- Cost Table --- */
+function buildCostTable() {
+  var tbody = document.getElementById('cost-tbody');
+  if (!tbody) return;
+  var html = '';
+  for (var i = 0; i < COST_EST.length; i++) {
+    var c = COST_EST[i];
+    html += '<tr><td style="font-family:var(--fm);font-size:10px;color:var(--cb2)">' + esc(c.path) + '</td><td>' + esc(c.low) + '</td><td style="color:var(--co);font-weight:500">' + esc(c.mid) + '</td><td style="color:var(--cr);font-weight:500">' + esc(c.high) + '</td><td style="font-size:10px">' + esc(c.basis) + '</td></tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+/* --- Control Validation --- */
+function buildControlValidation() {
+  var tbody = document.getElementById('cv-tbody');
+  if (!tbody) return;
+  var html = '';
+  for (var i = 0; i < CV_MAP.length; i++) {
+    var c = CV_MAP[i];
+    var statusClass = c.status === 'Verified' ? 'ec-pass' : c.status === 'Contradicted' ? 'ec-fail' : '';
+    var statusText = c.status === 'Verified' ? 'PASS' : c.status === 'Contradicted' ? 'FAIL' : 'UNVERIFIED';
+    html += '<tr><td style="font-family:var(--fm);font-size:10px">' + esc(c.ctrl) + '</td><td>' + esc(c.desc) + '</td><td>' + (c.finding ? esc(c.finding) : '\u2014') + '</td><td class="' + statusClass + '" style="font-weight:500">' + statusText + '</td></tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+/* --- Compliance Tables --- */
+function buildComplianceTables() {
+  var frameworkATbody = document.getElementById('framework-a-tbody');
+  if (frameworkATbody) {
+    var html = '';
+    for (var i = 0; i < EVIDENCE_CHAINS.framework_a.length; i++) {
+      var e = EVIDENCE_CHAINS.framework_a[i];
+      var statusClass = e.status === 'PASS' ? 'ec-pass' : 'ec-fail';
+      html += '<tr><td style="font-family:var(--fm);font-size:9px">' + esc(e.id) + '</td><td>' + esc(e.control) + '</td><td>' + esc(e.test) + '</td><td class="' + statusClass + '" style="font-weight:500">' + esc(e.status) + '</td><td style="font-size:10px">' + esc(e.evidence) + (e.dojo_ref ? '<br><span style="font-family:var(--fm);font-size:9px;color:var(--cr)">Dojo: ' + esc(e.dojo_ref) + '</span>' : '') + (e.ir_ref ? '<br><span style="font-family:var(--fm);font-size:9px;color:var(--cp)">IR: ' + esc(e.ir_ref) + '</span>' : '') + '</td></tr>';
+    }
+    frameworkATbody.innerHTML = html;
+  }
+
+  var frameworkBTbody = document.getElementById('framework-b-tbody');
+  if (frameworkBTbody) {
+    var html2 = '';
+    for (var j = 0; j < EVIDENCE_CHAINS.framework_b.length; j++) {
+      var e2 = EVIDENCE_CHAINS.framework_b[j];
+      var statusClass2 = e2.status === 'PASS' ? 'ec-pass' : 'ec-fail';
+      html2 += '<tr><td style="font-family:var(--fm);font-size:9px">' + esc(e2.id) + '</td><td>' + esc(e2.control) + '</td><td>' + esc(e2.test) + '</td><td class="' + statusClass2 + '" style="font-weight:500">' + esc(e2.status) + '</td><td style="font-size:10px">' + esc(e2.evidence) + (e2.dojo_ref ? '<br><span style="font-family:var(--fm);font-size:9px;color:var(--cr)">Dojo: ' + esc(e2.dojo_ref) + '</span>' : '') + (e2.ir_ref ? '<br><span style="font-family:var(--fm);font-size:9px;color:var(--cp)">IR: ' + esc(e2.ir_ref) + '</span>' : '') + '</td></tr>';
+    }
+    frameworkBTbody.innerHTML = html2;
+  }
+}
+
+/* --- Cross-Source Flow Diagram --- */
+function buildXsrcFlow() {
+  var canvas = document.getElementById('xsrc-flow');
+  if (!canvas) return;
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 340 * dpr;
+  canvas.style.height = '340px';
+  var ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  var W = rect.width, H = 340;
+  var s = getComputedStyle(document.documentElement);
+  var t1 = s.getPropertyValue('--t1').trim();
+  var t2 = s.getPropertyValue('--t2').trim();
+  var t3 = s.getPropertyValue('--t3').trim();
+  var bd = s.getPropertyValue('--bd2').trim();
+  var c1 = s.getPropertyValue('--c1').trim();
+  var c3 = s.getPropertyValue('--c3').trim();
+
+  // Source nodes (left column)
+  var sources = [
+    {label:'DefectDojo',sub:META.kpi.total.toLocaleString()+' findings',color:'#FF7A45',y:55},
+    {label:'GRC',sub:META.grc.risks+' risks · '+META.grc.unowned+' unowned',color:'#4B8BFF',y:165},
+    {label:'Security IR',sub:META.xsrc.ir_total+' investigations',color:'#9254DE',y:275}
+  ];
+  // Middle processing nodes
+  var mid = [
+    {label:'CWE Mapping',sub:META.xsrc.mapped+' risks mapped',color:'#13C2C2',y:80},
+    {label:'Control Validation',sub:META.xsrc.ctrl_valid+' verified · '+META.xsrc.ctrl_contra+' contradicted',color:'#FAAD14',y:170},
+    {label:'Incident Correlation',sub:META.xsrc.ir_mapped+' risks w/ incidents',color:'#9254DE',y:260}
+  ];
+  // Output nodes (right column)
+  var outputs = [
+    {label:META.xsrc.corroborated+' Corroborated',sub:'Risks proven by evidence',color:'#52C41A',y:75},
+    {label:META.xsrc.gaps+' Gap Proofs',sub:'Both sources confirm gap',color:'#FF4D4F',y:155},
+    {label:ATTACK_PATHS.length+' Attack Paths',sub:'Kill chains from all sources',color:'#FF7A45',y:235},
+    {label:META.xsrc.confidence+'% Confidence',sub:'Cross-source agreement',color:'#4B8BFF',y:305}
+  ];
+
+  var colL = 80, colM = W/2, colR = W - 80;
+  var boxW = 130, boxH = 50, boxR = 8;
+
+  function drawBox(x, y, w, h, color, label, sub) {
+    // Background
+    ctx.fillStyle = c3;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(x - w/2, y - h/2, w, h, boxR);
+    ctx.fill();
+    ctx.stroke();
+    // Accent line
+    ctx.fillStyle = color;
+    ctx.fillRect(x - w/2, y - h/2, 3, h);
+    // Label
+    ctx.fillStyle = t1;
+    ctx.font = '500 10px "DM Sans",sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(label, x + 2, y - 7);
+    // Sub
+    ctx.fillStyle = t3;
+    ctx.font = '400 8px "JetBrains Mono",monospace';
+    ctx.fillText(sub, x + 2, y + 9);
+  }
+
+  function drawFlow(x1, y1, x2, y2, color, width) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width || 1.5;
+    ctx.globalAlpha = 0.4;
+    ctx.beginPath();
+    var cpx = (x1 + x2) / 2;
+    ctx.moveTo(x1, y1);
+    ctx.bezierCurveTo(cpx, y1, cpx, y2, x2, y2);
+    ctx.stroke();
+    ctx.globalAlpha = 1.0;
+    // Arrow
+    var angle = Math.atan2(y2 - (y1+y2)/2, x2 - cpx);
+    ctx.fillStyle = color;
+    ctx.globalAlpha = 0.6;
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - 6*Math.cos(angle-0.4), y2 - 6*Math.sin(angle-0.4));
+    ctx.lineTo(x2 - 6*Math.cos(angle+0.4), y2 - 6*Math.sin(angle+0.4));
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+  }
+
+  // Draw flows: sources → middle
+  // DefectDojo → CWE Mapping, Control Validation
+  drawFlow(colL + boxW/2, sources[0].y, colM - boxW/2, mid[0].y, '#FF7A45', 2);
+  drawFlow(colL + boxW/2, sources[0].y, colM - boxW/2, mid[1].y, '#FF7A45', 1.5);
+  // Vanta → CWE Mapping, Control Validation
+  drawFlow(colL + boxW/2, sources[1].y, colM - boxW/2, mid[0].y, '#4B8BFF', 1.5);
+  drawFlow(colL + boxW/2, sources[1].y, colM - boxW/2, mid[1].y, '#4B8BFF', 2);
+  // Security IR → Incident Correlation, CWE Mapping
+  drawFlow(colL + boxW/2, sources[2].y, colM - boxW/2, mid[2].y, '#9254DE', 2);
+  drawFlow(colL + boxW/2, sources[2].y, colM - boxW/2, mid[0].y, '#9254DE', 1);
+
+  // Draw flows: middle → outputs
+  // CWE Mapping → Corroborated, Attack Paths
+  drawFlow(colM + boxW/2, mid[0].y, colR - boxW/2, outputs[0].y, '#13C2C2', 2);
+  drawFlow(colM + boxW/2, mid[0].y, colR - boxW/2, outputs[2].y, '#13C2C2', 1.5);
+  // Control Validation → Gap Proofs, Confidence
+  drawFlow(colM + boxW/2, mid[1].y, colR - boxW/2, outputs[1].y, '#FAAD14', 2);
+  drawFlow(colM + boxW/2, mid[1].y, colR - boxW/2, outputs[3].y, '#FAAD14', 1.5);
+  // Incident Correlation → Attack Paths, Corroborated, Confidence
+  drawFlow(colM + boxW/2, mid[2].y, colR - boxW/2, outputs[2].y, '#9254DE', 2);
+  drawFlow(colM + boxW/2, mid[2].y, colR - boxW/2, outputs[0].y, '#9254DE', 1);
+  drawFlow(colM + boxW/2, mid[2].y, colR - boxW/2, outputs[3].y, '#9254DE', 1);
+
+  // Draw boxes on top of flows
+  for (var i = 0; i < sources.length; i++) drawBox(colL, sources[i].y, boxW, boxH, sources[i].color, sources[i].label, sources[i].sub);
+  for (var j = 0; j < mid.length; j++) drawBox(colM, mid[j].y, boxW, boxH, mid[j].color, mid[j].label, mid[j].sub);
+  for (var k = 0; k < outputs.length; k++) drawBox(colR, outputs[k].y, boxW, boxH - 6, outputs[k].color, outputs[k].label, outputs[k].sub);
+
+  // Column headers
+  ctx.fillStyle = t3;
+  ctx.font = '500 7px "JetBrains Mono",monospace';
+  ctx.textAlign = 'center';
+  ctx.letterSpacing = '0.1em';
+  ctx.fillText('DATA SOURCES', colL, 18);
+  ctx.fillText('ANALYSIS', colM, 18);
+  ctx.fillText('OUTPUTS', colR, 18);
+}
+
+/* --- Knowledge Graph --- */
+function buildKnowledgeGraph() {
+  knowledgeGraph = [];
+  var i;
+  for (i = 0; i < FD.critical.length; i++) { var f = FD.critical[i]; knowledgeGraph.push({ type: 'Finding', label: f.t, section: 's8', meta: f.p + ' / ' + f.tm }); }
+  for (i = 0; i < FD.high.length; i++) { var f2 = FD.high[i]; knowledgeGraph.push({ type: 'Finding', label: f2.t, section: 's8', meta: f2.p + ' / ' + f2.tm }); }
+  for (i = 0; i < FD.medium.length; i++) { var f3 = FD.medium[i]; knowledgeGraph.push({ type: 'Finding', label: f3.t, section: 's8', meta: f3.p + ' / ' + f3.tm }); }
+  for (i = 0; i < VR.length; i++) { knowledgeGraph.push({ type: 'Risk', label: VR[i].id + ': ' + VR[i].d, section: 's11', meta: VR[i].c + ' / ' + VR[i].o }); }
+  for (i = 0; i < ATTACK_PATHS.length; i++) { var a = ATTACK_PATHS[i]; knowledgeGraph.push({ type: 'Attack Path', label: a.id + ': ' + a.name, section: 's2', meta: 'Impact: ' + a.impact }); }
+  var teamKeys = Object.keys(TEAM_DATA);
+  for (i = 0; i < teamKeys.length; i++) {
+    if (teamKeys[i] !== 'all') {
+      var t = TEAM_DATA[teamKeys[i]];
+      knowledgeGraph.push({ type: 'Team', label: t.label, section: 's5', meta: t.active_total + ' active findings' });
+    }
+  }
+  var cwes = TD.all.cwe_labels;
+  for (i = 0; i < cwes.length; i++) { knowledgeGraph.push({ type: 'CWE', label: cwes[i], section: 's4', meta: 'Weakness category' }); }
+  for (i = 0; i < CV_MAP.length; i++) { knowledgeGraph.push({ type: 'Control', label: CV_MAP[i].ctrl + ': ' + CV_MAP[i].desc, section: 's9', meta: CV_MAP[i].status }); }
+  for (i = 0; i < GAP_PROOFS.length; i++) { knowledgeGraph.push({ type: 'Gap', label: GAP_PROOFS[i].id + ': ' + GAP_PROOFS[i].desc, section: 's9', meta: GAP_PROOFS[i].framework }); }
+  for (i = 0; i < BLIND_SPOTS.length; i++) { knowledgeGraph.push({ type: 'Blind Spot', label: BLIND_SPOTS[i].area, section: 's7', meta: BLIND_SPOTS[i].products + ' products' }); }
+  for (i = 0; i < SHARED_DEPS.length; i++) { knowledgeGraph.push({ type: 'Dependency', label: SHARED_DEPS[i].dep + ' ' + SHARED_DEPS[i].version, section: 's9', meta: SHARED_DEPS[i].products.join(', ') }); }
+}
+
+/* --- Animated Counters --- */
+function animateCounters() {
+  var observer = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) {
+        entries[i].target.classList.add('visible');
+        var counters = entries[i].target.querySelectorAll('[data-count]');
+        for (var j = 0; j < counters.length; j++) {
+          (function(el) {
+            var target = parseInt(el.getAttribute('data-count'));
+            if (isNaN(target)) return;
+            var current = 0;
+            var step = Math.max(1, Math.ceil(target / 40));
+            var interval = setInterval(function() {
+              current += step;
+              if (current >= target) { current = target; clearInterval(interval); }
+              el.textContent = fmt(current);
+            }, 25);
+          })(counters[j]);
+        }
+        observer.unobserve(entries[i].target);
+      }
+    }
+  }, { threshold: 0.1 });
+
+  var sections = document.querySelectorAll('.sec');
+  for (var i = 0; i < sections.length; i++) { observer.observe(sections[i]); }
+}
+
+/* --- Scroll Spy --- */
+function setupScrollSpy() {
+  var links = document.querySelectorAll('.S .ng a');
+  var sections = [];
+  for (var i = 0; i < links.length; i++) {
+    var href = links[i].getAttribute('href');
+    if (href) {
+      var sec = document.getElementById(href.slice(1));
+      if (sec) sections.push({ el: sec, link: links[i] });
+    }
+  }
+
+  function onScroll() {
+    var active = null;
+    var scrollTop = window.scrollY + 100;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.offsetTop <= scrollTop) active = sections[i];
+    }
+    for (var j = 0; j < links.length; j++) links[j].classList.remove('active');
+    if (active) active.link.classList.add('active');
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* --- Ticker --- */
+function setupTicker() {
+  var ticker = document.getElementById('ticker');
+  if (!ticker) return;
+  var lastScroll = 0;
+  window.addEventListener('scroll', function() {
+    var st = window.scrollY;
+    if (st > lastScroll && st > 200) {
+      ticker.classList.add('hidden');
+    } else {
+      ticker.classList.remove('hidden');
+    }
+    lastScroll = st;
+  }, { passive: true });
+}
+
+function updateTicker() {
+  var d = TEAM_DATA[currentTeam] || TEAM_DATA.all;
+  var tkScore = document.getElementById('tk-score');
+  if (tkScore) tkScore.textContent = d.scoreN;
+  var tkCrit = document.getElementById('tk-crit');
+  if (tkCrit) tkCrit.textContent = d.crit + ' active';
+  var tkHigh = document.getElementById('tk-high');
+  if (tkHigh) tkHigh.textContent = d.high + ' active';
+  var tkTriage = document.getElementById('tk-triage');
+  if (tkTriage) tkTriage.textContent = d.triage + '%';
+}
+
+/* --- Team Filter --- */
+function filterTeam(teamKey) {
+  currentTeam = teamKey;
+  var d = TEAM_DATA[teamKey] || TEAM_DATA.all;
+  var td = TD[teamKey] || TD.all;
+
+  var tbLabel = document.getElementById('tb-team-label');
+  if (tbLabel) tbLabel.textContent = d.label;
+
+  var kpiGrid = document.getElementById('kpi-grid');
+  if (kpiGrid) {
+    var cards = kpiGrid.querySelectorAll('.K');
+    if (cards[0]) { cards[0].querySelector('.kv').textContent = fmt(d.total); cards[0].querySelector('.ks').textContent = d.products + ' products'; }
+    if (cards[1]) { cards[1].querySelector('.kv').textContent = td.crit; cards[1].querySelector('.ks').textContent = td.acrit + ' active'; }
+    if (cards[2]) { cards[2].querySelector('.kv').textContent = fmt(td.high); cards[2].querySelector('.ks').textContent = td.ahigh + ' active'; }
+    if (cards[3]) { cards[3].querySelector('.kv').textContent = fmt(td.med); cards[3].querySelector('.ks').textContent = td.amed + ' active'; }
+  }
+
+  var srGrade = document.getElementById('sr-grade');
+  if (srGrade) srGrade.textContent = d.score;
+  var srScore = document.getElementById('sr-score');
+  if (srScore) srScore.textContent = d.scoreN + ' / 100';
+  drawRing('score-ring', d.scoreN, d.score);
+
+  var tmTriage = document.getElementById('tm-triage');
+  if (tmTriage) tmTriage.textContent = d.triage + '%';
+  var tmMttrC = document.getElementById('tm-mttr-c');
+  if (tmMttrC) tmMttrC.textContent = d.mttr_c + 'd';
+  var tmMttrH = document.getElementById('tm-mttr-h');
+  if (tmMttrH) tmMttrH.textContent = d.mttr_h + 'd';
+  var tmMttrM = document.getElementById('tm-mttr-m');
+  if (tmMttrM) tmMttrM.textContent = d.mttr_m + 'd';
+
+  buildScoreFactors();
+  buildFunnel('triage-funnel');
+  buildCharts();
+  buildFindingsTables();
+  buildRecs();
+  updateTicker();
+
+  var sel = document.getElementById('team-select');
+  if (sel) sel.value = teamKey;
+}
+
+/* --- Theme Toggle --- */
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  var btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = next === 'dark' ? 'Light' : 'Dark';
+  setTimeout(function() { buildCharts(); }, 100);
+}
+
+/* --- Modal --- */
+function openModal(title, bodyHTML) {
+  var overlay = document.getElementById('modal-overlay');
+  var mtitle = document.getElementById('modal-title');
+  var mbody = document.getElementById('modal-body');
+  if (!overlay || !mtitle || !mbody) return;
+  mtitle.textContent = title;
+  mbody.innerHTML = bodyHTML;
+  overlay.classList.add('open');
+}
+
+function closeModal() {
+  var overlay = document.getElementById('modal-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+}
+
+/* --- Search --- */
+function openSearch() {
+  var overlay = document.getElementById('search-overlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  var input = document.getElementById('search-input');
+  if (input) { input.value = ''; input.focus(); }
+  var results = document.getElementById('search-results');
+  if (results) results.innerHTML = '';
+}
+
+function closeSearch() {
+  var overlay = document.getElementById('search-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+}
+
+function doSearch(query) {
+  var container = document.getElementById('search-results');
+  if (!container) return;
+  if (!query || query.length < 2) { container.innerHTML = ''; return; }
+  var q = query.toLowerCase();
+  var matches = [];
+  for (var i = 0; i < knowledgeGraph.length && matches.length < 15; i++) {
+    var item = knowledgeGraph[i];
+    if (item.label.toLowerCase().indexOf(q) !== -1 || item.meta.toLowerCase().indexOf(q) !== -1) {
+      matches.push(item);
+    }
+  }
+  var html = '';
+  for (var j = 0; j < matches.length; j++) {
+    var m = matches[j];
+    html += '<div class="sr-item" onclick="closeSearch();document.getElementById(\'' + m.section + '\').scrollIntoView({behavior:\'smooth\'})"><span class="sr-type">' + esc(m.type) + '</span>' + esc(m.label) + '<span style="float:right;color:var(--t3);font-size:10px">' + esc(m.meta) + '</span></div>';
+  }
+  if (matches.length === 0) {
+    html = '<div class="sr-item" style="color:var(--t3);text-align:center">No results for "' + esc(query) + '"</div>';
+  }
+  container.innerHTML = html;
+}
+
+/* --- Ticket --- */
+function ticket(name) {
+  showToast('Ticket created: "' + name + '"');
+}
+
+/* --- Toast --- */
+function showToast(msg) {
+  var toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 3000);
+}
+
+/* --- Copy One Pager --- */
+function copyOnePager() {
+  var d = TEAM_DATA[currentTeam] || TEAM_DATA.all;
+  var td = TD[currentTeam] || TD.all;
+  var recs = RECS[currentTeam] || RECS.all;
+  var p1Recs = [];
+  for (var i = 0; i < recs.length; i++) {
+    if (recs[i].p === 'p1') p1Recs.push('  - ' + recs[i].text.replace(/<[^>]+>/g, ''));
+  }
+  var brief = 'SECURITY POSTURE BRIEF \u2014 ' + META.period + '\n' +
+    'Team: ' + d.label + '\n' +
+    'Score: ' + d.scoreN + '/100 (' + d.score + ')\n\n' +
+    'FINDINGS\n' +
+    '  Total: ' + fmt(d.total) + '\n' +
+    '  Critical: ' + td.crit + ' (' + td.acrit + ' active)\n' +
+    '  High: ' + td.high + ' (' + td.ahigh + ' active)\n' +
+    '  Medium: ' + td.med + ' (' + td.amed + ' active)\n\n' +
+    'MTTR: Crit ' + d.mttr_c + 'd | High ' + d.mttr_h + 'd | Med ' + d.mttr_m + 'd\n' +
+    'Triage Rate: ' + d.triage + '%\n\n' +
+    'TOP RISKS\n' + p1Recs.join('\n') + '\n\n' +
+    'COMPLIANCE\n' +
+    '  Framework A Test: ' + META.grc.framework_a.test_pct + '%\n' +
+    '  Framework B Test: ' + META.grc.framework_b.test_pct + '%\n' +
+    '  GRC Risks: ' + META.grc.risks + ' (' + META.grc.unmit + ' unmitigated)\n';
+
+  navigator.clipboard.writeText(brief).then(function() {
+    showToast('Executive brief copied to clipboard');
+  }).catch(function() {
+    showToast('Failed to copy \u2014 try again');
+  });
+}
+
+/* --- Export Markdown --- */
+function exportMD() {
+  var d = TEAM_DATA[currentTeam] || TEAM_DATA.all;
+  var td = TD[currentTeam] || TD.all;
+  var md = '# Security Posture Report\n\n';
+  md += '**Period:** ' + META.period + '  \n';
+  md += '**Team:** ' + d.label + '  \n';
+  md += '**Score:** ' + d.scoreN + '/100 (' + d.score + ')  \n\n';
+  md += '## Findings Summary\n\n';
+  md += '| Severity | Total | Active |\n|---|---|---|\n';
+  md += '| Critical | ' + td.crit + ' | ' + td.acrit + ' |\n';
+  md += '| High | ' + td.high + ' | ' + td.ahigh + ' |\n';
+  md += '| Medium | ' + td.med + ' | ' + td.amed + ' |\n\n';
+  md += '## MTTR\n\n';
+  md += '- Critical: ' + d.mttr_c + 'd (SLA: ' + d.sla_c + '%)\n';
+  md += '- High: ' + d.mttr_h + 'd (SLA: ' + d.sla_h + '%)\n';
+  md += '- Medium: ' + d.mttr_m + 'd (SLA: ' + d.sla_m + '%)\n\n';
+  md += '## Recommendations\n\n';
+  var recs = RECS[currentTeam] || RECS.all;
+  for (var i = 0; i < recs.length; i++) {
+    md += '- **[' + recs[i].p.toUpperCase() + ']** ' + recs[i].text.replace(/<[^>]+>/g, '') + '\n';
+  }
+  md += '\n## Attack Paths\n\n';
+  for (var j = 0; j < ATTACK_PATHS.length; j++) {
+    var ap = ATTACK_PATHS[j];
+    md += '### ' + ap.id + ': ' + ap.name + '\n';
+    md += '- Risk: ' + ap.risk + ' | Impact: ' + ap.impact + ' | Likelihood: ' + ap.likelihood + '\n';
+    md += '- Chain: ' + ap.nodes.join(' \u2192 ') + '\n\n';
+  }
+  md += '## Compliance\n\n';
+  md += '- Framework A Test: ' + META.grc.framework_a.test_pct + '% (' + META.grc.framework_a.test + ')\n';
+  md += '- Framework B Test: ' + META.grc.framework_b.test_pct + '% (' + META.grc.framework_b.test + ')\n';
+  md += '- GRC Risks: ' + META.grc.risks + '\n';
+
+  var blob = new Blob([md], { type: 'text/markdown' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'security-report-' + currentTeam + '.md';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Markdown exported');
+}
+
+/* --- Findings Tabs --- */
+function showFindingsTab(tab) {
+  var tabs = document.querySelectorAll('#findings-tabs .tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  var contents = document.querySelectorAll('#s8 .tab-content');
+  for (var j = 0; j < contents.length; j++) contents[j].classList.remove('active');
+
+  var tabMap = { critical: 0, high: 1, medium: 2 };
+  if (tabs[tabMap[tab]]) tabs[tabMap[tab]].classList.add('active');
+  var contentId = 'findings-' + (tab === 'medium' ? 'medium' : tab);
+  var content = document.getElementById(contentId);
+  if (content) content.classList.add('active');
+}
+
+/* --- Scenario Simulator --- */
+function updateScenario() {
+  var scCrit = document.getElementById('sc-crit');
+  var scCluster = document.getElementById('sc-cluster');
+  var scEndpoint = document.getElementById('sc-endpoint');
+  var scContainer = document.getElementById('sc-container');
+
+  var critResolved = scCrit ? parseInt(scCrit.value) : 0;
+  var clusterFixed = scCluster ? parseInt(scCluster.value) : 0;
+  var endpointPatched = scEndpoint ? parseInt(scEndpoint.value) : 0;
+  var containerPct = scContainer ? parseInt(scContainer.value) : 60;
+
+  var critVal = document.getElementById('sc-crit-val');
+  if (critVal) critVal.textContent = critResolved;
+  var clusterVal = document.getElementById('sc-cluster-val');
+  if (clusterVal) clusterVal.textContent = clusterFixed;
+  var endpointVal = document.getElementById('sc-endpoint-val');
+  if (endpointVal) endpointVal.textContent = endpointPatched;
+  var containerVal = document.getElementById('sc-container-val');
+  if (containerVal) containerVal.textContent = containerPct + '%';
+
+  var baseScore = META.score.n || 0;
+  baseScore += critResolved * 3;
+  baseScore += Math.round((clusterFixed / 100) * 5);
+  baseScore += Math.round((endpointPatched / 2000) * 4);
+  baseScore += Math.round((containerPct - 60) * 0.1);
+  baseScore = Math.min(100, baseScore);
+
+  var projected = document.getElementById('sc-projected');
+  if (projected) {
+    projected.textContent = baseScore;
+    projected.style.color = baseScore >= 90 ? 'var(--cg)' : baseScore >= 80 ? 'var(--cb2)' : 'var(--ca)';
+  }
+}
+</script>
+</body>
+</html>

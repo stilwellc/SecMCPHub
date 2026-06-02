@@ -1,0 +1,57 @@
+{
+  "_description": "Maps CWE IDs to GRC risk categories and control domains. Read by /security-report to derive cross-source intelligence (finding evidence per risk).",
+  "_schema": {
+    "cwe_to_risk_category": "CWE-ID (string) -> array of risk-category names matching your GRC taxonomy",
+    "cwe_to_control_domain": "CWE-ID (string) -> array of control-domain names matching your control framework",
+    "risk_keywords": "risk-category -> array of keyword/phrase substrings used to fuzzy-match free-text risk descriptions"
+  },
+  "_examples_only": "These are illustrative entries. Replace the right-hand-side categories and domains with the taxonomy used by your GRC tool.",
+  "cwe_to_risk_category": {
+    "78":   ["Data Exfiltration", "Extortion"],
+    "79":   ["Reputational Damage", "Data Exfiltration"],
+    "89":   ["Data Exfiltration", "Privacy"],
+    "94":   ["Data Exfiltration", "Extortion"],
+    "95":   ["Data Exfiltration"],
+    "250":  ["Data Exfiltration"],
+    "284":  ["Data Exfiltration", "Fraud And Abuse"],
+    "285":  ["Data Exfiltration", "Fraud And Abuse", "Privacy"],
+    "346":  ["Fraud And Abuse"],
+    "400":  ["Denial Of Service"],
+    "601":  ["Fraud And Abuse"],
+    "611":  ["Data Exfiltration"],
+    "674":  ["Denial Of Service"],
+    "732":  ["Data Exfiltration"],
+    "798":  ["Data Exfiltration"],
+    "862":  ["Data Exfiltration", "Fraud And Abuse", "Privacy"],
+    "918":  ["Data Exfiltration"],
+    "1321": ["Data Exfiltration", "Reputational Damage"],
+    "1333": ["Denial Of Service"]
+  },
+  "cwe_to_control_domain": {
+    "78":   ["SECURITY_OPERATIONS"],
+    "79":   ["CHANGE_MANAGEMENT"],
+    "89":   ["CHANGE_MANAGEMENT", "DATA_CLASSIFICATION_&_HANDLING"],
+    "94":   ["CHANGE_MANAGEMENT", "VULNERABILITY_&_PATCH_MANAGEMENT"],
+    "250":  ["CONFIGURATION_MANAGEMENT"],
+    "284":  ["IDENTIFICATION_&_AUTHENTICATION"],
+    "285":  ["IDENTIFICATION_&_AUTHENTICATION"],
+    "346":  ["NETWORK_SECURITY"],
+    "400":  ["VULNERABILITY_&_PATCH_MANAGEMENT"],
+    "601":  ["IDENTIFICATION_&_AUTHENTICATION"],
+    "611":  ["CHANGE_MANAGEMENT"],
+    "732":  ["IDENTIFICATION_&_AUTHENTICATION"],
+    "798":  ["CRYPTOGRAPHIC_PROTECTIONS"],
+    "862":  ["IDENTIFICATION_&_AUTHENTICATION"],
+    "918":  ["NETWORK_SECURITY"],
+    "1321": ["VULNERABILITY_&_PATCH_MANAGEMENT"],
+    "1333": ["VULNERABILITY_&_PATCH_MANAGEMENT"]
+  },
+  "risk_keywords": {
+    "Data Exfiltration":   ["exfiltration", "breach", "unauthorized access", "sensitive data", "credential"],
+    "Fraud And Abuse":     ["fraud", "abuse", "impersonation", "account compromise"],
+    "Denial Of Service":   ["DDoS", "denial", "availability", "outage"],
+    "Extortion":           ["ransomware", "extortion", "ransom"],
+    "Reputational Damage": ["defacement", "malware hosting", "reputation"],
+    "Privacy":             ["privacy", "PII", "exposure"]
+  }
+}

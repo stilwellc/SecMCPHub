@@ -1,0 +1,73 @@
+{
+  "_description": "Maps IR / incident projects to GRC risk IDs and attack paths. Read by /security-report to derive cross-source intelligence (incident evidence per risk).",
+  "_schema": {
+    "mappings": {
+      "ir_name":     "string — short codename for the IR project",
+      "ir_id":       "string — stable identifier from your IR ticketing system",
+      "outcome":     "one of: 'Confirmed Incident' | 'Near Miss' | 'Non-Incident' | 'TBD'",
+      "priority":    "string | null — severity from your IR system",
+      "status":      "string — ticket status (Backlog | In Progress | Done | ...)",
+      "vanta_risk":  "string | array of strings — risk ID(s) from your GRC tool that this incident provides evidence for",
+      "attack_path": "string | array of strings | null — attack-path ID(s) that this incident corroborates",
+      "summary":     "string — one-line description",
+      "category":    "string — incident category for grouping"
+    },
+    "unmapped_ir": "Array of IR projects that don't yet map to a risk — surfaced in the dashboard for triage",
+    "stats":       "Aggregate counts used by the dashboard header tiles"
+  },
+  "_examples_only": "The mappings below are illustrative placeholders. Replace ir_id with real IDs from your IR system and vanta_risk with the risk IDs from your GRC register.",
+  "mappings": [
+    {
+      "ir_name":     "ExamplePhishing",
+      "ir_id":       "00000000-0000-0000-0000-000000000001",
+      "outcome":     "Confirmed Incident",
+      "priority":    "High",
+      "status":      "Done",
+      "vanta_risk":  "RISK-001",
+      "attack_path": "AP-1",
+      "summary":     "Targeted phishing campaign against finance team",
+      "category":    "Phishing"
+    },
+    {
+      "ir_name":     "ExampleOffboardingGap",
+      "ir_id":       "00000000-0000-0000-0000-000000000002",
+      "outcome":     "Near Miss",
+      "priority":    null,
+      "status":      "Done",
+      "vanta_risk":  ["RISK-002", "RISK-003"],
+      "attack_path": "AP-2",
+      "summary":     "Former employee retained access to CI/CD system",
+      "category":    "Offboarding Failure"
+    },
+    {
+      "ir_name":     "ExampleSupplyChain",
+      "ir_id":       "00000000-0000-0000-0000-000000000003",
+      "outcome":     "Confirmed Incident",
+      "priority":    null,
+      "status":      "Done",
+      "vanta_risk":  "RISK-004",
+      "attack_path": ["AP-2", "AP-3"],
+      "summary":     "Compromised third-party CDN serving malicious JavaScript",
+      "category":    "Supply Chain"
+    }
+  ],
+  "unmapped_ir": [
+    {
+      "ir_name":  "ExampleUnmapped",
+      "status":   "Backlog",
+      "outcome":  "TBD",
+      "summary":  "Investigation in progress — no risk mapping yet"
+    }
+  ],
+  "stats": {
+    "total_ir_projects":          0,
+    "mapped_to_risks":            0,
+    "unmapped":                   0,
+    "confirmed_incidents":        0,
+    "near_misses":                0,
+    "non_incidents":              0,
+    "active_investigations":      0,
+    "unique_risks_covered":       0,
+    "unique_attack_paths_covered": 0
+  }
+}
